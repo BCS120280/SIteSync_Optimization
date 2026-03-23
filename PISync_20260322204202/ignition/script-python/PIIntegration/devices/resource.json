@@ -1,0 +1,17 @@
+{
+  "scope": "A",
+  "version": 1,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "code.py"
+  ],
+  "attributes": {
+    "lastModification": {
+      "actor": "EP89-Extra",
+      "timestamp": "2025-06-18T18:58:54Z"
+    },
+    "hintScope": 2,
+    "lastModificationSignature": "a6d9ab200ba7b1ea6543a0ae909b4d5eb79d8de65eedc7fe646b0238d067e307"
+  }
+}
