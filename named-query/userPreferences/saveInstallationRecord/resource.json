@@ -1,0 +1,70 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "UpdateQuery",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "Installation_Records",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "34967e035865af0b051f77284fa5293ad42b9032431030bb90bed75d8fdc57a1",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "SiteSyncAdmin",
+      "timestamp": "2026-03-05T16:08:42Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "deviceId",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "devEUI",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "installerUserId",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "installerDisplayName",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "checklistResults",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "configurationSnapshot",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "healthMetrics",
+        "sqlType": 7
+      }
+    ]
+  }
+}

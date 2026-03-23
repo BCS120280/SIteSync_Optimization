@@ -1,0 +1,50 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "UpdateQuery",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "User_Preferences",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "b9f08f14cccff58093de65217de9f8c8b2266d8da56b15af522da5333f620b0c",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "SiteSyncAdmin",
+      "timestamp": "2026-03-05T16:08:42Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "userId",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "preferenceKey",
+        "sqlType": 7
+      },
+      {
+        "type": "Parameter",
+        "identifier": "preferenceValue",
+        "sqlType": 7
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "scope": "C",
+  "version": 1,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "data.bin"
+  ],
+  "attributes": {
+    "lastModification": {
+      "actor": "SiteSyncAdmin",
+      "timestamp": "2026-03-05T16:08:47Z"
+    },
+    "lastModificationSignature": "a03fce5cd8df5fd235ad48659486247e6f6426d76d795be1a69e96c687ff5987"
+  }
+}

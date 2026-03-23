@@ -1,0 +1,40 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "UpdateQuery",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "Installation_Records",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "bdf7cbd2bc72381de3465a8aff78a15b12f914be101ee86e3ac57434faa47032",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "SiteSyncAdmin",
+      "timestamp": "2026-03-05T16:08:42Z"
+    },
+    "parameters": [
+      {
+        "type": "Parameter",
+        "identifier": "devEUI",
+        "sqlType": 7
+      }
+    ]
+  }
+}
