@@ -2185,3 +2185,347 @@ print("addDevices hardcoded URL: PASS")
 *Projects reviewed: PISync_2026-04-11_1427, SiteSyncCore_2026-04-17_1622, SiteSync-FieldApp_Improvements_2026-04-11_1548*
 *Total findings: 6 Critical, 12 High, 18 Medium, 10 Low*
 
+
+---
+
+## 3.4 SiteSYnc EnterpriseManagementScripts — 52 Files
+
+### Overview and Relationship to SiteSyncCore
+
+EnterpriseManagementScripts shares 51 of its 52 files with SiteSyncCore by path. Of those shared files, **47 are byte-for-byte identical** to Core and carry every defect documented in §3.2. **5 files diverge**, and **1 file (`utils/deviceProfileDropDown/code.py`) exists only in Enterprise**. The project appears to be an earlier branch of SiteSyncCore that was kept in use for an enterprise deployment and has since diverged in both directions — some bugs were fixed here first, some regressions introduced.
+
+**Diff summary vs SiteSyncCore:**
+| File | Direction |
+|------|-----------|
+| `addDevices/code.py` | Enterprise has OLDER real implementation (predates Core's stub) |
+| `createPITemplate/code.py` | Enterprise has debug prints active + a path-separator bug |
+| `device/createDevice/code.py` | Enterprise has inline implementation (not delegated to MPC) |
+| `utils/sitehandler/code.py` | Enterprise has debug prints + different roles API call shape |
+| `enterprise/tenant/code.py` | Cosmetically different comment only |
+| `utils/deviceProfileDropDown/code.py` | Enterprise only |
+
+---
+
+### [3.4.1] `addDevices/code.py`
+
+---
+
+#### [3.4.1-A] Hardcoded internal PI server URL — same as Core [3.2.12-A]
+
+**[Critical] `PIAddress` hardcoded at module level** — `addDevices/code.py:5`
+
+Same defect as finding [3.2.12-A] and [3.1.3-A]. The internal hostname `pgwgen002923.mgroupnet.com` is committed to source at module level. See finding [3.2.12-A] for full impact and fix.
+
+---
+
+#### [3.4.1-B] `null = None`, `false = False`, `true = True` aliases at module scope
+
+**[Medium] JSON-literal aliases pollute module namespace** — `addDevices/code.py:1–3`
+
+**File:** `SiteSYnc EnterpriseManagementScripts/script-python/addDevices/code.py`, lines 1–3
+
+**Impact.** These aliases were introduced to allow copy-pasting JSON literals directly into Python dicts (e.g., `"selected": true`). They work in Jython 2.7, but they shadow Python builtins `None`, `False`, `True` at module scope, which can confuse static analysis tools and linters. Any module that imports from `addDevices` gains these aliases in scope unexpectedly. In particular, `null` as a name conflict with the Ignition JSON API is a readability hazard.
+
+**Source (defective):**
+```python
+null = None
+false = False
+true = True
+```
+
+**Recommended Fix:** Replace inline JSON-style literals with proper Python literals and delete the aliases:
+```python
+# BEFORE
+"selected": true,
+"dataFields": null,
+
+# AFTER
+"selected": True,
+"dataFields": None,
+```
+
+---
+
+#### [3.4.1-C] `addTagToPi()` — Enterprise has the real implementation; Core replaced it with a stub
+
+**[Note / Regression in Core] Enterprise version correctly returns PI adapter results** — `addDevices/code.py:91–98`
+
+**File:** `SiteSYnc EnterpriseManagementScripts/script-python/addDevices/code.py`, lines 91–98
+
+**Observation.** The Enterprise `addTagToPi()` performs the full MQTT Adapter data-selection update:
+1. Browses child tags of the given tag path
+2. Gets the current data selection from the adapter
+3. Formats new items, de-duplicates against existing selection
+4. Calls `system.piAdapter.updateDataSelection()` and returns the result
+
+SiteSyncCore replaced this implementation with a stub that logs via `system.util.getLogger` but unconditionally `return False` (finding [3.2.12-B]). This is a functional regression in Core — PI data selection updates no longer execute.
+
+**Action.** Restore the Enterprise implementation in Core (with the hardcoded URL defect fixed separately per [3.2.12-A]):
+```python
+def addTagToPi(tagPath, componentID, PIAddress):
+    items = getAttributesForTag(tagPath)
+    existingConfig = getCurrentDataSelection(componentID, PIAddress)
+    piTags = formatDataSelectionItem(tagPath, items, existingConfig)
+    return updateDataSelection(piTags, componentID, PIAddress)
+```
+
+---
+
+#### [3.4.1-D] `getCurrentDataSelection()` — `"null"` string bypasses guard, same as Core
+
+**[High] `json.loads("null")` returns Python `None` — iteration raises `TypeError`** — `addDevices/code.py:11`
+
+Same root cause as finding [3.2.8-A]. When the adapter has no existing selection, `getDataSelection()` returns `"null"`. The guard `if selectedData != None:` passes, and `json.loads("null")` returns `None`. `formatDataSelectionItem()` then iterates over `existingConfig` (which is `None`) and raises `TypeError`.
+
+**Recommended Fix:**
+```python
+selectedData = system.piAdapter.getDataSelection(componentID, "MQTT1", PIAddress)
+if selectedData and selectedData != "null":
+    parsed = json.loads(selectedData)
+    return parsed if parsed is not None else []
+return []
+```
+
+---
+
+#### [3.4.1-E] `system.tag.browse(filter={"recursive":True})` — recursive key silently ignored
+
+**[Medium] Non-recursive browse returns only top-level children** — `addDevices/code.py:20`
+
+Same defect as [3.2.10-A]. `getAttributesForTag()` passes `{"recursive":True}` to `system.tag.browse()` — the key is silently dropped.
+
+**Recommended Fix:** Use `system.tag.browseConfiguration(rootTagPath, recursive=True)`.
+
+---
+
+### [3.4.2] `createPITemplate/code.py`
+
+---
+
+#### [3.4.2-A] Double-slash path separator bug unique to Enterprise
+
+**[High] `"{0}/{1}".format(baseTagPath, tagName)` produces double-slash in PI tag path** — `createPITemplate/code.py:39`
+
+**File:** `SiteSYnc EnterpriseManagementScripts/script-python/createPITemplate/code.py`, line 39
+
+**Impact.** `baseTagPath` is assembled on line 10 as:
+```python
+baseTagPath = "[default]PI Integration/{0}".format(assembledPath)
+```
+where `assembledPath = tagPath.replace('[default]', '').replace(tagName, "")`. Since `tagName` is stripped from the end of `tagPath`, `assembledPath` ends with a `/`. `baseTagPath` therefore ends with `/`. Line 39 then formats `"{0}/{1}".format(baseTagPath, tagName)`, producing:
+
+```
+[default]PI Integration/path/to//tagName
+```
+
+The double-slash makes the path string invalid. `addTagToPi()` receives this malformed path, causing the PI data selection item to be registered with a path that doesn't resolve. SiteSyncCore fixed this to `"{0}{1}"` (no inserted separator). Enterprise retains the bug.
+
+**Source (defective):**
+```python
+results = addDevices.addTagToPi("{0}/{1}".format(baseTagPath, tagName), ...)
+```
+
+**Recommended Fix** (apply the Core fix):
+```python
+results = addDevices.addTagToPi("{0}{1}".format(baseTagPath, tagName), ...)
+```
+
+---
+
+#### [3.4.2-B] Active `system.perspective.print()` debug calls — gateway scope no-op
+
+**[Medium] Four active debug prints in gateway-scope function** — `createPITemplate/code.py:4,35,41,44`
+
+**File:** `SiteSYnc EnterpriseManagementScripts/script-python/createPITemplate/code.py`, lines 4, 35, 41, 44
+
+SiteSyncCore commented out lines 4, 35, and 41; Enterprise still has them active. Line 44 (exception handler) remains active in both. All four are silent no-ops in gateway scope.
+
+**Source (defective):**
+```python
+system.perspective.print("Creating PI isntance {0}".format(tagPath))  # line 4
+system.perspective.print(createReult)                                  # line 35
+system.perspective.print(results)                                      # line 41
+system.perspective.print("Error " + str(e))                            # line 44
+```
+
+**Recommended Fix:** Replace all four with gateway logger calls or remove:
+```python
+_log = system.util.getLogger("createPITemplate")
+_log.debug("Creating PI instance: " + str(tagPath))
+```
+
+---
+
+### [3.4.3] `device/createDevice/code.py`
+
+---
+
+#### [3.4.3-A] `appID` parameter silently overwritten by `getDefaultApp()` on every call
+
+**[High] Caller-supplied `appID` discarded — hardcoded tenant ID 3 always used** — `device/createDevice/code.py:5`
+
+**File:** `SiteSYnc EnterpriseManagementScripts/script-python/device/createDevice/code.py`, line 5
+
+**Impact.** The function signature declares `appID = 0` as a default parameter, but the very first line of the body immediately overwrites it:
+```python
+def saveDevice(devEUI, appEUI, appKey, name, serialNumber, modelID, lat, lon,
+               description, provider, tagPath, image, user, appID = 0, tenantID = 1):
+    appID = enterprise.tenant.getDefaultApp()   # silently discards caller's appID
+```
+`enterprise.tenant.getDefaultApp()` returns the hardcoded value `3` (see finding [3.2.4-A]). Any caller that passes an explicit `appID` for a different enterprise application will have it silently replaced. Multi-tenant device creation is broken — all devices are registered under application ID 3 regardless of context.
+
+**Recommended Fix:** Remove the override, or only apply a default when the parameter is absent:
+```python
+def saveDevice(devEUI, appEUI, appKey, name, serialNumber, modelID, lat, lon,
+               description, provider, tagPath, image, user, appID=None, tenantID=1):
+    if appID is None:
+        appID = enterprise.tenant.getDefaultApp()
+```
+
+---
+
+#### [3.4.3-B] Multiple `system.perspective.print()` debug calls in device-creation flow
+
+**[Medium] Five active debug prints in gateway-scope `saveDevice()`** — `device/createDevice/code.py:10,14,16,21,22`
+
+**File:** `SiteSYnc EnterpriseManagementScripts/script-python/device/createDevice/code.py`, lines 10, 14, 16, 21, 22
+
+**Impact.** Milestone checkpoints ("pre-create device", "pre-create tag", "post-create device") and the raw image value are all logged via `system.perspective.print()`. These are no-ops in gateway scope, leaving the entire device-creation pipeline unobservable in production.
+
+**Source (defective):**
+```python
+system.perspective.print("pre-create device")
+system.perspective.print("pre-create tag")
+system.perspective.print("post-create tag {0}".format(tagPathSaveResult))
+system.perspective.print("post-create device")
+system.perspective.print(image)
+```
+
+**Recommended Fix:** Replace with gateway logger:
+```python
+_log = system.util.getLogger("device.createDevice")
+_log.info("Creating device: " + devEUI)
+_log.debug("Tag path save result: " + str(tagPathSaveResult))
+```
+
+---
+
+#### [3.4.3-C] `createPITemplate.createInstance()` called inline — PI errors abort device creation
+
+**[Medium] Tight coupling between device creation and PI template provisioning** — `device/createDevice/code.py:20`
+
+**File:** `SiteSYnc EnterpriseManagementScripts/script-python/device/createDevice/code.py`, line 20
+
+**Impact.** After a device is successfully created and its tag path saved, `createPITemplate.createInstance(fullTagPath, name)` is called on line 20. The return value is discarded. If PI is unavailable, the call raises an exception that propagates up through `saveDevice()` — the device was successfully created in SiteSync but the caller receives an error response. On retry, `saveDevice()` attempts to create the device again, producing a duplicate-device error. The PI provisioning step is not idempotent and its failure path destroys the successful device creation outcome.
+
+**Recommended Fix:** Separate PI provisioning from device creation; call it as a best-effort post-creation step:
+```python
+# After confirming device + tag creation succeeded:
+try:
+    createPITemplate.createInstance(fullTagPath, name)
+except Exception as e:
+    _log.warn("PI template creation failed for {0}: {1}".format(devEUI, str(e)))
+    message += "; PI template not created"
+return utils.resultParser.createResults(True, message)
+```
+
+---
+
+### [3.4.4] `utils/sitehandler/code.py`
+
+---
+
+#### [3.4.4-A] `updateSiteRoles()` wraps roles in `{"roles": ...}` envelope — API contract mismatch with Core
+
+**[High] Behavioral divergence in roles update call shape** — `utils/sitehandler/code.py:65–74`
+
+**File:** `SiteSYnc EnterpriseManagementScripts/script-python/utils/sitehandler/code.py`, lines 65–74
+
+**Impact.** Enterprise wraps the roles array before calling the API:
+```python
+j = {"roles": rolesJSON}
+r = json.dumps(j)   # sends {"roles": [...]}
+system.sitesync.updateTenantRoles(r, int(siteID))
+```
+
+SiteSyncCore sends the array directly:
+```python
+r = json.dumps(rolesJSON)   # sends [...]
+system.sitesync.updateTenantRoles(r, int(siteID))
+```
+
+One of these two is calling the API with the wrong payload shape. If `system.sitesync.updateTenantRoles()` expects a flat array, Enterprise silently passes `{"roles": [...]}` and roles are never updated. If it expects the wrapped object, Core silently passes a flat array and roles are never updated. This divergence must be reconciled against the actual `system.sitesync` module API contract.
+
+Additionally, Enterprise guards `if len(rolesJSON) > 0:` — if the roles list is empty, nothing is called and no error is returned, silently skipping the clear-all-roles case.
+
+**Recommended Fix:** Determine the correct API shape, align both projects, and handle the empty-roles case explicitly:
+```python
+def updateSiteRoles(siteID, rolesJSON):
+    r = json.dumps(rolesJSON)   # or json.dumps({"roles": rolesJSON}) — verify with API
+    result = system.sitesync.updateTenantRoles(r, int(siteID))
+    return json.loads(result) if result else utils.resultParser.createResults(True, "Roles updated")
+```
+
+---
+
+#### [3.4.4-B] `system.perspective.print()` debug calls in `updateSiteRoles()`
+
+**[Medium] Four debug prints in gateway-scope function** — `utils/sitehandler/code.py:67,68,72,74`
+
+**File:** `SiteSYnc EnterpriseManagementScripts/script-python/utils/sitehandler/code.py`, lines 67, 68, 72, 74
+
+**Source (defective):**
+```python
+system.perspective.print("Preparing roles")
+system.perspective.print(rolesJSON)
+system.perspective.print(a)
+system.perspective.print("No roles")
+```
+
+**Recommended Fix:** Remove all four; replace with `system.util.getLogger("utils.sitehandler").debug(...)` if diagnostics are needed.
+
+---
+
+### [3.4.5] `utils/deviceProfileDropDown/code.py` (Enterprise-only)
+
+---
+
+#### [3.4.5-A] `-NA` model filter is undocumented
+
+**[Low] Silent model filtering with no explanation** — `utils/deviceProfileDropDown/code.py:7`
+
+**File:** `SiteSYnc EnterpriseManagementScripts/script-python/utils/deviceProfileDropDown/code.py`, line 7
+
+**Impact.** `if '-NA' not in model:` silently skips any device profile whose `model_name` contains `-NA`. The intent is presumably to hide placeholder or "not available" profiles from the dropdown. However, there is no comment explaining this, and a profile legitimately named something like `Sensor-NAnotherword` would be silently excluded. The function is otherwise clean and well-structured.
+
+**Source:**
+```python
+for device in deviceModels:
+    model = device["model_name"]
+    if '-NA' not in model:   # undocumented filter
+```
+
+**Recommended Fix:** Add a comment, or make the filter configurable:
+```python
+EXCLUDED_SUFFIXES = ('-NA',)  # placeholder profiles not shown in dropdowns
+for device in deviceModels:
+    model = device["model_name"]
+    if not any(model.endswith(s) for s in EXCLUDED_SUFFIXES):
+```
+
+---
+
+### [3.4.6] `enterprise/tenant/code.py` — Cosmetic Difference Only
+
+The Enterprise version differs from Core only in a single comment character (`-16` vs `-1`). The same hardcoded `return 3` stub is present. See finding [3.2.4-A] for full impact and fix.
+
+---
+
+### [3.4.7] Shared Files — All Core Findings Propagate
+
+The following 47 files are byte-for-byte identical to SiteSyncCore and carry every defect from §3.2:
+
+| Critical findings present | [3.2.1-A] `dashboard/routing` NameError · [3.2.2-A,B] `sparkplugSiteSync` NameError + sleep(15) · [3.2.3-A] `device/activateDevice` NameError · [3.2.7-A] `PIIntegration/utils` sleep(3) |
+|---|---|
+| High findings present | [3.2.5-A,B] AF "null" + backslash · [3.2.6-A] status duplicate defs · [3.2.8-A] settings "null" guard · [3.2.11-A] resultParser missing json import |
+
