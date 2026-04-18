@@ -1,0 +1,657 @@
+Here is the complete review of all six files.
+
+---
+
+## Code Review — PISync_2026-04-11_1427 `script-python/`
+
+**Platform:** Ignition 8.1.50 · Jython 2.7 (Python 2.7 on JVM) · Azul OpenJDK 17.0.16
+**Scope:** Every `.py` file under `script-python/` — 6 files, 22 findings
+
+---
+
+### 1.1 `createPITemplate/code.py`
+
+**[HIGH] `baseTagPath` hardcoded to root — correct subfolder never derived** — `code.py:6`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/createPITemplate/code.py`, lines 3–32
+
+**Impact.** `createInstance` creates every UDT instance directly under `[default]PI Integration` regardless of where the source tag lives. All devices land in the root folder, losing their folder hierarchy. If two devices in different source subfolders share the same `tagName`, the collision policy `"a"` silently aborts the second creation with no error — one device is never provisioned. Callers receive a `createResult` that looks successful while the tag is in the wrong place.
+
+**Explanation.** The sister implementation in `PIIntegration/activate/code.py:71` correctly derives the target folder by stripping the device name and the provider prefix from `tagPath`. This file skips that derivation entirely and always targets the root folder. Every tag created here is misplaced.
+
+**Source.** Current code (defective):
+```python
+ 3  def createInstance(tagPath, tagName):
+ 4      limitedModel = system.tag.readBlocking(["{0}/metaData/sparkplug/template".format(tagPath)])[0].value
+ 5      if limitedModel != None:
+ 6          baseTagPath = "[default]PI Integration"      # ← always root, no subfolder
+```
+
+**Recommended Fix.**
+```python
+ 3  def createInstance(tagPath, tagName):
+ 4      limitedModel = system.tag.readBlocking(["{0}/metaData/sparkplug/template".format(tagPath)])[0].value
+ 5      if limitedModel is not None:
+ 6          baseTagPath = "[default]PI Integration/{0}".format(
+ 7              tagPath.replace(tagName, '').replace('[default]', '').strip('/')
+ 8          )
+```
+
+---
+
+### 1.2 `createPITemplate/code.py`
+
+**[HIGH] `.activated` uses dot-separator — child tag is never written** — `code.py:31`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/createPITemplate/code.py`, line 31
+
+**Impact.** The call to `writeBlocking` targets a non-existent property rather than the `/activated` child tag. Ignition returns `Bad_NotFound` quality silently; the activation flag is never set to `True`. Any downstream logic that checks `activated` to determine whether a device is already provisioned will always treat it as unprovisioned and attempt to re-create the UDT on every call.
+
+**Explanation.** In Ignition tag paths, `/` separates child tags and `.` accesses a tag's built-in or custom *properties* (e.g., `.Enabled`, `.dataType`). There is no standard property named `activated`. `writeBlocking` silently accepts the write attempt but records `Bad_NotFound`. Compare `PIIntegration/activate/code.py:65` which correctly uses `/PIactivate`.
+
+**Source.** Current code (defective):
+```python
+31      system.tag.writeBlocking([tagPath + ".activated"], [True])
+```
+
+**Recommended Fix.**
+```python
+31      system.tag.writeBlocking([tagPath + "/activated"], [True])
+```
+
+---
+
+### 1.3 `createPITemplate/code.py`
+
+**[MEDIUM] `system.perspective.print` debug call in a script-library function** — `code.py:30`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/createPITemplate/code.py`, line 30
+
+**Impact.** When `createInstance` is called from a Gateway event, a Vision client, or any non-Perspective context, `system.perspective` is unavailable and raises `AttributeError: 'GatewaySystemUtilities' object has no attribute 'perspective'`, preventing the function from returning its result. Even inside a valid Perspective session the output is invisible to the operator and spams the browser console.
+
+**Explanation.** `system.perspective.print()` is a session-scoped debugging helper valid only inside Perspective component and page event scripts. A shared script library is called from multiple contexts; it must not rely on session-scoped APIs.
+
+**Source.** Current code (defective):
+```python
+30      system.perspective.print(createReult)
+```
+
+**Recommended Fix.**
+```python
+# Remove the line entirely, or replace with a gateway logger:
+30      system.util.getLogger("PISync.createPITemplate").debug("configure result: %s" % createReult)
+```
+
+---
+
+### 1.4 `createPITemplate/code.py`
+
+**[LOW] Typo: `createReult`** — `code.py:29`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/createPITemplate/code.py`, lines 29, 32
+
+**Impact.** No runtime error within this function because both the assignment and the `return` use the same misspelled name. However, any future reader or refactor that introduces `createResult` as a separate name would create a `NameError`. Callers that inspect the name via reflection or introspection tools will see the misspelling.
+
+**Explanation.** Pure typo.
+
+**Source.** Current code (defective):
+```python
+29      createReult = system.tag.configure(baseTagPath, [tag], collisionPolicy)
+32      return createReult
+```
+
+**Recommended Fix.**
+```python
+29      createResult = system.tag.configure(baseTagPath, [tag], collisionPolicy)
+32      return createResult
+```
+
+---
+
+### 2.1 `exchange/mqttVanillaTransmission/callables/code.py`
+
+**[CRITICAL] `isinstance` against `unicode` silently drops all `java.lang.String` tag values** — `code.py:72`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/exchange/mqttVanillaTransmission/callables/code.py`, lines 72–73
+
+**Impact.** Every string-type Ignition tag (any tag whose value is a string) is silently dropped with `DropReason("Not allowed data type: <type 'java.lang.String'>")`. No MQTT message is ever published for those tags. The drop is recorded in statistics, giving the false appearance of deliberate filtering rather than a coding defect. `resolvePublishParameters` is the gating function called by `tagChangeEvent` for every tag change, so the entire class of string tags is permanently dead in this integration.
+
+**Explanation.** On the JVM, Ignition returns string tag values as `java.lang.String` objects. In Jython 2.7, `java.lang.String` is **not** a subclass of Python `unicode` — it is a distinct Java type. `isinstance(value, unicode)` returns `False` for `java.lang.String`, causing the guard to raise `DropReason`. Integer, long, float, and boolean values autobox to their Python equivalents and pass the check; only strings are affected.
+
+**Source.** Current code (defective):
+```python
+72      if not isinstance(tagQualifiedValue.value,(bool,int,long,float,unicode)):
+73          raise DropReason("Not allowed data type: %s" % type(tagQualifiedValue.value))
+```
+
+**Recommended Fix.**
+```python
+72      import java.lang.String as _JString
+73      if not isinstance(tagQualifiedValue.value, (bool, int, long, float, unicode, _JString)):
+74          raise DropReason("Not allowed data type: %s" % type(tagQualifiedValue.value))
+```
+
+Also update the Influx branch (line 127) which applies the same flawed type check:
+```python
+# line 125-128 — replace:
+        if type(tagQualifiedValue.value) in (int, long):
+            valueInfluxString = "%ii" % tagQualifiedValue.value
+        elif type(tagQualifiedValue.value) is unicode:
+            valueInfluxString = '"%s"' % tagQualifiedValue.value
+# with:
+        if isinstance(tagQualifiedValue.value, (int, long)):
+            valueInfluxString = "%ii" % tagQualifiedValue.value
+        elif isinstance(tagQualifiedValue.value, (unicode, _JString)):
+            valueInfluxString = '"%s"' % tagQualifiedValue.value
+```
+
+---
+
+### 2.2 `exchange/mqttVanillaTransmission/callables/code.py`
+
+**[HIGH] Timestamp format `sss` produces seconds, not milliseconds** — `code.py:98`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/exchange/mqttVanillaTransmission/callables/code.py`, line 98
+
+**Impact.** The `"local"` timestamp in every MQTT payload that uses the `qualifiedValue` or `json` payload format carries a wrong sub-second component. A tag change at 14:56:13.025 is timestamped as `2024-07-30 14:56:13.013` (the seconds value `13` zero-padded to three digits) rather than `2024-07-30 14:56:13.025` (milliseconds `25` → `025`). Consumers relying on millisecond precision for deduplication, ordering, or PI time-series alignment receive corrupted timestamps.
+
+**Explanation.** `system.date.format` delegates to Java's `java.text.SimpleDateFormat`. In that format language `s` means *second-of-minute* (0–59) and `S` means *millisecond* (0–999). The pattern `sss` repeats the second component three times with minimum width 3, producing `013` for second 13 — not milliseconds. The inline comment (`# 2024-07-30 14:56:13.025`) shows millisecond intent; only `SSS` (capital S) achieves it.
+
+**Source.** Current code (defective):
+```python
+98          timestamp = system.date.format(tagQualifiedValue.timestamp,"yyyy-MM-dd HH:mm:ss.sss")
+```
+
+**Recommended Fix.**
+```python
+98          timestamp = system.date.format(tagQualifiedValue.timestamp,"yyyy-MM-dd HH:mm:ss.SSS")
+```
+
+---
+
+### 2.3 `exchange/mqttVanillaTransmission/callables/code.py`
+
+**[HIGH] `Topic.replace(measurementName, "")` corrupts topics where tag name appears more than once** — `code.py:114`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/exchange/mqttVanillaTransmission/callables/code.py`, lines 112–114
+
+**Impact.** For the `"value"` payload format, any tag whose name also appears in a parent folder segment has its topic silently garbled. For example, a topic `sensors/Pump/Pump` is reduced to `sensors//` (both occurrences removed). The MQTT broker receives a double-slash topic that does not match any subscription, so the message is effectively lost. The function returns without raising an exception, so the silent misdirection is invisible in logs.
+
+**Explanation.** `str.replace(old, new)` is a global substitution — it replaces every occurrence of `old` in the string. The intent is to strip only the *last segment* (the measurement name) to leave a folder-level topic. The correct approach is to slice the string positionally.
+
+**Source.** Current code (defective):
+```python
+111      if payloadFormat == "value":
+112          measurementName = Topic.split('/')[-1]        
+113          Payload = system.util.jsonEncode({measurementName: tagQualifiedValue.value })        
+114          Topic = Topic.replace(measurementName, "")
+```
+
+**Recommended Fix.**
+```python
+111      if payloadFormat == "value":
+112          parts = Topic.split('/')
+113          measurementName = parts[-1]
+114          Payload = system.util.jsonEncode({measurementName: tagQualifiedValue.value})
+115          Topic = "/".join(parts[:-1]) + "/"
+```
+
+---
+
+### 2.4 `exchange/mqttVanillaTransmission/callables/code.py`
+
+**[HIGH] `topic = str(topic)[:-1]` in `publish()` strips the last character unconditionally** — `code.py:168`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/exchange/mqttVanillaTransmission/callables/code.py`, lines 167–169
+
+**Impact.** For payload formats other than `"value"` — namely `"qualifiedValue"`, `"json"`, and `"influx"` — the topic does not end with a trailing `/`. The `[:-1]` chop removes the final character of the tag name. A tag called `Temperature` is published to `.../Temperatur`; `Pressure` becomes `.../Pressur`. No exception is raised; the broker receives the truncated topic and no subscriber matches it, silently discarding the message.
+
+**Explanation.** The `[:-1]` is a workaround for the trailing `/` left by the `"value"` branch (finding 2.3). Once finding 2.3 is fixed to produce a topic without a trailing slash, the strip in `publish()` must be removed. It was never correct for the other three payload formats.
+
+**Source.** Current code (defective):
+```python
+168          topic = str(topic)[:-1]
+169          payload = str(payload)
+```
+
+**Recommended Fix.**
+```python
+168          # Remove the [:-1] strip; resolvePublishParameters now returns a clean topic
+169          payload = str(payload)
+```
+(After applying the fix from 2.3, `topic` no longer ends with `/` for any format, so no stripping is needed.)
+
+---
+
+### 2.5 `exchange/mqttVanillaTransmission/callables/code.py`
+
+**[HIGH] `readBlocking(udtInstancePath)` passes a string instead of a list** — `code.py:254`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/exchange/mqttVanillaTransmission/callables/code.py`, line 254
+
+**Impact.** `tagChangeEvent` is the top-level entry point called on every tag change. `instance = system.tag.readBlocking(udtInstancePath)[0]` reads the UDT configuration that drives all downstream logic. Because `udtInstancePath` is a bare string rather than a list, the call either raises `TypeError` immediately (crashing the event handler with an unhandled exception logged to the gateway) or, if Jython coerces the string to a character sequence, reads single-character "tag paths" — all returning `Bad_NotFound` quality. In either case `instance.quality.good` is `False`, the outer `if` block is skipped, and **no MQTT message is ever published** from this integration.
+
+**Explanation.** `system.tag.readBlocking` is a Java-backed function whose signature is `List<String> → List<QualifiedValue>`. Every other call to `readBlocking` in this codebase wraps the path in a list (e.g., lines 46–47, line 94). This line is the only exception and is inconsistent with both the API contract and the surrounding code.
+
+**Source.** Current code (defective):
+```python
+254              instance = system.tag.readBlocking(udtInstancePath)[0]
+```
+
+**Recommended Fix.**
+```python
+254              instance = system.tag.readBlocking([udtInstancePath])[0]
+```
+
+---
+
+### 2.6 `exchange/mqttVanillaTransmission/callables/code.py`
+
+**[MEDIUM] `writeStatistics` called inside the per-server loop — counters inflated** — `code.py:309–310`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/exchange/mqttVanillaTransmission/callables/code.py`, lines 302–310
+
+**Impact.** With `n` servers configured, a single tag change event increments both `Event Count` and `Sent Count` by `n` instead of 1. An installation with 3 servers reports 3× the actual event and message volume. Statistics-based monitoring thresholds, dashboards, and rate calculations are all proportionally wrong.
+
+**Explanation.** `writeStatistics` reads the current counter, adds 1, and writes it back — once per invocation. Since the call sits inside `for server in serverList:`, it executes once per server per event.
+
+**Source.** Current code (defective):
+```python
+302                  for server in serverList:
+303                      try:
+304                          publish(module, server, topic, payload, qos, retain)
+305                          log.debug(...)
+306                      except Exception as e:
+307                          raise PublishError(str(e))
+308                      
+309                      if logStatistics:
+310                          writeStatistics(udtInstancePath)   # ← inside loop
+```
+
+**Recommended Fix.**
+```python
+302                  for server in serverList:
+303                      try:
+304                          publish(module, server, topic, payload, qos, retain)
+305                          log.debug(...)
+306                      except Exception as e:
+307                          raise PublishError(str(e))
+308                  
+309                  if logStatistics:                         # ← outside loop
+310                      writeStatistics(udtInstancePath)
+```
+
+---
+
+### 3.1 `PIIntegration/activate/code.py`
+
+**[CRITICAL] `replaceNull` returns `0` in both branches — all tag values become zero** — `code.py:6–10`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/PIIntegration/activate/code.py`, lines 6–10
+
+**Impact.** `publishDevice` calls `replaceNull(t['value'].value)` for every tag it browses and places the result into `deviceJSON`. Because `replaceNull` always returns `0`, the entire JSON payload published to PI via `system.cirruslink.transmission.publish` is a dictionary of zeros — for example `{"Temperature": 0, "Pressure": 0, "Flow": 0}`. Real process values are never transmitted. PI receives perpetual zero readings, which may silently pass validation and pollute the PI historian with false data.
+
+**Explanation.** The `else` branch was written to return the value unchanged when it is not `None`, but the developer wrote `return 0` instead of `return value`. Both branches now take the same path.
+
+**Source.** Current code (defective):
+```python
+ 6  def replaceNull(value):
+ 7      if value == None:
+ 8          return 0
+ 9      else:
+10          return 0    # ← should be: return value
+```
+
+**Recommended Fix.**
+```python
+ 6  def replaceNull(value):
+ 7      if value is None:
+ 8          return 0
+ 9      return value
+```
+
+---
+
+### 3.2 `PIIntegration/activate/code.py`
+
+**[CRITICAL] `selectAll` defined twice — second definition silently shadows the first** — `code.py:39, 119`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/PIIntegration/activate/code.py`, lines 39–42 and 119–125
+
+**Impact.** Python executes `def` statements as assignments; the second definition of `selectAll` at line 119 overwrites the first at line 39. At runtime `selectAll` is always the 2-argument version `(dataset, select)`. Any caller that invokes the original 1-argument form `selectAll(tableData)` receives `TypeError: selectAll() takes exactly 2 arguments (1 given)`, crashing the caller's event handler. Perspective table components wired to the 1-arg form break silently (the exception is swallowed by the component or appears only in the gateway log).
+
+**Explanation.** The two functions have different signatures and different semantics: the first unconditionally sets `selected = True` for all rows; the second sets `selected` to a caller-supplied boolean. They should have distinct names.
+
+**Source.** Current code (defective):
+```python
+39  def selectAll(tableData):          # ← overwritten at module load
+40      for row in tableData:
+41          row['selected'] = True
+42      return tableData
+
+...
+
+119  def selectAll(dataset, select):   # ← this is the only runtime definition
+120      system.perspective.print(select)
+121      for row in dataset:
+122          system.perspective.print(row)
+123          row['selected'] = select
+124          system.perspective.print(row)
+125      return dataset
+```
+
+**Recommended Fix.**
+```python
+39  def selectAllTrue(tableData):      # renamed — sets all rows to selected=True
+40      for row in tableData:
+41          row['selected'] = True
+42      return tableData
+
+...
+
+119  def selectAll(dataset, select):   # retains its callers unchanged
+120      for row in dataset:
+121          row['selected'] = select
+122      return dataset
+```
+
+---
+
+### 3.3 `PIIntegration/activate/code.py`
+
+**[HIGH] `publishDevice`: `.sentToPI` dot-separator writes to a property, not a child tag** — `code.py:28`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/PIIntegration/activate/code.py`, line 28
+
+**Impact.** `publishDevice` records the send date by writing to `{rootTag}.sentToPI`. Because `.` accesses a tag *property* rather than a *child tag*, the write targets a non-existent property, `writeBlocking` returns `Bad_NotFound`, and the child tag `/sentToPI` is never updated. Downstream code in `findDevices` reads `/sentToPI` (finding 4.1) to determine whether a device has been sent to PI; since the date is never stored, the device is re-queued on every invocation and duplicate publishes occur indefinitely.
+
+**Explanation.** Same dot-vs-slash semantics as finding 1.2. Ignition tag paths use `/` for child tags and `.` for properties. No standard or custom property named `sentToPI` exists; the path is simply wrong.
+
+**Source.** Current code (defective):
+```python
+28      system.tag.writeBlocking(["{0}.sentToPI".format(rootTag)], [today])
+```
+
+**Recommended Fix.**
+```python
+28      system.tag.writeBlocking(["{0}/sentToPI".format(rootTag)], [today])
+```
+
+---
+
+### 3.4 `PIIntegration/activate/code.py`
+
+**[HIGH] `createInstance`: `.activated` dot-separator — activation flag never written** — `code.py:96`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/PIIntegration/activate/code.py`, line 96
+
+**Impact.** Same failure mode as finding 1.2. The activation flag at `/activated` is never set to `True`. If any workflow checks `/activated` to decide whether to re-run `createInstance`, it will always see `None` or `False` and attempt to re-create the UDT instance on every call, hitting the `"a"` (abort) collision policy and doing nothing after the first time — or, if collision policy is changed to overwrite, destroying and recreating the UDT repeatedly.
+
+**Source.** Current code (defective):
+```python
+96      system.tag.writeBlocking([tagPath + ".activated"], [True])
+```
+
+**Recommended Fix.**
+```python
+96      system.tag.writeBlocking([tagPath + "/activated"], [True])
+```
+
+---
+
+### 3.5 `PIIntegration/activate/code.py`
+
+**[MEDIUM] `searchDirectory` parameter ignored — both browse functions hardcode the search path** — `code.py:100–114`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/PIIntegration/activate/code.py`, lines 100–106, 109–114
+
+**Impact.** `getAllDevicesInTargetFolder(searchDirectory)` and `getAllFlickerableTagsTargetFolder(searchDirectory)` accept a `searchDirectory` argument but ignore it, always browsing `"[default]PI Integration"`. A caller that passes a scoped path to limit the operation (e.g., a specific subfolder or a different tag provider) silently receives results from the hardcoded root. Scoped refreshes, multi-provider deployments, and unit tests that use a sandbox path all fail invisibly.
+
+**Source.** Current code (defective):
+```python
+100  def getAllDevicesInTargetFolder(searchDirectory):
+101      tagPaths = []
+102      results = system.tag.browse(path = "[default]PI Integration",   # searchDirectory unused
+103                                   filter = { "recursive":True, 'tagType': "UdtInstance"})
+```
+
+**Recommended Fix.**
+```python
+100  def getAllDevicesInTargetFolder(searchDirectory):
+101      tagPaths = []
+102      results = system.tag.browse(path=searchDirectory,
+103                                   filter={"recursive": True, "tagType": "UdtInstance"})
+```
+Apply the same change to `getAllFlickerableTagsTargetFolder`.
+
+---
+
+### 3.6 `PIIntegration/activate/code.py`
+
+**[MEDIUM] Debug `system.perspective.print` calls left in production `selectAll`** — `code.py:120–124`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/PIIntegration/activate/code.py`, lines 120–124
+
+**Impact.** When `selectAll` is invoked from a gateway script or Vision component, `system.perspective` is unavailable and raises `AttributeError`, crashing the caller. Inside a Perspective session the calls print every row dict to the browser console on every selection toggle, polluting the developer console and adding unnecessary tag-read overhead.
+
+**Source.** Current code (defective):
+```python
+119  def selectAll(dataset, select):
+120      system.perspective.print(select)
+121      for row in dataset:
+122          system.perspective.print(row)
+123          row['selected'] = select
+124          system.perspective.print(row)
+125      return dataset
+```
+
+**Recommended Fix.**
+```python
+119  def selectAll(dataset, select):
+120      for row in dataset:
+121          row['selected'] = select
+122      return dataset
+```
+
+---
+
+### 4.1 `PIIntegration/devices/code.py`
+
+**[HIGH] `findDevices`: `.sentToPI` dot-separator — read always returns `None`, every device re-queued** — `code.py:26`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/PIIntegration/devices/code.py`, line 26
+
+**Impact.** `findDevices` reads `.sentToPI` to decide whether a device has already been activated. Because `.sentToPI` targets a non-existent property (same dot-vs-slash issue as 3.3), `readBlocking` always returns `value = None` with `Bad_NotFound` quality. The check `if activated[0].value == None:` is therefore always `True`; every device with a valid template is returned in the list as if it has never been sent to PI. Repeated calls to `addTagToPi` / `publishDevice` for every device on every invocation — regardless of whether they were activated hours or days ago — cause duplicate MQTT publishes and duplicate PI data entries.
+
+**Source.** Current code (defective):
+```python
+26          activated = system.tag.readBlocking([
+27              "[default]PI Integration/{0}.sentToPI".format(
+28                  d['fullTagPath'].replace("[default]", "")),
+```
+
+**Recommended Fix.**
+```python
+26          activated = system.tag.readBlocking([
+27              "[default]PI Integration/{0}/sentToPI".format(
+28                  d['fullTagPath'].replace("[default]", "")),
+```
+
+---
+
+### 4.2 `PIIntegration/devices/code.py`
+
+**[MEDIUM] Debug `system.perspective.print` calls in `findDevices`** — `code.py:27, 29, 44, 45`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/PIIntegration/devices/code.py`, lines 27, 29, 44, 45
+
+**Impact.** `findDevices` is a pure data-retrieval function intended to be called from multiple contexts (gateway scheduled scripts, Perspective event handlers, etc.). The four `system.perspective.print` calls raise `AttributeError` in any non-Perspective context, turning a benign data query into a hard error. Inside a Perspective session they leak internal tag paths and `QualifiedValue` objects to the browser console for every device iterated.
+
+**Source.** Current code (defective):
+```python
+27              system.perspective.print(d['fullTagPath'])
+28              
+29              system.perspective.print(activated)
+...
+44              system.perspective.print(activatedToday)
+45              system.perspective.print(activatedToday <= 1)
+```
+
+**Recommended Fix.** Remove all four lines. If diagnostic output is needed during development, route it through a gateway logger:
+```python
+            log = system.util.getLogger("PISync.findDevices")
+            log.debug("device: %s, sentToPI: %s" % (d['fullTagPath'], activated[0].value))
+```
+
+---
+
+### 4.3 `PIIntegration/devices/code.py`
+
+**[LOW] Bare `print` statement debug output** — `code.py:8, 10`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/PIIntegration/devices/code.py`, lines 8, 10
+
+**Impact.** Valid Jython 2.7 syntax, so no runtime error. However, `print` in Ignition writes to the JVM's stdout, which is captured in the wrapper log file and is invisible to operators or integrators. It provides no actionable operational information and produces noise in gateway diagnostics.
+
+**Source.** Current code (defective):
+```python
+ 8              print result['value'].value
+...
+10                  print "Found unactivated node"
+```
+
+**Recommended Fix.** Remove both lines, or replace with logger calls if the diagnostic intent must be preserved:
+```python
+ 8              # remove or:
+ 8              log.debug("activation value: %s" % result['value'].value)
+10              log.debug("Found unactivated node: %s" % str(result['fullPath']))
+```
+
+---
+
+### 5.1 `PIIntegration/topics/code.py`
+
+**[MEDIUM] `tagPath.split(']')[1]` raises `IndexError` on paths without a provider bracket** — `code.py:4`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/PIIntegration/topics/code.py`, line 4
+
+**Impact.** `getTopic` is a utility function expected to be safe to call with any tag path. When called with a relative path (no `[provider]` prefix) such as `PI Integration/Device/Tag`, `split(']')` returns a one-element list and `[1]` raises `IndexError: list index out of range`. The caller's stack unwinds with an unhandled exception. This is most likely to occur during development, testing, or if the calling code strips provider brackets before passing the path.
+
+**Explanation.** `"[default]PI Integration/Device".split(']')` → `["[default", "PI Integration/Device"]`. Index `[1]` works. `"PI Integration/Device".split(']')` → `["PI Integration/Device"]`. Index `[1]` is out of bounds. Using `[-1]` instead of `[1]` handles both cases: for bracketed paths it still selects the part after `]`; for unbracketed paths it selects the only element.
+
+**Source.** Current code (defective):
+```python
+1  def getTopic(tagPath):
+2      #customizabl
+3      standardTopic = "mpc/{0}"
+4      tagName = tagPath.split(']')[1]
+5      return standardTopic.format(tagName)
+```
+
+**Recommended Fix.**
+```python
+1  def getTopic(tagPath):
+2      standardTopic = "mpc/{0}"
+3      tagName = tagPath.split(']')[-1].lstrip('/')
+4      return standardTopic.format(tagName)
+```
+
+---
+
+### 6.1 `addDevices/code.py`
+
+**[HIGH] `getDataSelection` passes hardcoded `"MQTT1"` — `componentID` parameter is ignored** — `code.py:10`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/addDevices/code.py`, line 10
+
+**Impact.** `getCurrentDataSelection(componentID, PIAddress)` accepts a `componentID` parameter and passes it as the first argument to the underlying API, but then passes the hardcoded string `"MQTT1"` as the second argument. If the PI Adapter API expects `(componentID, address)` then the second argument is an extra parameter that may be ignored or cause a call error. If the API expects `(componentID1, componentID2, address)`, the function always fetches data for `"MQTT1"` regardless of what `componentID` was passed — a caller using `"MyAdapter"` silently receives MQTT1's data selection. The module-level constant `componentID = "MQTT1"` (line 6) suggests `"MQTT1"` is the default, making the parameter redundant but still misleading.
+
+**Source.** Current code (defective):
+```python
+10          selectedData = system.piAdapter.getDataSelection(componentID, "MQTT1", PIAddress)
+```
+
+**Recommended Fix.**
+```python
+10          selectedData = system.piAdapter.getDataSelection(componentID, PIAddress)
+```
+(Remove the hardcoded `"MQTT1"` second argument; verify against the `system.piAdapter` API signature.)
+
+---
+
+### 6.2 `addDevices/code.py`
+
+**[HIGH] Mixed tabs and spaces in `formatDataSelectionItem` — `TabError` on module load** — `code.py:41–42`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/addDevices/code.py`, lines 41–42
+
+**Impact.** Python 2.7 / Jython 2.7 raises `TabError: inconsistent use of tabs and spaces in indentation` when it encounters this block during module parsing. The module **fails to load**. Every function in `addDevices/code.py` — `getCurrentDataSelection`, `getAttributesForTag`, `getDataType`, `generateTopic`, `generateStreamID`, `formatDataSelectionItem`, `updateDataSelection`, `addTagToPi` — is unavailable. Any Perspective component or gateway script that calls them receives `NameError` or `ImportError`.
+
+**Explanation.** Line 41 (`for item in selectedData:`) is indented with two tabs. Line 42 (`unique_dict[item['streamId']] = item`) is indented with one tab followed by four spaces. Python 2.7 does not equate a tab to four spaces; it treats them as incompatible indentation tokens.
+
+**Source.** Current code (defective):
+```python
+40		unique_dict = {}
+41		for item in selectedData:        # \t\t (two tabs)
+42		    unique_dict[item['streamId']] = item  # \t + 4 spaces  ← TabError
+```
+
+**Recommended Fix.**
+```python
+40		unique_dict = {}
+41		for item in selectedData:        # \t\t
+42			unique_dict[item['streamId']] = item  # \t\t\t — pure tabs
+```
+
+---
+
+### 6.3 `addDevices/code.py`
+
+**[LOW] Dead code: `counter = 0` assigned but never used** — `code.py:62`
+
+**File:** `PISync_2026-04-11_1427/ignition/script-python/addDevices/code.py`, line 62
+
+**Impact.** No runtime effect. The variable occupies a name in the local scope and misleads readers into expecting a counter-increment or guard on `selectedData.append` that never materialises.
+
+**Source.** Current code (defective):
+```python
+61          if generateStreamID(tagPath, tagName) not in unique_dict.keys():
+62              counter = 0    # assigned, never read or incremented
+63              selectedData.append(j)
+```
+
+**Recommended Fix.**
+```python
+61          if generateStreamID(tagPath, tagName) not in unique_dict.keys():
+62              selectedData.append(j)
+```
+
+---
+
+## Summary
+
+| ID | File | Severity | Title |
+|----|------|----------|-------|
+| 2.1 | `exchange/…/callables/code.py` | **CRITICAL** | `isinstance` drops all `java.lang.String` tag values |
+| 3.1 | `PIIntegration/activate/code.py` | **CRITICAL** | `replaceNull` always returns `0` |
+| 3.2 | `PIIntegration/activate/code.py` | **CRITICAL** | `selectAll` defined twice; 2-arg shadows 1-arg |
+| 1.1 | `createPITemplate/code.py` | HIGH | `baseTagPath` hardcoded to root |
+| 1.2 | `createPITemplate/code.py` | HIGH | `.activated` dot-separator — child tag never written |
+| 2.2 | `exchange/…/callables/code.py` | HIGH | Timestamp format `sss` → `SSS` |
+| 2.3 | `exchange/…/callables/code.py` | HIGH | `Topic.replace` corrupts multi-segment topics |
+| 2.4 | `exchange/…/callables/code.py` | HIGH | `topic[:-1]` strips unconditionally |
+| 2.5 | `exchange/…/callables/code.py` | HIGH | `readBlocking(string)` instead of `readBlocking([string])` |
+| 3.3 | `PIIntegration/activate/code.py` | HIGH | `.sentToPI` dot-separator in `publishDevice` |
+| 3.4 | `PIIntegration/activate/code.py` | HIGH | `.activated` dot-separator in `createInstance` |
+| 4.1 | `PIIntegration/devices/code.py` | HIGH | `.sentToPI` dot-separator — every device always re-queued |
+| 6.1 | `addDevices/code.py` | HIGH | Hardcoded `"MQTT1"` ignores `componentID` |
+| 6.2 | `addDevices/code.py` | HIGH | Mixed tabs/spaces → `TabError` on module load |
+| 1.3 | `createPITemplate/code.py` | MEDIUM | `system.perspective.print` debug call |
+| 2.6 | `exchange/…/callables/code.py` | MEDIUM | `writeStatistics` inside per-server loop |
+| 3.5 | `PIIntegration/activate/code.py` | MEDIUM | `searchDirectory` parameter ignored |
+| 3.6 | `PIIntegration/activate/code.py` | MEDIUM | Debug `perspective.print` in `selectAll` |
+| 4.2 | `PIIntegration/devices/code.py` | MEDIUM | Debug `perspective.print` in `findDevices` |
+| 5.1 | `PIIntegration/topics/code.py` | MEDIUM | `IndexError` on paths without `]` |
+| 1.4 | `createPITemplate/code.py` | LOW | Typo `createReult` |
+| 4.3 | `PIIntegration/devices/code.py` | LOW | Bare `print` debug statements |
+| 6.3 | `addDevices/code.py` | LOW | Dead code: `counter = 0` |
