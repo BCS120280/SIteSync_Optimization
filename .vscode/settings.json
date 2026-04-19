@@ -1,0 +1,14 @@
+{
+    "[python]": {
+        "editor.insertSpaces": false,
+        "editor.tabSize": 4
+    },
+    "chat.mcp.serverSampling": {
+        "SIteSync_Optimization/.vscode/mcp.json: io.github.upstash/context7": {
+            "allowedModels": [
+                "anthropic/Anthropic/claude-opus-4-7"
+            ]
+        }
+    },
+    "claudeCode.initialPermissionMode": "plan"
+}
