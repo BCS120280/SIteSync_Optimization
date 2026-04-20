@@ -11,6 +11,8 @@
         "upstash.context7-mcp",
         "ms-python.vscode-python-envs",
         "sixth.sixth-ai",
-        "vscjava.vscode-maven"
+        "vscjava.vscode-maven",
+        "oracle.oracle-java",
+        "jostrand.ignition-mcp"
     ]
 }

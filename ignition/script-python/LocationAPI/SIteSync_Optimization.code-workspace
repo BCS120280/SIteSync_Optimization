@@ -44,7 +44,8 @@
 			"donjayamanne.python-environment-manager",
 			"ms-toolsai.vscode-jupyter-powertoys",
 			"hydrologicengineeringcenter.hec-jython",
-			"vscjava.vscode-maven"
+			"vscjava.vscode-maven",
+			"oracle.oracle-java"
 		]
 	}
 }
