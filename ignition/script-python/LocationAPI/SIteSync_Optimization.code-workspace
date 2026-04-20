@@ -20,9 +20,23 @@
 			"MQTT",
 			"sitesync"
 		],
-		"ignitionFlint.showInheritedResources": true
+		"ignitionFlint.showInheritedResources": true,
+		"netbeans.jdkhome": "/usr/local/sdkman/candidates/java/25.0.2-ms",
+		"netbeans.project.jdkhome": "/usr/local/sdkman/candidates/java/25.0.2-ms",
+		"terminal.integrated.env.linux": {
+			"JAVA_HOME": "/usr/local/sdkman/candidates/java/25.0.2-ms",
+			"PATH": "/usr/local/sdkman/candidates/java/25.0.2-ms/bin:${env:PATH}"
+		}
 	},
 	"extensions": {
-		"recommendations": []
+		"recommendations": [
+			"jjshnady.jythonplus-language",
+			"asf.apache-netbeans-java",
+			"j4k0xb.v8-bytecode-highlight",
+			"keith-gamble.ignition-flint",
+			"nburnet1.ignition-sift",
+			"rbledsaw3.ignition-json-edit",
+			"whiskeyhouse.ignition-dev-tools"
+		]
 	}
 }

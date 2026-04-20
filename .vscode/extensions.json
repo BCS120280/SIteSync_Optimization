@@ -1,5 +1,12 @@
 {
     "recommendations": [
-        "vscjava.vscode-gradle"
+        "vscjava.vscode-gradle",
+        "jjshnady.jythonplus-language",
+        "asf.apache-netbeans-java",
+        "j4k0xb.v8-bytecode-highlight",
+        "keith-gamble.ignition-flint",
+        "nburnet1.ignition-sift",
+        "rbledsaw3.ignition-json-edit",
+        "whiskeyhouse.ignition-dev-tools"
     ]
 }
