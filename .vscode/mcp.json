@@ -15,6 +15,10 @@
 		"ignition-mcp": {
 			"url": "http://localhost:3537/mcp",
 			"type": "http"
+		},
+		"exa": {
+			"url": "https://mcp.exa.ai/mcp?exaApiKey=${input:EXA_API_KEY}",
+			"type": "http"
 		}
 	},
 	"inputs": [
@@ -22,6 +26,12 @@
 			"id": "CONTEXT7_API_KEY",
 			"type": "promptString",
 			"description": "API key for authentication",
+			"password": true
+		},
+		{
+			"id": "EXA_API_KEY",
+			"type": "promptString",
+			"description": "Exa API key for web search",
 			"password": true
 		}
 	]
