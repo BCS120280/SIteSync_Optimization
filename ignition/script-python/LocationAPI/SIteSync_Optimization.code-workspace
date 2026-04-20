@@ -26,7 +26,8 @@
 		"terminal.integrated.env.linux": {
 			"JAVA_HOME": "/usr/local/sdkman/candidates/java/25.0.2-ms",
 			"PATH": "/usr/local/sdkman/candidates/java/25.0.2-ms/bin:${env:PATH}"
-		}
+		},
+		"ignitionSift.pythonPath": "python2"
 	},
 	"extensions": {
 		"recommendations": [
@@ -37,7 +38,9 @@
 			"nburnet1.ignition-sift",
 			"rbledsaw3.ignition-json-edit",
 			"whiskeyhouse.ignition-dev-tools",
-			"upstash.context7-mcp"
+			"upstash.context7-mcp",
+			"ms-python.vscode-python-envs",
+			"sixth.sixth-ai"
 		]
 	}
 }
