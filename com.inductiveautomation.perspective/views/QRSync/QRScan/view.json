@@ -1,0 +1,272 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "props": {
+          "style": {
+            "marginTop": 10
+          },
+          "text": "Add Device",
+          "textStyle": {
+            "color": "#0d5c63",
+            "fontFamily": "Arial",
+            "fontSize": "XX-Large",
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "events": {
+              "dom": {
+                "onClick": [
+                  {
+                    "config": {
+                      "script": "\tself.session.custom.barcodeEvent \u003d \"QRSync\""
+                    },
+                    "scope": "G",
+                    "type": "script"
+                  },
+                  {
+                    "config": {
+                      "config": {
+                        "backgroundColor": "AUTO",
+                        "cameraPreference": "BACK",
+                        "type": "QR_CODE",
+                        "uuid": "56428abb-3990-4a15-ae58-d928ab66edaa"
+                      },
+                      "context": {}
+                    },
+                    "scope": "C",
+                    "type": "native/barcode"
+                  }
+                ]
+              }
+            },
+            "meta": {
+              "name": "Button_launchQR"
+            },
+            "position": {
+              "basis": "72px"
+            },
+            "propConfig": {
+              "meta.visible": {
+                "binding": {
+                  "config": {
+                    "expression": "({session.props.device.type} \u003d \"android\" || {session.props.device.type} \u003d \"ios\")"
+                  },
+                  "type": "expr"
+                }
+              },
+              "props.enabled": {
+                "binding": {
+                  "config": {
+                    "expression": "({session.props.device.type} \u003d \"android\" || {session.props.device.type} \u003d \"ios\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "image": {
+                "icon": {
+                  "path": "material/qr_code_scanner"
+                }
+              },
+              "style": {
+                "backgroundColor": "#0D5C63",
+                "borderBottomLeftRadius": "12px",
+                "borderBottomRightRadius": "12px",
+                "borderTopLeftRadius": "12px",
+                "borderTopRightRadius": "12px",
+                "classes": "formLabel",
+                "color": "#FFFFFF",
+                "fontSize": 16,
+                "marginBottom": "10%"
+              },
+              "text": "Launch QR Scanner"
+            },
+            "scripts": {
+              "customMethods": [],
+              "extensionFunctions": null,
+              "messageHandlers": [
+                {
+                  "messageType": "QRSync",
+                  "pageScope": false,
+                  "script": "\t# implement your handler here\n\tlogger \u003d system.util.getLogger(\u0027SiteSyncQRScan\u0027)\n\t\n\n\ttry:\n\t\tlogger.info(str(payload))\n\t\tscannedData \u003d payload[\u0027scanValue\u0027]\n\t\tresults \u003d utils.QRCodeParser.parse(scannedData)\n\t\tlogger.info(str(results))\n\t\t\n\t\n\t\tif results[\u0027devEUI\u0027] !\u003d \"\":\n\t\t\n\t\t\tfoundDevice \u003d system.sitesync.lookupDevice(results[\u0027devEUI\u0027])\n\t\t\t\n\t\t\tutils.messages.waiting.hideLoading()\n\t\t\tif foundDevice !\u003d None:\n\t\t\t\timport json\n\t\t\t\td \u003d json.loads(foundDevice)\n\t\t\t\tif self.session.custom.showQRAlreadySynced:\n\t\t\t\t\tsystem.perspective.navigate( view \u003d \"QRSync/alreadyRegisteredDialog\", params \u003d {\"device\":d, \"QRscan\":results})\n\t\t\t\t\n\t\t\t\telse:\n\t\t\t\t\tsystem.perspective.navigate( view \u003d \"QRSync/mobileActivation\", params \u003d {\"device\":d})\n\n\t\t\telse:\n\t\t\t\tsystem.perspective.navigate( view \u003d \"QRSync/mobileQRAdd\", params \u003d {\"qrScan\":results})\n\t\t\t\t\n\t\telse:\n\t\t\tsystem.perspective.navigate( view \u003d \"QRSync/mobileQRAdd\", params \u003d {\"qrScan\":results})\n\t\t\n\texcept Exception as e:\n\t\tlogger.info(str(e))",
+                  "sessionScope": true,
+                  "viewScope": false
+                }
+              ]
+            },
+            "type": "ia.input.button"
+          },
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "32px",
+              "display": false
+            },
+            "props": {
+              "style": {
+                "textAlign": "center"
+              },
+              "text": "Or"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Icon"
+                },
+                "position": {
+                  "basis": "70px"
+                },
+                "props": {
+                  "color": "#0D5C63",
+                  "path": "material/format_list_bulleted",
+                  "style": {
+                    "backgroundColor": "white",
+                    "borderStyle": "none",
+                    "cursor": "pointer",
+                    "marginLeft": "00",
+                    "marginRight": 10
+                  }
+                },
+                "type": "ia.display.icon"
+              },
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "basis": "200px"
+                },
+                "props": {
+                  "style": {
+                    "classes": "formLabel",
+                    "color": "#0D5C63",
+                    "fontSize": 16,
+                    "fontWeight": "bold",
+                    "marginLeft": 10
+                  },
+                  "text": "Enter Device Keys"
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "page": "/qrSyncMobile"
+                  },
+                  "scope": "C",
+                  "type": "nav"
+                }
+              }
+            },
+            "meta": {
+              "name": "formAddDevice"
+            },
+            "props": {
+              "alignItems": "center",
+              "justify": "center",
+              "style": {
+                "backgroundColor": "white",
+                "borderBottomLeftRadius": 12,
+                "borderBottomRightRadius": 12,
+                "borderColor": "#1F2E60",
+                "borderStyle": "solid",
+                "borderTopLeftRadius": 12,
+                "borderTopRightRadius": 12
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label_useApp"
+                },
+                "props": {
+                  "style": {
+                    "backgroundColor": "#D5D5D5",
+                    "borderColor": "#E6E6E6",
+                    "borderStyle": "solid",
+                    "color": "#0d5c63",
+                    "fontWeight": "bold"
+                  },
+                  "text": "It looks like you aren\u0027t on a mobile device using the perspective app, so we can\u0027t access your camera. Try opening in app or entering data manually.",
+                  "textStyle": {
+                    "textAlign": "center"
+                  }
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer"
+            },
+            "position": {
+              "basis": "142px"
+            },
+            "propConfig": {
+              "meta.visible": {
+                "binding": {
+                  "config": {
+                    "expression": "!({session.props.device.type} \u003d \"android\" || {session.props.device.type} \u003d \"ios\")"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "direction": "column",
+              "justify": "space-evenly"
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "CoordinateContainer_QRScan"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "classes": "pageFormat/grey-bubble"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "pageFormat/rootPadding"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

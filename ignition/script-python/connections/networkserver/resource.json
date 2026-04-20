@@ -1,0 +1,17 @@
+{
+  "scope": "A",
+  "version": 1,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "code.py"
+  ],
+  "attributes": {
+    "lastModification": {
+      "actor": "Sarah Sonnier",
+      "timestamp": "2025-02-19T04:49:41Z"
+    },
+    "hintScope": 2,
+    "lastModificationSignature": "63da728651b8facdd7df8082c6f5fbee3d11abfa1be06b5e72db245198183f3a"
+  }
+}

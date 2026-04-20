@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "../../.."
+		}
+	],
+	"settings": {
+		"claudeCode.initialPermissionMode": "plan",
+		"[python]": {
+			"editor.insertSpaces": false,
+			"editor.tabSize": 4
+		},
+		"claudeCode.useTerminal": true,
+		"python.analysis.extraPaths": [
+			"/home/codespace/.vscode-remote/data/User/globalStorage/whiskeyhouse.ignition-dev-tools/venv/lib/python3.12/site-packages/ignition_lsp/stubs"
+		]
+	}
+}

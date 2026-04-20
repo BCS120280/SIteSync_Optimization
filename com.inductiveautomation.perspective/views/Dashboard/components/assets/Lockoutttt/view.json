@@ -1,0 +1,201 @@
+{
+  "custom": {},
+  "params": {
+    "tagPath": "[default]AloxyValvePosition"
+  },
+  "propConfig": {
+    "params.engUnits": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.maxAnalogValue": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.minAnalogValue": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.processValue": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.tagName": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.tagPath": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 250,
+      "width": 250
+    },
+    "dropConfig": {
+      "udts": [
+        {
+          "action": "path",
+          "param": "tagPath",
+          "type": "SiteSync/TE-Pressure"
+        },
+        {
+          "action": "path",
+          "param": "tagPath",
+          "type": "SiteSync/SushiPressure"
+        },
+        {
+          "action": "path",
+          "param": "tagPath",
+          "type": "SiteSync/TWTG-Pressure"
+        }
+      ]
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Tag Name"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.tagPath"
+              },
+              "transforms": [
+                {
+                  "code": "\ttagName \u003d value.split(\u0027]\u0027)[1].split(\u0027/\u0027)[-1]\n\treturn tagName",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Dashboard/boldLabel"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Tag Name_0"
+            },
+            "position": {
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "fallbackDelay": 2.5,
+                    "mode": "indirect",
+                    "references": {
+                      "tagPath": "{view.params.tagPath}"
+                    },
+                    "tagPath": "{tagPath}/metaData/valueToDisplay"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tif quality.badOrError:\n\t\treturn \"Error getting status\"\n\telse:\n\t\treturn value",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "tag"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "classes": "Dashboard/label"
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer",
+          "tooltip": {
+            "enabled": true,
+            "text": "Status"
+          }
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Tag Name_0"
+            },
+            "position": {
+              "grow": 1
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "fallbackDelay": 2.5,
+                    "mode": "indirect",
+                    "references": {
+                      "tagPath": "{view.params.tagPath}"
+                    },
+                    "tagPath": "{tagPath}/metaData/valueToDisplay.timestamp"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tif quality.badOrError:\n\t\treturn \"Error getting status\"\n\telse:\n\t\treturn value",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "tag"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "classes": "Dashboard/label"
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_0"
+        },
+        "position": {
+          "basis": "72px"
+        },
+        "props": {
+          "direction": "column"
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "justify": "center",
+      "style": {
+        "classes": "Dashboard/PVTile"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "custom": {},
+  "params": {
+    "value": {
+      "event": null,
+      "message": "{\"deduplicationId\":\"bece0677-71c0-4349-9db9-74dae764042d\",\"time\":\"2023-11-09T15:21:22.257276900+00:00\",\"deviceInfo\":{\"tenantId\":\"52f14cd4-c6f1-4fbd-8f87-4025e1d49242\",\"tenantName\":\"ChirpStack\",\"applicationId\":\"57cfe33a-6e7c-447c-a37c-eb63021c1330\",\"applicationName\":\"test-application\",\"deviceProfileId\":\"b7291f78-c44f-44f9-a85a-79755b2fdb77\",\"deviceProfileName\":\"generic device\",\"deviceName\":\"cloudHotDrop\",\"devEui\":\"90ab96fffee1b9c9\",\"tags\":{\"decoder\":\"HotDrop\",\"tagPath\":\"None\",\"tagProvider\":\"default\"}},\"devAddr\":\"011e3d4e\",\"adr\":true,\"dr\":3,\"fCnt\":13137,\"fPort\":2,\"data\":\"IGYAL+AUAA8AYQcA////7v//GAAA2fj/DQCE/w0RAQEBn/3tAGUABQQFAwD0/wUAAQEB\",\"rxInfo\":[{\"gatewayId\":\"00800000a00053dc\",\"uplinkId\":6013,\"rssi\":-96,\"snr\":10,\"channel\":7,\"rfChain\":1,\"location\":{\"latitude\":29.4457446,\"longitude\":-99.5450974},\"context\":\"wHOiZA\u003d\u003d\",\"metadata\":{\"regioncommonname\":\"US915\",\"regionname\":\"us9150\"}}],\"txInfo\":{\"frequency\":903700000,\"modulation\":{\"lora\":{\"bandwidth\":125000,\"spreadingFactor\":7,\"codeRate\":\"CR45\"}}}}",
+      "timestamp": 1718637845
+    }
+  },
+  "propConfig": {
+    "params.value": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 400
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "TextArea"
+        },
+        "position": {
+          "basis": "100%",
+          "grow": 1
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.value.message"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.input.text-area"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "alignContent": "flex-start",
+      "justify": "space-around"
+    },
+    "type": "ia.container.flex"
+  }
+}

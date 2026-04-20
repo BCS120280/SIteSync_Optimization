@@ -1,0 +1,2537 @@
+{
+  "custom": {
+    "columns": [
+      {
+        "align": "center",
+        "boolean": "checkbox",
+        "dateFormat": "MM/DD/YYYY",
+        "editable": false,
+        "field": "Status",
+        "filter": {
+          "boolean": {
+            "condition": ""
+          },
+          "date": {
+            "condition": "",
+            "value": ""
+          },
+          "enabled": false,
+          "number": {
+            "condition": "",
+            "value": ""
+          },
+          "string": {
+            "condition": "",
+            "value": ""
+          },
+          "visible": "on-hover"
+        },
+        "footer": {
+          "align": "center",
+          "justify": "left",
+          "style": {
+            "classes": ""
+          },
+          "title": ""
+        },
+        "header": {
+          "align": "center",
+          "justify": "left",
+          "style": {
+            "classes": ""
+          },
+          "title": ""
+        },
+        "justify": "auto",
+        "nullFormat": {
+          "includeNullStrings": false,
+          "nullFormatValue": "",
+          "strict": false
+        },
+        "number": "value",
+        "numberFormat": "0,0.##",
+        "progressBar": {
+          "bar": {
+            "color": "",
+            "style": {
+              "classes": ""
+            }
+          },
+          "max": 100,
+          "min": 0,
+          "track": {
+            "color": "",
+            "style": {
+              "classes": ""
+            }
+          },
+          "value": {
+            "enabled": true,
+            "format": "0,0.##",
+            "justify": "center",
+            "style": {
+              "classes": ""
+            }
+          }
+        },
+        "render": "view",
+        "resizable": true,
+        "sort": "ascending",
+        "sortable": false,
+        "strictWidth": false,
+        "style": {
+          "classes": ""
+        },
+        "toggleSwitch": {
+          "color": {
+            "selected": "",
+            "unselected": ""
+          }
+        },
+        "viewParams": {
+          "errors": {
+            "GatewayError": "gateway error",
+            "HardwareError": "hardware error",
+            "IgnitionError": "ignition error",
+            "MQTTError": "network server error",
+            "Operational": "good"
+          },
+          "value": 2
+        },
+        "viewPath": "Device Status Icon",
+        "visible": true,
+        "width": 20
+      },
+      {
+        "align": "center",
+        "boolean": "checkbox",
+        "dateFormat": "MM/DD/YYYY",
+        "editable": false,
+        "field": "Name",
+        "filter": {
+          "boolean": {
+            "condition": ""
+          },
+          "date": {
+            "condition": "",
+            "value": ""
+          },
+          "enabled": false,
+          "number": {
+            "condition": "",
+            "value": ""
+          },
+          "string": {
+            "condition": "",
+            "value": ""
+          },
+          "visible": "on-hover"
+        },
+        "footer": {
+          "align": "center",
+          "justify": "left",
+          "style": {
+            "classes": ""
+          },
+          "title": ""
+        },
+        "header": {
+          "align": "center",
+          "justify": "left",
+          "style": {
+            "classes": ""
+          },
+          "title": ""
+        },
+        "justify": "auto",
+        "nullFormat": {
+          "includeNullStrings": false,
+          "nullFormatValue": "",
+          "strict": false
+        },
+        "number": "value",
+        "numberFormat": "0,0.##",
+        "progressBar": {
+          "bar": {
+            "color": "",
+            "style": {
+              "classes": ""
+            }
+          },
+          "max": 100,
+          "min": 0,
+          "track": {
+            "color": "",
+            "style": {
+              "classes": ""
+            }
+          },
+          "value": {
+            "enabled": true,
+            "format": "0,0.##",
+            "justify": "center",
+            "style": {
+              "classes": ""
+            }
+          }
+        },
+        "render": "auto",
+        "resizable": true,
+        "sort": "none",
+        "sortable": true,
+        "strictWidth": false,
+        "style": {
+          "classes": "",
+          "color": "#000000",
+          "fontWeight": "bold"
+        },
+        "toggleSwitch": {
+          "color": {
+            "selected": "",
+            "unselected": ""
+          }
+        },
+        "viewParams": {},
+        "viewPath": "",
+        "visible": true,
+        "width": ""
+      },
+      {
+        "align": "center",
+        "boolean": "checkbox",
+        "dateFormat": "MM/DD/YYYY",
+        "editable": false,
+        "field": "DevEUI",
+        "filter": {
+          "boolean": {
+            "condition": ""
+          },
+          "date": {
+            "condition": "",
+            "value": ""
+          },
+          "enabled": false,
+          "number": {
+            "condition": "",
+            "value": ""
+          },
+          "string": {
+            "condition": "",
+            "value": ""
+          },
+          "visible": "on-hover"
+        },
+        "footer": {
+          "align": "center",
+          "justify": "left",
+          "style": {
+            "classes": ""
+          },
+          "title": ""
+        },
+        "header": {
+          "align": "center",
+          "justify": "left",
+          "style": {
+            "classes": ""
+          },
+          "title": ""
+        },
+        "justify": "auto",
+        "nullFormat": {
+          "includeNullStrings": false,
+          "nullFormatValue": "",
+          "strict": false
+        },
+        "number": "value",
+        "numberFormat": "0,0.##",
+        "progressBar": {
+          "bar": {
+            "color": "",
+            "style": {
+              "classes": ""
+            }
+          },
+          "max": 100,
+          "min": 0,
+          "track": {
+            "color": "",
+            "style": {
+              "classes": ""
+            }
+          },
+          "value": {
+            "enabled": true,
+            "format": "0,0.##",
+            "justify": "center",
+            "style": {
+              "classes": ""
+            }
+          }
+        },
+        "render": "auto",
+        "resizable": true,
+        "sort": "none",
+        "sortable": true,
+        "strictWidth": false,
+        "style": {
+          "classes": ""
+        },
+        "toggleSwitch": {
+          "color": {
+            "selected": "",
+            "unselected": ""
+          }
+        },
+        "viewParams": {},
+        "viewPath": "",
+        "visible": true,
+        "width": ""
+      },
+      {
+        "align": "center",
+        "boolean": "checkbox",
+        "dateFormat": "MM/DD/YYYY",
+        "editable": false,
+        "field": "ActivationStatus",
+        "filter": {
+          "boolean": {
+            "condition": ""
+          },
+          "date": {
+            "condition": "",
+            "value": ""
+          },
+          "enabled": false,
+          "number": {
+            "condition": "",
+            "value": ""
+          },
+          "string": {
+            "condition": "",
+            "value": ""
+          },
+          "visible": "on-hover"
+        },
+        "footer": {
+          "align": "center",
+          "justify": "left",
+          "style": {
+            "classes": ""
+          },
+          "title": ""
+        },
+        "header": {
+          "align": "center",
+          "justify": "left",
+          "style": {
+            "classes": ""
+          },
+          "title": ""
+        },
+        "justify": "auto",
+        "nullFormat": {
+          "includeNullStrings": false,
+          "nullFormatValue": "",
+          "strict": false
+        },
+        "number": "value",
+        "numberFormat": "0,0.##",
+        "progressBar": {
+          "bar": {
+            "color": "",
+            "style": {
+              "classes": ""
+            }
+          },
+          "max": 100,
+          "min": 0,
+          "track": {
+            "color": "",
+            "style": {
+              "classes": ""
+            }
+          },
+          "value": {
+            "enabled": true,
+            "format": "0,0.##",
+            "justify": "center",
+            "style": {
+              "classes": ""
+            }
+          }
+        },
+        "render": "auto",
+        "resizable": true,
+        "sort": "none",
+        "sortable": true,
+        "strictWidth": false,
+        "style": {
+          "classes": ""
+        },
+        "toggleSwitch": {
+          "color": {
+            "selected": "",
+            "unselected": ""
+          }
+        },
+        "viewParams": {},
+        "viewPath": "",
+        "visible": true,
+        "width": ""
+      },
+      {
+        "align": "center",
+        "boolean": "checkbox",
+        "dateFormat": "MM/DD/YYYY",
+        "editable": false,
+        "field": "LastActivity",
+        "filter": {
+          "boolean": {
+            "condition": ""
+          },
+          "date": {
+            "condition": "",
+            "value": ""
+          },
+          "enabled": false,
+          "number": {
+            "condition": "",
+            "value": ""
+          },
+          "string": {
+            "condition": "",
+            "value": ""
+          },
+          "visible": "on-hover"
+        },
+        "footer": {
+          "align": "center",
+          "justify": "left",
+          "style": {
+            "classes": ""
+          },
+          "title": ""
+        },
+        "header": {
+          "align": "center",
+          "justify": "left",
+          "style": {
+            "classes": ""
+          },
+          "title": ""
+        },
+        "justify": "auto",
+        "nullFormat": {
+          "includeNullStrings": false,
+          "nullFormatValue": "",
+          "strict": false
+        },
+        "number": "value",
+        "numberFormat": "0,0.##",
+        "progressBar": {
+          "bar": {
+            "color": "",
+            "style": {
+              "classes": ""
+            }
+          },
+          "max": 100,
+          "min": 0,
+          "track": {
+            "color": "",
+            "style": {
+              "classes": ""
+            }
+          },
+          "value": {
+            "enabled": true,
+            "format": "0,0.##",
+            "justify": "center",
+            "style": {
+              "classes": ""
+            }
+          }
+        },
+        "render": "auto",
+        "resizable": true,
+        "sort": "none",
+        "sortable": true,
+        "strictWidth": false,
+        "style": {
+          "classes": ""
+        },
+        "toggleSwitch": {
+          "color": {
+            "selected": "",
+            "unselected": ""
+          }
+        },
+        "viewParams": {},
+        "viewPath": "",
+        "visible": true,
+        "width": ""
+      },
+      {
+        "align": "center",
+        "boolean": "checkbox",
+        "dateFormat": "MM/DD/YYYY",
+        "editable": false,
+        "field": "deviceType",
+        "filter": {
+          "boolean": {
+            "condition": ""
+          },
+          "date": {
+            "condition": "",
+            "value": ""
+          },
+          "enabled": false,
+          "number": {
+            "condition": "",
+            "value": ""
+          },
+          "string": {
+            "condition": "",
+            "value": ""
+          },
+          "visible": "on-hover"
+        },
+        "footer": {
+          "align": "center",
+          "justify": "left",
+          "style": {
+            "classes": ""
+          },
+          "title": ""
+        },
+        "header": {
+          "align": "center",
+          "justify": "left",
+          "style": {
+            "classes": ""
+          },
+          "title": ""
+        },
+        "justify": "auto",
+        "nullFormat": {
+          "includeNullStrings": false,
+          "nullFormatValue": "",
+          "strict": false
+        },
+        "number": "value",
+        "numberFormat": "0,0.##",
+        "progressBar": {
+          "bar": {
+            "color": "",
+            "style": {
+              "classes": ""
+            }
+          },
+          "max": 100,
+          "min": 0,
+          "track": {
+            "color": "",
+            "style": {
+              "classes": ""
+            }
+          },
+          "value": {
+            "enabled": true,
+            "format": "0,0.##",
+            "justify": "center",
+            "style": {
+              "classes": ""
+            }
+          }
+        },
+        "render": "auto",
+        "resizable": true,
+        "sort": "none",
+        "sortable": true,
+        "strictWidth": false,
+        "style": {
+          "classes": ""
+        },
+        "toggleSwitch": {
+          "color": {
+            "selected": "",
+            "unselected": ""
+          }
+        },
+        "viewParams": {},
+        "viewPath": "",
+        "visible": true,
+        "width": ""
+      }
+    ],
+    "counters": {
+      "DecodeError": 14,
+      "NotActivated": 61,
+      "Operational": 257,
+      "TimedOut": 0
+    },
+    "filterApplied": false,
+    "filterValue": 0,
+    "initialData": [
+      {
+        "Name": "No Devices Yet!",
+        "Status": 2
+      }
+    ],
+    "refresh": false,
+    "status": {
+      "-1": [
+        "[default]GlamosWalker",
+        "[default]Aduenis",
+        "[default]TWTG-Vibration-V3-D6D4",
+        "[default]Trackonomy Domino",
+        "[default]GlamosWalkerKit1",
+        "[default]testing/basf-tabletop-temperature/TWTG-TT-6AA6",
+        "[default]THL-CA76",
+        "[default]THL-0F0E",
+        "[default]THL-08FA",
+        "[default]test-location/meowdy",
+        "[default]test-location/meowdy",
+        "[default]test-location/meowdy",
+        "[default]test-location/meowdy",
+        "[default]test-location/meowdy",
+        "[default]test-location/meowdy",
+        "[default]test-location/meowdy",
+        "[default]test-location/meowdy",
+        "[default]test-location/meowdy",
+        "[default]test-location/meowdy",
+        "[default]test-location/meowdy",
+        "[default]Glamos3",
+        "[default]THL-A2CC",
+        "[default]THL-EE8E",
+        "[default]test-location/VegaAir-B266",
+        "[default]DraginoS31B_LB_TempHumidity",
+        "[default]test-location/0A6F9",
+        "[default]test-location/00350",
+        "[default]test-location/03190",
+        "[default]test-location/06802",
+        "[default]test-location/0F37C",
+        "[default]test-location/05F49",
+        "[default]test-location/0970D",
+        "[default]test-location/0B791",
+        "[default]test-location/09E7B",
+        "[default]test-location/04295",
+        "[default]test-location/04294",
+        "[default]test-location/09E7F",
+        "[default]testing/basf-tabletop-valvePosition/Aloxy-ValvePosition-2667",
+        "[default]testing/basf-tabletop-valvePosition/Aloxy-ValvePosition-26F3",
+        "[default]testing/enersysJob/VDC-Temp-Node-9",
+        "[default]testing/enersysJob/VDC-Temp-Node-31",
+        "[default]testing/enersysJob/VDC-Temp-Node-39",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-89",
+        "[default]test-location/Test_Device01",
+        "[default]test-location/GlamosWalker",
+        "[default]test-location/THL-001",
+        "[default]test-location/TWTGTemperature-Contact-EEDE",
+        "[default]test-location/twtgtEMPERATURE-cONTACT-ee93",
+        "[default]test-location/Abeeway Tracker 040b",
+        "[default]test-location/Abeeway Tracker 01ac",
+        "[default]test-location/Abeeway Tracker 0176",
+        "[default]test-location/Abeeway Tracker 047d",
+        "[default]test-location/Abeeway Tracker 01a5",
+        "[default]test-location/Abeeway Tracker 00db",
+        "[default]test-location/Abeeway Tracker 0343",
+        "[default]test-location/Abeeway Tracker 0496",
+        "[default]test-location/Abeeway Tracker 0399",
+        "[default]test-location/Abeeway Tracker 0411",
+        "[default]test-location/Abeeway Tracker 040d",
+        "[default]test-location/Abeeway Tracker 00e5",
+        "[default]EnersysRB_TCtest"
+      ],
+      "0": [
+        "[default]TWTG-Temp-6A99",
+        "[default]TWTGVibration-1935",
+        "[default]RadioBridgeTemperature-2702",
+        "[default]THL-CFAE",
+        "[default]EnersysNode5",
+        "[default]EnersysNode6",
+        "[default]TE Connectivity Vibration 069E",
+        "[default]THL-92C2",
+        "[default]THL-134F",
+        "[default]THL-EAED",
+        "[default]VoBo 6X Westlake",
+        "[default]THL-C9E3",
+        "[default]THL-CF74",
+        "[default]THL-1332",
+        "[default]sample-device",
+        "[default]THL-6D53",
+        "[default]THL-5890",
+        "[default]THL-45D6",
+        "[default]THL-7916",
+        "[default]THL-6554",
+        "[default]THL-4692",
+        "[default]THL-6951",
+        "[default]THL-6DDA",
+        "[default]THL-2571",
+        "[default]THL-CCF4",
+        "[default]THL-BFE4",
+        "[default]THL-B9D8",
+        "[default]THL-0D96",
+        "[default]THL-82F9",
+        "[default]THL-5F01",
+        "[default]THL-75EE",
+        "[default]THL-10CF",
+        "[default]THL-B92C",
+        "[default]THL-968C",
+        "[default]THL-0BE9",
+        "[default]THL-4475",
+        "[default]THL-A4A4",
+        "[default]THL-E19F",
+        "[default]THL-F1F7",
+        "[default]THL-2B8C",
+        "[default]THL-9DEC",
+        "[default]THL-DD0C",
+        "[default]THL-0EBE",
+        "[default]THL-F07A",
+        "[default]THL-B73C",
+        "[default]THL-5073",
+        "[default]THL-Test",
+        "[default]THL-73F8",
+        "[default]THL-B1FB",
+        "[default]THL-6934",
+        "[default]THL-1910",
+        "[default]THL-DAF2",
+        "[default]THL-A181",
+        "[default]THL-B876",
+        "[default]THL-4562",
+        "[default]THL-F308",
+        "[default]THL-CFC9",
+        "[default]THL-BBDB",
+        "[default]THL-1549",
+        "[default]THL-4E42",
+        "[default]THL-CCC6",
+        "[default]THL-6E0B",
+        "[default]THL-4414",
+        "[default]THL-3C12",
+        "[default]THL-94D5",
+        "[default]Trackonomy-eSeal-609D",
+        "[default]Trackonomy-eSeal-2990",
+        "[default]Trackonomy-eSeal-DB7F",
+        "[default]Trackonomy-eSeal-6FF7",
+        "[default]Trackonomy-eSeal-78E2",
+        "[default]Trackonomy-eSeal-9539",
+        "[default]Trackonomy-eSeal-50F0",
+        "[default]Trackonomy-eSeal-053C",
+        "[default]Trackonomy-eSeal-C0C2",
+        "[default]Trackonomy-eSeal-4BC3",
+        "[default]TWTG-TT-6B24",
+        "[default]RadioBridgeHumidity-94F0",
+        "[default]RadioBridgeHumidity-94EA",
+        "[default]RadioBridgeHumidity-94E9",
+        "[default]RadioBridgeHumidity-94EB",
+        "[default]RadioBridgeHumidity-94F2",
+        "[default]CLNG_TWTG_TT_Test",
+        "[default]TestTrackonomyBox",
+        "[default]test-location/09E7E",
+        "[default]testing/basf-tabletop-vibration/TWTG-Vibration-70C2",
+        "[default]testing/basf-tabletop-vibration/TWTG-Vibration-6E52",
+        "[default]testing/enersysJob/VDC-Temp-Node-1",
+        "[default]testing/enersysJob/VDC-Temp-Node-2",
+        "[default]testing/enersysJob/VDC-Temp-Node-3",
+        "[default]testing/enersysJob/VDC-Temp-Node-4",
+        "[default]testing/enersysJob/VDC-Temp-Node-5",
+        "[default]testing/enersysJob/VDC-Temp-Node-6",
+        "[default]testing/enersysJob/VDC-Temp-Node-7",
+        "[default]testing/enersysJob/VDC-Temp-Node-8",
+        "[default]testing/enersysJob/VDC-Temp-Node-10",
+        "[default]testing/enersysJob/VDC-Temp-Node-11",
+        "[default]testing/enersysJob/VDC-Temp-Node-12",
+        "[default]testing/enersysJob/VDC-Temp-Node-13",
+        "[default]testing/enersysJob/VDC-Temp-Node-14",
+        "[default]testing/enersysJob/VDC-Temp-Node-15",
+        "[default]testing/enersysJob/VDC-Temp-Node-16",
+        "[default]testing/enersysJob/VDC-Temp-Node-17",
+        "[default]testing/enersysJob/VDC-Temp-Node-18",
+        "[default]testing/enersysJob/VDC-Temp-Node-19",
+        "[default]testing/enersysJob/VDC-Temp-Node-20",
+        "[default]testing/enersysJob/VDC-Temp-Node-21",
+        "[default]testing/enersysJob/VDC-Temp-Node-22",
+        "[default]testing/enersysJob/VDC-Temp-Node-23",
+        "[default]testing/enersysJob/VDC-Temp-Node-24",
+        "[default]testing/enersysJob/VDC-Temp-Node-25",
+        "[default]testing/enersysJob/VDC-Temp-Node-26",
+        "[default]testing/enersysJob/VDC-Temp-Node-27",
+        "[default]testing/enersysJob/VDC-Temp-Node-28",
+        "[default]testing/enersysJob/VDC-Temp-Node-29",
+        "[default]testing/enersysJob/VDC-Temp-Node-30",
+        "[default]testing/enersysJob/VDC-Temp-Node-32",
+        "[default]testing/enersysJob/VDC-Temp-Node-33",
+        "[default]testing/enersysJob/VDC-Temp-Node-34",
+        "[default]testing/enersysJob/VDC-Temp-Node-35",
+        "[default]testing/enersysJob/VDC-Temp-Node-36",
+        "[default]testing/enersysJob/VDC-Temp-Node-37",
+        "[default]testing/enersysJob/VDC-Temp-Node-38",
+        "[default]testing/enersysJob/VDC-Temp-Node-40",
+        "[default]testing/enersysJob/VDC-Temp-Node-41",
+        "[default]testing/enersysJob/VDC-Temp-Node-42",
+        "[default]testing/enersysJob/VDC-Temp-Node-43",
+        "[default]testing/enersysJob/VDC-Temp-Node-44",
+        "[default]testing/enersysJob/VDC-Temp-Node-45",
+        "[default]testing/enersysJob/VDC-Temp-Node-46",
+        "[default]testing/enersysJob/VDC-Temp-Node-47",
+        "[default]testing/enersysJob/VDC-Temp-Node-48",
+        "[default]testing/enersysJob/VDC-Temp-Node-49",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-50",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-51",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-52",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-53",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-54",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-55",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-56",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-57",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-58",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-59",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-60",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-61",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-62",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-63",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-64",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-65",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-66",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-67",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-68",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-69",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-70",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-71",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-72",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-73",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-74",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-75",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-76",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-77",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-78",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-79",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-80",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-81",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-82",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-83",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-84",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-85",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-86",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-87",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-88",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-90",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-91",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-92",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-93",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-94",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-95",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-96",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-97",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-98",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-99",
+        "[default]testing/enersysJob-Kaden/VDC-Temp-Node-100",
+        "[default]testing/basf-tabletop-amperage/HotDrop-Direct-19F5",
+        "[default]testing/basf-tabletop-amperage/HotDrop-Direct-2719",
+        "[default]testing/basf-tabletop-temperature/TWTG TT-6169DA",
+        "[default]testing/level/RIOT-Ultrasonic-Level-0250",
+        "[default]testing/basf-tabletop-pressure/TWTGVibration-6F31",
+        "[default]testing/GP-monticello/461-RM-002",
+        "[default]testing/GP-monticello/460-RM-003",
+        "[default]testing/GP-monticello/460-RM-004",
+        "[default]testing/GP-monticello/510-RM-011",
+        "[default]testing/GP-monticello/510-RM-004",
+        "[default]testing/GP-monticello/510-RM-003",
+        "[default]testing/GP-monticello/500-RM-004",
+        "[default]testing/GP-monticello/510-RM-005",
+        "[default]testing/GP-monticello/510-RM-006",
+        "[default]testing/GP-monticello/520-RM-004",
+        "[default]testing/GP-monticello/500-RM-002",
+        "[default]testing/GP-monticello/520-RM-003",
+        "[default]testing/GP-monticello/520-RM-002",
+        "[default]testing/GP-monticello/440-RM-002",
+        "[default]testing/GP-monticello/910-RM-001",
+        "[default]testing/GP-monticello/910-RM-007",
+        "[default]testing/GP-monticello/204-RM-002",
+        "[default]testing/GP-monticello/910-RM-006",
+        "[default]testing/GP-monticello/203-RM-008",
+        "[default]testing/GP-monticello/910-RM-004",
+        "[default]testing/GP-monticello/203-RM-002",
+        "[default]testing/GP-monticello/203-RM-005",
+        "[default]testing/GP-monticello/910-RM-005",
+        "[default]testing/GP-monticello/203-RM-003",
+        "[default]testing/GP-monticello/511-RM-001",
+        "[default]testing/GP-monticello/209-RM-002",
+        "[default]testing/GP-monticello/209-RM-001",
+        "[default]testing/GP-monticello/875-RM-005",
+        "[default]testing/GP-monticello/875-RM-003",
+        "[default]testing/GP-monticello/875-RM-006",
+        "[default]testing/GP-monticello/206-RM-003",
+        "[default]testing/GP-monticello/205-RM-003",
+        "[default]testing/GP-monticello/206-RM-002",
+        "[default]testing/GP-monticello/202-RM-003",
+        "[default]testing/GP-monticello/206-RM-006",
+        "[default]testing/GP-monticello/130-RM-003",
+        "[default]testing/GP-monticello/140-RM-002",
+        "[default]testing/GP-monticello/210-RM-001",
+        "[default]testing/GP-monticello/510-RM-010",
+        "[default]testing/GP-monticello/510-RM-009",
+        "[default]testing/GP-monticello/205-RM-002",
+        "[default]testing/GP-monticello/204-RM-001",
+        "[default]testing/GP-monticello/203-RM-001",
+        "[default]testing/GP-monticello/131-RM-001",
+        "[default]testing/GP-monticello/440-RM-004",
+        "[default]testing/GP-monticello/520-RM-005",
+        "[default]testing/GP-monticello/0BC77",
+        "[default]testing/GP-monticello/0BC9E",
+        "[default]testing/GP-monticello/0BC6F",
+        "[default]testing/GP-monticello/0BC85",
+        "[default]testing/GP-monticello/0BC83",
+        "[default]testing/GP-monticello/0BC9F",
+        "[default]testing/GP-monticello/2 WEB",
+        "[default]testing/MSAGas-test/TestMSAIntegration",
+        "[edge]sensors/Controller",
+        "[default]TWTGTemperature-Transmitter-6B22",
+        "[default]AirVibe",
+        "[default]SensorNetworks-MicroPims-24e4",
+        "[default]API Test Device",
+        "[default]Radiobridge tt-5E7F",
+        "[default]TWTG TT-6B1A",
+        "[default]DraginoTemp-C6FA",
+        "[default]DraginoTemp-C6FC",
+        "[default]DraginoTemp-C701",
+        "[default]DraginoTemp-C6FF",
+        "[default]DraginoTemp-C6FE",
+        "[default]Radiobridge Temperature-5EE6",
+        "[default]Radiobridge Temperature-5EAF",
+        "[default]Radiobridge Temperature-5ED7",
+        "[default]Radiobridge Temperature-5ED8"
+      ],
+      "3": [],
+      "4": [
+        "[default]RadioBridgeVibration-BEEE",
+        "[default]TWTG-Pressure-V3-60F0",
+        "[default]THL-6F04",
+        "[default]THL-6DBF",
+        "[default]Padlock-38D8",
+        "[default]Comfort-7EC3",
+        "[default]TWTG-PT-6147",
+        "[default]testing/basf-tabletop-pressure/TWTG-Pressure -606D",
+        "[default]testing/GP-monticello/520-RM-008",
+        "[default]testing/GP-monticello/875-RM-002",
+        "[default]testing/GP-monticello/878-RM-001",
+        "[default]testing/GP-monticello/130-RM-002",
+        "[default]testing/GP-monticello/130-RM-004",
+        "[default]testing/GP-monticello/1 WEB"
+      ]
+    },
+    "tableData": []
+  },
+  "events": {
+    "system": {
+      "onStartup": {
+        "config": {
+          "script": "\tsystem.perspective.sendMessage(\"refreshData\")"
+        },
+        "scope": "G",
+        "type": "script"
+      }
+    }
+  },
+  "params": {},
+  "propConfig": {
+    "custom.columns": {
+      "persistent": true
+    },
+    "custom.counters": {
+      "persistent": true
+    },
+    "custom.data": {
+      "persistent": false
+    },
+    "custom.filterApplied": {
+      "persistent": true
+    },
+    "custom.filterValue": {
+      "persistent": true
+    },
+    "custom.initialData": {
+      "persistent": true
+    },
+    "custom.refresh": {
+      "persistent": true
+    },
+    "custom.status": {
+      "persistent": true
+    },
+    "custom.tableData": {
+      "binding": {
+        "config": {
+          "path": "view.custom.data"
+        },
+        "transforms": [
+          {
+            "code": "\tformattedTable \u003d []\n\tfor item in value:\n\t\tj \u003d item.toDict()\n\t\tif j[\u0027devEUI\u0027] in self.getChild(\"root\").getChild(\"table\").custom.devEUIsToDelete:\n\t\t\tj[\u0027selected\u0027] \u003d True\n\t\telse:\n\n\t\t\tj[\u0027selected\u0027] \u003d False\n\t\tformattedTable.append(j)\n\t\n\treturn formattedTable",
+            "type": "script"
+          }
+        ],
+        "type": "property"
+      },
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 1100,
+      "width": 1444
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\t\n\timport json\n\timport time\n\t# refresh device list\n\tself.props.style.cursor \u003d \"progress\"\n\tself.props.style.backgroundColor \u003d \"#00000060\"\n\tself.props.enabled \u003d False\n\t\n\ttry:\n\t\n\t\n\t\t\n\t\tdevList \u003d device.get.listDevices(self.session.custom.tenantID)\n\t\t\n\t\t\n\t\t# Then create an empty list, this will house our data.\n\t\tdata \u003d []\n\t\theaders \u003d [\u0027devEUI\u0027, \u0027Name\u0027, \u0027SensorType\u0027, \u0027ImageUploaded\u0027, \u0027Latitude\u0027, \u0027Longitude\u0027, \u0027Equipment Tag\u0027, \"Sensor Tag\", \u0027Description\u0027, \u0027Custom Attributes\u0027 ]\t \n\t\tfor d in devList:\n\t\t\t# Then add each row to the list. Note that each row is also a list object.\n\t\t\t\n\t\t\tdevEUI \u003d d[\u0027devEUI\u0027]\n\t\t\tname \u003d d[\u0027deviceName\u0027]\n\t\t\tcheckedIn \u003d False\n\t\t\t\n\t\t\tlat \u003d d[\u0027latitude\u0027]\n\t\t\tlon \u003d d[\u0027longitude\u0027]\n\t\t\tdesc \u003d d[\u0027description\u0027]\n\t\t\tsensorType \u003d d[\u0027deviceType\u0027]\n\t\t\teTag \u003d \"\"\n\t\t\tsTag \u003d \"\"\n\t\t\tmetaData \u003d \"\"\n\t\t\timage \u003d \"\"\n\t\t\ttagPath \u003d d[\u0027fullTagPath\u0027]\n\t\t\ttry:\n\t\t\t\tmetaData \u003d device.get.getMetaData(devEUI)\n\t\t\t\tif len(metaData.keys()) \u003e 0:\n\t\t\t\t\tif \u0027Equipment Tag\u0027 in metaData:\n\t\t\t\t\t\n\t\t\t\t\t\teTag \u003d metaData[\u0027Equipment Tag\u0027]\n\t\t\t\t\tif \"Sensor Tag\" in metaData:\n\t\t\t\t\t\tsTag \u003d metaData[\"Sensor Tag\"]\n\t\t\texcept Exception as e:\n\t\t\t\tsystem.perspective.print(\"Error getting metaadata\" + str(e))\t\n\t\t\t\t\t\n\t\t\ttry:\n\t\t\t\timage \u003d system.tag.readBlocking([tagPath + \u0027/metaData/image\u0027])[0].value\n\t\t\t\tif image !\u003d None and len(image) !\u003d 2:\n\t\t\t\t\timage \u003d \"Uploaded\"\n\t\t\t\telse:\n\t\t\t\t\timage \u003d \"Not uploaded\"\n\t\t\texcept Exception as e:\n\t\t\t\timage \u003d \"Error loading image: \" + str(e)\n\t\t\t\tsystem.perspective.print(\"image error\")\t\n\t\t\n#\t\t\t\n#\t\t\tif vals[3] \u003d\u003d \"Activated\":\n#\t\t\t\tcheckedIn \u003d True\n#\t\t\t\n\t\n\t\t\tvalues \u003d [devEUI, name, sensorType,  image, lat, lon, eTag, sTag, desc, str(metaData) ]\n\t\t\tdata.append(values)\n\t\t\t\n\t\tcsv \u003d system.dataset.toDataSet(headers, data) \t\t \n\t\n\t\tdata \u003d system.dataset.toExcel(True, [csv])\n\t\tnow \u003d system.date.now()\n\t\tformattedDate \u003d system.date.format(now,\"MM-dd-yyyhmms\")\n\t\tfileName \u003d formattedDate + \"_SiteSyncDevices.xlsx\"\n\t\tsystem.perspective.download(fileName,data)\t\t\t\t\t\n\texcept Exception as e:\n\t\tsystem.perspective.print(str(e))\n\t\n\tself.props.style.cursor \u003d \"pointer\"\n\tself.props.style.backgroundColor \u003d \"#00000020\""
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "download",
+                      "tooltip": {
+                        "enabled": true,
+                        "text": "Download Devices"
+                      }
+                    },
+                    "position": {
+                      "basis": "45px"
+                    },
+                    "props": {
+                      "color": "#0D5C636B",
+                      "path": "material/cloud_download",
+                      "style": {
+                        "borderStyle": "none",
+                        "cursor": "pointer"
+                      }
+                    },
+                    "type": "ia.display.icon"
+                  },
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\tif self.parent.parent.getChild(\"Table\").props.columns[7].visible:\n\t\tself.parent.parent.getChild(\"Table\").props.columns[7].visible \u003d False\n\t\tself.parent.parent.parent.parent.getChild(\"table\").custom.devEUIsToDelete \u003d []\n\telse:\n\t\tself.parent.parent.getChild(\"Table\").props.columns[7].visible \u003d True"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "deleteDevices",
+                      "tooltip": {
+                        "enabled": true,
+                        "text": "Select devices to delete"
+                      }
+                    },
+                    "position": {
+                      "basis": "45px",
+                      "display": false
+                    },
+                    "props": {
+                      "color": "#0D5C636B",
+                      "path": "material/delete_forever",
+                      "style": {
+                        "borderStyle": "none",
+                        "cursor": "pointer"
+                      }
+                    },
+                    "type": "ia.display.icon"
+                  },
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\timport json\n\timport time\n\t# refresh device list\n\tself.props.style.cursor \u003d \"progress\"\n\tself.props.style.backgroundColor \u003d \"#00000060\"\n\tcolumns \u003d []\n\ttrue \u003d True\n\tfalse \u003d False\n\t\n\ttry:\n\t\t\n\t\tself.view.custom.filterValue \u003d None\n\t\tself.view.custom.filterApplied \u003d False\n\t\tsystem.perspective.sendMessage(\"refreshData\", {})\n\n\texcept Exception as e:\n\t\tsystem.perspective.print(e)\n\t\n\t\n\ttime.sleep(1)\n\tself.props.style.cursor \u003d \"pointer\"\n\tself.props.style.backgroundColor \u003d \"#00000020\"\n\t\n\t"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "refreshData",
+                      "tooltip": {
+                        "enabled": true,
+                        "text": "Refresh data in table"
+                      }
+                    },
+                    "position": {
+                      "basis": "45px"
+                    },
+                    "props": {
+                      "color": "#0D5C636B",
+                      "path": "material/refresh",
+                      "style": {
+                        "borderStyle": "none",
+                        "cursor": "pointer"
+                      }
+                    },
+                    "type": "ia.display.icon"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer"
+                },
+                "props": {
+                  "alignContent": "flex-start",
+                  "alignItems": "flex-start",
+                  "justify": "flex-end",
+                  "style": {
+                    "padding": 5
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "events": {
+                  "component": {
+                    "onRowDoubleClick": [
+                      {
+                        "config": {
+                          "script": "\tdevEUI \u003d event.value[\u0027devEUI\u0027]\n\tsystem.perspective.navigate(page\u003d\"devices/{0}\".format(devEUI))"
+                        },
+                        "scope": "G",
+                        "type": "script"
+                      },
+                      {
+                        "config": {
+                          "page": ""
+                        },
+                        "scope": "C",
+                        "type": "nav"
+                      }
+                    ]
+                  }
+                },
+                "meta": {
+                  "name": "Table"
+                },
+                "position": {
+                  "grow": 1
+                },
+                "propConfig": {
+                  "props.data": {
+                    "binding": {
+                      "config": {
+                        "path": "view.custom.tableData"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "columns": [
+                    {
+                      "align": "center",
+                      "boolean": "checkbox",
+                      "dateFormat": "MM/DD/YYYY",
+                      "editable": false,
+                      "field": "fullTagPath",
+                      "filter": {
+                        "boolean": {
+                          "condition": ""
+                        },
+                        "date": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "enabled": false,
+                        "number": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "string": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "visible": "on-hover"
+                      },
+                      "footer": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "header": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": "Status"
+                      },
+                      "justify": "center",
+                      "nullFormat": {
+                        "includeNullStrings": false,
+                        "nullFormatValue": "",
+                        "strict": false
+                      },
+                      "number": "value",
+                      "numberFormat": "0,0.##",
+                      "progressBar": {
+                        "bar": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "max": 100,
+                        "min": 0,
+                        "track": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "value": {
+                          "enabled": true,
+                          "format": "0,0.##",
+                          "justify": "center",
+                          "style": {
+                            "classes": ""
+                          }
+                        }
+                      },
+                      "render": "auto",
+                      "resizable": true,
+                      "sort": "none",
+                      "sortable": true,
+                      "strictWidth": false,
+                      "style": {
+                        "classes": ""
+                      },
+                      "toggleSwitch": {
+                        "color": {
+                          "selected": "",
+                          "unselected": ""
+                        }
+                      },
+                      "viewParams": {},
+                      "viewPath": "Devices/Diagnostics/Device Status Icon",
+                      "visible": true,
+                      "width": ""
+                    },
+                    {
+                      "align": "center",
+                      "boolean": "checkbox",
+                      "dateFormat": "MM/DD/YYYY",
+                      "editable": false,
+                      "field": "devEUI",
+                      "filter": {
+                        "boolean": {
+                          "condition": ""
+                        },
+                        "date": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "enabled": false,
+                        "number": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "string": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "visible": "on-hover"
+                      },
+                      "footer": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "header": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "justify": "auto",
+                      "nullFormat": {
+                        "includeNullStrings": false,
+                        "nullFormatValue": "",
+                        "strict": false
+                      },
+                      "number": "value",
+                      "numberFormat": "0,0.##",
+                      "progressBar": {
+                        "bar": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "max": 100,
+                        "min": 0,
+                        "track": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "value": {
+                          "enabled": true,
+                          "format": "0,0.##",
+                          "justify": "center",
+                          "style": {
+                            "classes": ""
+                          }
+                        }
+                      },
+                      "render": "auto",
+                      "resizable": true,
+                      "sort": "none",
+                      "sortable": true,
+                      "strictWidth": false,
+                      "style": {
+                        "classes": ""
+                      },
+                      "toggleSwitch": {
+                        "color": {
+                          "selected": "",
+                          "unselected": ""
+                        }
+                      },
+                      "viewParams": {},
+                      "viewPath": "",
+                      "visible": true,
+                      "width": ""
+                    },
+                    {
+                      "align": "center",
+                      "boolean": "checkbox",
+                      "dateFormat": "MM/DD/YYYY",
+                      "editable": false,
+                      "field": "deviceName",
+                      "filter": {
+                        "boolean": {
+                          "condition": ""
+                        },
+                        "date": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "enabled": false,
+                        "number": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "string": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "visible": "on-hover"
+                      },
+                      "footer": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "header": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": "Name"
+                      },
+                      "justify": "auto",
+                      "nullFormat": {
+                        "includeNullStrings": false,
+                        "nullFormatValue": "",
+                        "strict": false
+                      },
+                      "number": "value",
+                      "numberFormat": "0,0.##",
+                      "progressBar": {
+                        "bar": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "max": 100,
+                        "min": 0,
+                        "track": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "value": {
+                          "enabled": true,
+                          "format": "0,0.##",
+                          "justify": "center",
+                          "style": {
+                            "classes": ""
+                          }
+                        }
+                      },
+                      "render": "auto",
+                      "resizable": true,
+                      "sort": "none",
+                      "sortable": true,
+                      "strictWidth": false,
+                      "style": {
+                        "classes": ""
+                      },
+                      "toggleSwitch": {
+                        "color": {
+                          "selected": "",
+                          "unselected": ""
+                        }
+                      },
+                      "viewParams": {},
+                      "viewPath": "",
+                      "visible": true,
+                      "width": ""
+                    },
+                    {
+                      "align": "center",
+                      "boolean": "checkbox",
+                      "dateFormat": "MM/DD/YYYY",
+                      "editable": false,
+                      "field": "deviceType",
+                      "filter": {
+                        "boolean": {
+                          "condition": ""
+                        },
+                        "date": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "enabled": false,
+                        "number": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "string": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "visible": "on-hover"
+                      },
+                      "footer": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "header": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": "Sensor Type"
+                      },
+                      "justify": "auto",
+                      "nullFormat": {
+                        "includeNullStrings": false,
+                        "nullFormatValue": "",
+                        "strict": false
+                      },
+                      "number": "value",
+                      "numberFormat": "0,0.##",
+                      "progressBar": {
+                        "bar": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "max": 100,
+                        "min": 0,
+                        "track": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "value": {
+                          "enabled": true,
+                          "format": "0,0.##",
+                          "justify": "center",
+                          "style": {
+                            "classes": ""
+                          }
+                        }
+                      },
+                      "render": "auto",
+                      "resizable": true,
+                      "sort": "none",
+                      "sortable": true,
+                      "strictWidth": false,
+                      "style": {
+                        "classes": ""
+                      },
+                      "toggleSwitch": {
+                        "color": {
+                          "selected": "",
+                          "unselected": ""
+                        }
+                      },
+                      "viewParams": {},
+                      "viewPath": "",
+                      "visible": true,
+                      "width": ""
+                    },
+                    {
+                      "align": "center",
+                      "boolean": "checkbox",
+                      "dateFormat": "MM/DD/YYYY",
+                      "editable": false,
+                      "field": "description",
+                      "filter": {
+                        "boolean": {
+                          "condition": ""
+                        },
+                        "date": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "enabled": false,
+                        "number": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "string": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "visible": "on-hover"
+                      },
+                      "footer": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "header": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "justify": "auto",
+                      "nullFormat": {
+                        "includeNullStrings": false,
+                        "nullFormatValue": "",
+                        "strict": false
+                      },
+                      "number": "value",
+                      "numberFormat": "0,0.##",
+                      "progressBar": {
+                        "bar": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "max": 100,
+                        "min": 0,
+                        "track": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "value": {
+                          "enabled": true,
+                          "format": "0,0.##",
+                          "justify": "center",
+                          "style": {
+                            "classes": ""
+                          }
+                        }
+                      },
+                      "render": "auto",
+                      "resizable": true,
+                      "sort": "none",
+                      "sortable": true,
+                      "strictWidth": false,
+                      "style": {
+                        "classes": ""
+                      },
+                      "toggleSwitch": {
+                        "color": {
+                          "selected": "",
+                          "unselected": ""
+                        }
+                      },
+                      "viewParams": {},
+                      "viewPath": "",
+                      "visible": false,
+                      "width": ""
+                    },
+                    {
+                      "align": "center",
+                      "boolean": "checkbox",
+                      "dateFormat": "MM/DD/YYYY",
+                      "editable": false,
+                      "field": "tagPathBase",
+                      "filter": {
+                        "boolean": {
+                          "condition": ""
+                        },
+                        "date": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "enabled": false,
+                        "number": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "string": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "visible": "on-hover"
+                      },
+                      "footer": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "header": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": "Last Seen"
+                      },
+                      "justify": "auto",
+                      "nullFormat": {
+                        "includeNullStrings": false,
+                        "nullFormatValue": "",
+                        "strict": false
+                      },
+                      "number": "value",
+                      "numberFormat": "0,0.##",
+                      "progressBar": {
+                        "bar": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "max": 100,
+                        "min": 0,
+                        "track": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "value": {
+                          "enabled": true,
+                          "format": "0,0.##",
+                          "justify": "center",
+                          "style": {
+                            "classes": ""
+                          }
+                        }
+                      },
+                      "render": "auto",
+                      "resizable": true,
+                      "sort": "none",
+                      "sortable": true,
+                      "strictWidth": false,
+                      "style": {
+                        "classes": ""
+                      },
+                      "toggleSwitch": {
+                        "color": {
+                          "selected": "",
+                          "unselected": ""
+                        }
+                      },
+                      "viewParams": {},
+                      "viewPath": "Devices/Diagnostics/lastActvitity",
+                      "visible": true,
+                      "width": ""
+                    },
+                    {
+                      "align": "center",
+                      "boolean": "checkbox",
+                      "dateFormat": "MM/DD/YYYY",
+                      "editable": false,
+                      "field": "deviceTypeID",
+                      "filter": {
+                        "boolean": {
+                          "condition": ""
+                        },
+                        "date": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "enabled": false,
+                        "number": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "string": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "visible": "on-hover"
+                      },
+                      "footer": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "header": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": "Value"
+                      },
+                      "justify": "center",
+                      "nullFormat": {
+                        "includeNullStrings": false,
+                        "nullFormatValue": "",
+                        "strict": false
+                      },
+                      "number": "value",
+                      "numberFormat": "0,0.##",
+                      "progressBar": {
+                        "bar": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "max": 100,
+                        "min": 0,
+                        "track": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "value": {
+                          "enabled": true,
+                          "format": "0,0.##",
+                          "justify": "center",
+                          "style": {
+                            "classes": ""
+                          }
+                        }
+                      },
+                      "render": "auto",
+                      "resizable": true,
+                      "sort": "none",
+                      "sortable": true,
+                      "strictWidth": false,
+                      "style": {
+                        "classes": ""
+                      },
+                      "toggleSwitch": {
+                        "color": {
+                          "selected": "",
+                          "unselected": ""
+                        }
+                      },
+                      "viewParams": {},
+                      "viewPath": "Devices/components/currentValue",
+                      "visible": true,
+                      "width": ""
+                    }
+                  ],
+                  "emptyMessage": {
+                    "noData": {
+                      "text": "No Devices"
+                    }
+                  },
+                  "filter": {
+                    "enabled": true,
+                    "placeholderText": "Search"
+                  },
+                  "footerStyle": {
+                    "backgroundColor": "#00000020"
+                  },
+                  "headerGroupStyle": {
+                    "fontWeight": "normal"
+                  },
+                  "headerStyle": {
+                    "fontWeight": "normal"
+                  },
+                  "pager": {
+                    "initialOption": 100,
+                    "style": {
+                      "fill": "#D83E3E"
+                    }
+                  },
+                  "rows": {
+                    "subview": {
+                      "viewParams": {
+                        "deviceEUI": "value",
+                        "deviceName": "value"
+                      },
+                      "viewPath": "Device Details"
+                    }
+                  },
+                  "selection": {
+                    "style": {
+                      "borderStyle": "none"
+                    }
+                  },
+                  "style": {
+                    "backgroundColor": "#FFFFFF",
+                    "borderStyle": "none"
+                  }
+                },
+                "scripts": {
+                  "customMethods": [],
+                  "extensionFunctions": null,
+                  "messageHandlers": [
+                    {
+                      "messageType": "checkUnCheck",
+                      "pageScope": true,
+                      "script": "\t# implement your handler here\n\ttry:\n\t\tsystem.perspective.print(\"Check uncheck\")\n\t\tsystem.perspective.print(payload)\n\t\trowUID \u003d payload[\u0027devEUI\u0027]\n\t\tselected \u003d payload[\u0027selected\u0027]\n\t\ttagPath \u003d payload[\"tagPathBase\"]\n\t\titem \u003d {\"devEUI\":rowUID, \"tagPathBase\":tagPath}\n\t\tif selected:\n\t\t\t##add to selected\n\t\t\tself.parent.parent.parent.getChild(\"table\").custom.devEUIsToDelete.append(item)\n\t\telse:\n\t\t\tnewList \u003d []\n\t\t\t##else remove from selected\n\t\t\tfor d in self.parent.parent.parent.getChild(\"table\").custom.devEUIsToDelete:\n\t\t\t\tif d[\u0027devEUI\u0027] \u003d\u003d rowUID:\n\t\t\t\t\tcontinue\n\t\t\t\telse:\n\t\t\t\t\tnewList.append(d)\n\t\t\t\n\t\t\tself.parent.parent.parent.getChild(\"table\").custom.devEUIsToDelete \u003d newList\n\t\tsystem.perspective.print(self.parent.parent.parent.getChild(\"table\").custom.devEUIsToDelete)\n\n\t\n\texcept Exception as ex:\n\t\tsystem.perspective.print(\"Check uncheck\")\n\t\tsystem.perspective.print(str(ex))",
+                      "sessionScope": false,
+                      "viewScope": false
+                    }
+                  ]
+                },
+                "type": "ia.display.table"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer_0"
+            },
+            "position": {
+              "grow": 1
+            },
+            "props": {
+              "direction": "column"
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "events": {
+                  "dom": {
+                    "onClick": {
+                      "config": {
+                        "draggable": true,
+                        "id": "h8PEVgyR",
+                        "modal": true,
+                        "overlayDismiss": false,
+                        "resizable": true,
+                        "showCloseIcon": true,
+                        "type": "open",
+                        "viewParams": {
+                          "devicesToDelete": "{/root/table.custom.devEUIsToDelete}"
+                        },
+                        "viewPath": "Confirmations/DeleteDevices",
+                        "viewportBound": false
+                      },
+                      "scope": "C",
+                      "type": "popup"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Button"
+                },
+                "position": {
+                  "grow": 1
+                },
+                "propConfig": {
+                  "position.display": {
+                    "binding": {
+                      "config": {
+                        "path": "..../table.custom.devEUIsToDelete"
+                      },
+                      "transforms": [
+                        {
+                          "code": "\tif len(value) \u003e 0:\n\t\treturn True\n\telse:\n\t\treturn False",
+                          "type": "script"
+                        }
+                      ],
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "image": {
+                    "icon": {
+                      "path": "material/delete_forever"
+                    }
+                  },
+                  "style": {
+                    "classes": "diagnostics/buttons/error"
+                  },
+                  "text": "Delete Selected Devices"
+                },
+                "type": "ia.input.button"
+              },
+              {
+                "meta": {
+                  "name": "BreakpointContainer"
+                },
+                "position": {
+                  "basis": "200px"
+                },
+                "type": "ia.container.breakpt"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer"
+            },
+            "propConfig": {
+              "position.display": {
+                "binding": {
+                  "config": {
+                    "path": "parent.custom.devEUIsToDelete"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tif len(value) \u003e 0:\n\t\treturn True\n\telse:\n\t\treturn False",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "alignItems": "flex-start",
+              "direction": "column",
+              "justify": "center",
+              "style": {
+                "padding": 5
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "custom": {
+          "devEUIsToDelete": []
+        },
+        "meta": {
+          "name": "table"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 0,
+              "name": "sm",
+              "order": 0,
+              "rowIndex": 3,
+              "span": 12
+            },
+            {
+              "colIndex": 1,
+              "name": "md",
+              "order": 0,
+              "rowIndex": 2,
+              "span": 10
+            },
+            {
+              "colIndex": 1,
+              "name": "lg",
+              "order": 0,
+              "rowIndex": 2,
+              "span": 10
+            }
+          ],
+          "height": 722
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "#00000020"
+          }
+        },
+        "scripts": {
+          "customMethods": [],
+          "extensionFunctions": null,
+          "messageHandlers": [
+            {
+              "messageType": "afterDeviceDeleted",
+              "pageScope": true,
+              "script": "\t# implement your handler here\n\tself.custom.devEUIsToDelete \u003d []\n\t\n\t##trigger table refresh",
+              "sessionScope": false,
+              "viewScope": false
+            }
+          ]
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "page": "/QR-sync"
+              },
+              "scope": "C",
+              "type": "nav"
+            }
+          }
+        },
+        "meta": {
+          "name": "Button"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 0,
+              "name": "sm",
+              "order": -0.5,
+              "rowIndex": 2,
+              "span": 12
+            },
+            {
+              "colIndex": 1,
+              "name": "md",
+              "order": 0,
+              "rowIndex": 1,
+              "span": 2
+            },
+            {
+              "colIndex": 1,
+              "name": "lg",
+              "order": 0,
+              "rowIndex": 1,
+              "span": 2
+            }
+          ],
+          "height": 60
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "#FFFFFF",
+            "color": "#0D5C63",
+            "fontSize": 16
+          },
+          "text": "Add Device"
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "page": "/bulk-upload"
+              },
+              "scope": "C",
+              "type": "nav"
+            }
+          }
+        },
+        "meta": {
+          "name": "Button_0"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 0,
+              "name": "sm",
+              "order": 0,
+              "rowIndex": 2,
+              "span": 12
+            },
+            {
+              "colIndex": 3,
+              "name": "md",
+              "order": 1,
+              "rowIndex": 1,
+              "span": 2
+            },
+            {
+              "colIndex": 3,
+              "name": "lg",
+              "order": 1,
+              "rowIndex": 1,
+              "span": 2
+            }
+          ],
+          "height": 60
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "#FFFFFF",
+            "color": "#0D5C63",
+            "fontSize": 16
+          },
+          "text": "Bulk Device Upload"
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "props": {
+                      "style": {
+                        "alignItems": "center",
+                        "fontSize": 15,
+                        "fontWeight": "bold"
+                      },
+                      "text": "Operational"
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\t\n\tself.view.custom.filterApplied \u003d True\n\tself.view.custom.filterValue \u003d 0\n\tsystem.perspective.sendMessage(\"refreshData\", {})"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "Button"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "path": "view.custom.counters.Operational"
+                          },
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "props": {
+                      "image": {
+                        "position": "center",
+                        "style": {
+                          "fill": "#FFFFFF"
+                        }
+                      },
+                      "style": {
+                        "borderStyle": "none",
+                        "classes": "diagnostics/buttons/good",
+                        "color": "#000000"
+                      },
+                      "textStyle": {
+                        "fontSize": 35
+                      }
+                    },
+                    "type": "ia.input.button"
+                  }
+                ],
+                "meta": {
+                  "name": "operational"
+                },
+                "props": {
+                  "direction": "column",
+                  "style": {
+                    "paddingLeft": 5,
+                    "paddingRight": 5
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "props": {
+                      "style": {
+                        "alignItems": "center",
+                        "fontSize": 15,
+                        "fontWeight": "bold"
+                      },
+                      "text": "Not Activated"
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\n\tself.view.custom.filterApplied \u003d True\n\tself.view.custom.filterValue \u003d -1\n\tsystem.perspective.sendMessage(\"refreshData\", {})"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "Button_0"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "path": "view.custom.counters.NotActivated"
+                          },
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "props": {
+                      "image": {
+                        "style": {
+                          "fill": "#FFFFFF"
+                        }
+                      },
+                      "style": {
+                        "borderStyle": "none",
+                        "classes": "diagnostics/buttons/notActivated",
+                        "color": "#000000"
+                      },
+                      "textStyle": {
+                        "fontSize": 35
+                      }
+                    },
+                    "type": "ia.input.button"
+                  }
+                ],
+                "meta": {
+                  "name": "Not activated"
+                },
+                "props": {
+                  "direction": "column"
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "props": {
+                      "style": {
+                        "alignItems": "center",
+                        "fontSize": 15,
+                        "fontWeight": "bold"
+                      },
+                      "text": "Missed Check-in"
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\n\tself.view.custom.filterApplied \u003d True\n\tself.view.custom.filterValue \u003d 4\n\tsystem.perspective.sendMessage(\"refreshData\", {})"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "Button_1"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "path": "view.custom.counters.TimedOut"
+                          },
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "props": {
+                      "image": {
+                        "style": {
+                          "fill": "#FFFFFF"
+                        }
+                      },
+                      "style": {
+                        "borderStyle": "none",
+                        "classes": "diagnostics/buttons/error",
+                        "color": "#000000"
+                      },
+                      "textStyle": {
+                        "fontSize": 35
+                      }
+                    },
+                    "type": "ia.input.button"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer_1"
+                },
+                "props": {
+                  "direction": "column"
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "props": {
+                      "style": {
+                        "alignItems": "center",
+                        "fontSize": 15,
+                        "fontWeight": "bold"
+                      },
+                      "text": "Decode Errors"
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\ttry:\n\t\tself.view.custom.filterValue \u003d 3\n\t\tself.view.custom.filterApplied \u003d True\n\t\tsystem.perspective.sendMessage(\"refreshData\", {})\n\t\t\n#\t\n#\t\tpaths \u003d self.view.custom.status[self.view.custom.filterValue]\n#\t\tfilteredData \u003d []\n#\t\tfor r in self.view.custom.data:\n#\t\t\tif r[\u0027fullTagPath\u0027] in paths:\n#\t\t\t\tfilteredData.append(r)\n#\t\t\n#\t\tself.view.custom.data \u003d filteredData\t\t\n\texcept Exception as e:\n\t\tsystem.perspective.print(e)\n\t"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "Button_4"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "path": "view.custom.counters.DecodeError"
+                          },
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "props": {
+                      "image": {
+                        "style": {
+                          "fill": "#FFFFFF"
+                        }
+                      },
+                      "style": {
+                        "borderStyle": "none",
+                        "classes": "diagnostics/buttons/decodeError",
+                        "color": "#000000"
+                      },
+                      "textStyle": {
+                        "fontSize": 35
+                      }
+                    },
+                    "type": "ia.input.button"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer_2"
+                },
+                "props": {
+                  "direction": "column"
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer"
+            },
+            "props": {
+              "justify": "space-between",
+              "style": {
+                "paddingBottom": 5,
+                "paddingTop": 5
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "statusButtons"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 0,
+              "name": "sm",
+              "order": 0,
+              "rowIndex": 1,
+              "span": 12
+            },
+            {
+              "colIndex": 6,
+              "name": "md",
+              "order": 0.5,
+              "rowIndex": 0,
+              "span": 5
+            },
+            {
+              "colIndex": 5,
+              "name": "lg",
+              "order": 1,
+              "rowIndex": 0,
+              "span": 6
+            }
+          ],
+          "height": "auto"
+        },
+        "props": {
+          "direction": "column"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "DMSS10"
+            },
+            "position": {
+              "basis": "390px"
+            },
+            "props": {
+              "fit": {
+                "mode": "contain"
+              },
+              "source": "data:image/png;base64,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"
+            },
+            "type": "ia.display.image"
+          }
+        ],
+        "meta": {
+          "name": "imageContainer"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 0,
+              "name": "sm",
+              "order": 0,
+              "rowIndex": 0,
+              "span": 12
+            },
+            {
+              "colIndex": 1,
+              "name": "md",
+              "order": 0,
+              "rowIndex": 0,
+              "span": 5
+            },
+            {
+              "colIndex": 1,
+              "name": "lg",
+              "order": 0,
+              "rowIndex": 0,
+              "span": 4
+            }
+          ],
+          "height": 78
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "breakpoints": [
+        {
+          "minWidth": 900,
+          "name": "sm"
+        },
+        {
+          "minWidth": 480,
+          "name": "md"
+        },
+        {
+          "minWidth": 1440,
+          "name": "lg"
+        }
+      ],
+      "style": {
+        "backgroundColor": "#FFFFFF",
+        "classes": "pageFormat/rootPadding"
+      }
+    },
+    "scripts": {
+      "customMethods": [],
+      "extensionFunctions": null,
+      "messageHandlers": [
+        {
+          "messageType": "refreshData",
+          "pageScope": true,
+          "script": "\t# implement your handler here\n\timport json\n\t\t\n\tcolumns \u003d []\n\ttrue \u003d True\n\tfalse \u003d False\n\t\n\tstatusData \u003d {\n\t\"NotActivated\":0, \n\t\"Operational\":0, \n\t\"TimedOut\":0, \n\t\"DecodeError\":0\n\t}\n\t\n\n\t\n\tif self.session.custom.tenantID !\u003d -1:\n\t\ttry:\n\t\t\tdata \u003d device.get.listDevices(self.session.custom.tenantID)\n\t\t\t\n\t\t\ttagPaths \u003d device.diagnostics.getTagPaths(data)\n\t\t\tvalues \u003d device.diagnostics.getValues(tagPaths)\n\t\n\t\t\tstatusData \u003d device.diagnostics.getStatusCalculations(values)\n\t\t\tself.view.custom.counters \u003d statusData\n\t\t\tself.view.custom.status \u003d device.diagnostics.getStatusPaths(tagPaths, values)\n\t\t\tif self.view.custom.filterApplied:\n\t\t\t\tpaths \u003d self.view.custom.status[self.view.custom.filterValue]\n\t\t\t\tfilteredData \u003d []\n\t\t\t\tfor r in data:\n\t\t\t\t\tif r[\u0027fullTagPath\u0027] in paths:\n\t\t\t\t\t\tfilteredData.append(r)\n\t\t\t\t\n\t\t\t\tself.view.custom.data \u003d filteredData\t\t\n\t\t\telse:\n\t\t\t\t\t\n\t\t\t\tself.view.custom.data \u003d data\n\t\t\t\n\t\texcept Exception as e:\n\t\t\tsystem.perspective.print(\"Error getting devices, root: \" + str(e))\n\t\t\tself.view.custom.data \u003d []\n\telse:\n\t\tsystem.perspective.navigate(page\u003d\"/\")",
+          "sessionScope": false,
+          "viewScope": false
+        }
+      ]
+    },
+    "type": "ia.container.column"
+  }
+}

@@ -1,0 +1,263 @@
+{
+  "custom": {},
+  "params": {
+    "UDT": "{udtName}",
+    "decoder": "{decoderName}"
+  },
+  "propConfig": {
+    "params.UDT": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.decoder": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 243,
+      "width": 400
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "DeletePrompt"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 0,
+              "name": "sm",
+              "order": 0,
+              "rowIndex": 0,
+              "span": 12
+            },
+            {
+              "colIndex": 0,
+              "name": "md",
+              "order": 0,
+              "rowIndex": 0,
+              "span": 12
+            },
+            {
+              "colIndex": 0,
+              "name": "lg",
+              "order": 1,
+              "rowIndex": 0,
+              "span": 12
+            }
+          ],
+          "height": 60
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "\"Delete \" + {view.params.UDT}+ \" UDT?\""
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "color": "#da6240",
+            "fontWeight": "bolder"
+          },
+          "textStyle": {
+            "fontSize": 18,
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "WarningMessage"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 1,
+              "name": "sm",
+              "order": 0,
+              "rowIndex": 1,
+              "span": 10
+            },
+            {
+              "colIndex": 1,
+              "name": "md",
+              "order": 1,
+              "rowIndex": 1,
+              "span": 10
+            },
+            {
+              "colIndex": 1,
+              "name": "lg",
+              "order": 1,
+              "rowIndex": 1,
+              "span": 10
+            }
+          ],
+          "height": 70
+        },
+        "props": {
+          "alignVertical": "top",
+          "style": {
+            "color": "#000000",
+            "fontWeight": "500"
+          },
+          "text": "Warning: You will no longer be able to create new devices with this UDT Definition!",
+          "textStyle": {
+            "fontSize": 13,
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": [
+              {
+                "config": {
+                  "script": "\tsystem.example.deleteUDT(self.view.params.UDT)\n\tsystem.perspective.closePopup(\"\")"
+                },
+                "scope": "G",
+                "type": "script"
+              },
+              {
+                "config": {
+                  "params": {
+                    "decoder": "{view.params.decoder}"
+                  },
+                  "view": "Decoder Details"
+                },
+                "scope": "C",
+                "type": "nav"
+              }
+            ]
+          }
+        },
+        "meta": {
+          "name": "Button_0"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 6,
+              "name": "sm",
+              "order": 0,
+              "rowIndex": 2,
+              "span": 5
+            },
+            {
+              "colIndex": 6,
+              "name": "md",
+              "order": 0,
+              "rowIndex": 2,
+              "span": 5
+            },
+            {
+              "colIndex": 6,
+              "name": "lg",
+              "order": 0,
+              "rowIndex": 2,
+              "span": 5
+            }
+          ],
+          "height": 50,
+          "width": 169,
+          "x": 506.125,
+          "y": 431.145
+        },
+        "props": {
+          "image": {
+            "icon": {
+              "color": "#B23C3C"
+            }
+          },
+          "style": {
+            "backgroundColor": "#da6240",
+            "borderStyle": "outset",
+            "borderWidth": 2,
+            "classes": "hand-on-hover wait",
+            "color": "#000000",
+            "cursor": "pointer",
+            "fontSize": 16
+          },
+          "text": "Delete"
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tsystem.perspective.closePopup(\"\")"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Button_1"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 1,
+              "name": "sm",
+              "order": -0.5,
+              "rowIndex": 2,
+              "span": 5
+            },
+            {
+              "colIndex": 1,
+              "name": "md",
+              "order": -0.5,
+              "rowIndex": 2,
+              "span": 5
+            },
+            {
+              "colIndex": 1,
+              "name": "lg",
+              "order": -0.5,
+              "rowIndex": 2,
+              "span": 5
+            }
+          ],
+          "height": 50
+        },
+        "props": {
+          "image": {
+            "icon": {
+              "color": "#B23C3C"
+            }
+          },
+          "style": {
+            "backgroundColor": "#FFFFFF",
+            "color": "#000000",
+            "fontSize": 16
+          },
+          "text": "Go Back"
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "style": {
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "type": "ia.container.column"
+  }
+}

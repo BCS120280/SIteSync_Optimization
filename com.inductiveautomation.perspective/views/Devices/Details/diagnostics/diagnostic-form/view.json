@@ -1,0 +1,251 @@
+{
+  "custom": {
+    "hasCheckedIn": true,
+    "isOverDue": "value",
+    "usesAPI": false
+  },
+  "params": {
+    "deviceTypeID": 12,
+    "tagPathBase": "[default]test/lab/0A6F9"
+  },
+  "propConfig": {
+    "custom.hasCheckedIn": {
+      "binding": {
+        "config": {
+          "fallbackDelay": 2.5,
+          "mode": "indirect",
+          "references": {
+            "tagPathBase": "{view.params.tagPathBase}"
+          },
+          "tagPath": "{tagPathBase}/LoRaMetrics/MesgTimeStamp"
+        },
+        "transforms": [
+          {
+            "code": "\tif not quality.badOrError:\n\t\tif system.date.getYear(value) \u003d\u003d 2021:\n\t\t\treturn False\n\t\telse:\n\t\t\treturn True\n\telse:\n\t\treturn False",
+            "type": "script"
+          }
+        ],
+        "type": "tag"
+      },
+      "persistent": true
+    },
+    "custom.isOverDue": {
+      "persistent": true
+    },
+    "custom.usesAPI": {
+      "persistent": true
+    },
+    "params.deviceTypeID": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.tagPathBase": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 650
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "FlexRepeater"
+        },
+        "position": {
+          "basis": "644px"
+        },
+        "propConfig": {
+          "props.instances[0].labelText": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "tagPathBase": "{view.params.tagPathBase}"
+                },
+                "tagPath": "{tagPathBase}/LoRaMetrics/MesgTimeStamp"
+              },
+              "transforms": [
+                {
+                  "code": "\tif system.date.getYear(value) \u003d\u003d 2021:\n\t\t#self.view.custom.hasCheckedIn \u003d False\n\t\treturn \"Has not been seen, ensure sensor has been activated and can join the network\"\n\telse:\n\t\t#self.view.custom.hasCheckedIn \u003d True\n\t\tlastSeen \u003d utils.timeFormatter.time_elapsed_since_dateTag(value)\n\t\tif lastSeen !\u003d \"Never seen\":\n\t\t\treturn \"Last checked in \" +lastSeen\n\t\telse:\n\t\t\t#self.view.custom.hasCheckedIn \u003d False\n\t\t\treturn \"Has not been seen, ensure sensor has been activated and can join the network\"\n\t\t",
+                  "type": "script"
+                }
+              ],
+              "type": "tag"
+            }
+          },
+          "props.instances[0].rowColor": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "tagPathBase": "{view.params.tagPathBase}"
+                },
+                "tagPath": "{tagPathBase}/LoRaMetrics/checkin_overdue"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value:\n\t\tif  self.view.custom.hasCheckedIn \u003d\u003d False:\n\t\t\treturn \"grey\"\n\t\telse:\n\t\t\treturn \"diagnostics/error\"\n\telse:\n\t\treturn \"diagnostics/good\"",
+                  "type": "script"
+                }
+              ],
+              "type": "tag"
+            }
+          },
+          "props.instances[1].rowColor": {
+            "binding": {
+              "config": {
+                "path": "this.props.instances[0].rowColor"
+              },
+              "type": "property"
+            }
+          },
+          "props.instances[2].labelText": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "tagPathBase": "{view.params.tagPathBase}"
+                },
+                "tagPath": "{tagPathBase}/LoRaMetrics/LastGateway"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d None:\n\t\tself.props.instances[3].rowColor \u003d \"grey\"\n\t\tself.props.instances[2].rowColor \u003d \"grey\"\n\t\treturn \"No LoRa Gateway has seen packets from device\"\n\telse:\n\t\tself.props.instances[3].rowColor \u003d \"diagnostics/good\"\n\t\tself.props.instances[2].rowColor \u003d \"diagnostics/good\"\n\t\treturn \"Last Gateway: \" + str(value)",
+                  "type": "script"
+                }
+              ],
+              "type": "tag"
+            }
+          },
+          "props.instances[3].rowColor": {
+            "binding": {
+              "config": {
+                "path": "this.props.instances[2].rowColor"
+              },
+              "type": "property"
+            }
+          },
+          "props.instances[4].labelText": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "tagPathBase": "{view.params.tagPathBase}"
+                },
+                "tagPath": "{tagPathBase}/Errors/decodeError"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d None:\n\t\treturn \"Nothing to decode\"\n\telif value \u003d\u003d \"No decode errors found\":\n\t\treturn \"Decoded successfully\"\n\telse:\n\t\t\n\t\treturn \"Decode Error: \" + str(value)",
+                  "type": "script"
+                }
+              ],
+              "type": "tag"
+            }
+          },
+          "props.instances[4].navigateTo": {
+            "binding": {
+              "config": {
+                "path": "view.params.deviceTypeID"
+              },
+              "transforms": [
+                {
+                  "code": "\treturn \"/device-profile/decoder/{0}\".format(value)",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          },
+          "props.instances[4].rowColor": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "tagPathBase": "{view.params.tagPathBase}"
+                },
+                "tagPath": "{tagPathBase}/Errors/decodeError"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d \"No decode errors found\":\n\t\treturn \"diagnostics/good\"\n\telse:\n\t\tif self.view.custom.hasCheckedIn\u003d\u003d False:\n\t\t\treturn \"grey\"\n\t\telse:\n\t\t\treturn \"diagnostics/error\"",
+                  "type": "script"
+                }
+              ],
+              "type": "tag"
+            }
+          }
+        },
+        "props": {
+          "direction": "column",
+          "instances": [
+            {
+              "iconName": "material/phonelink_ring",
+              "instancePosition": {},
+              "instanceStyle": {
+                "classes": ""
+              },
+              "labelVisible": true,
+              "navigateTo": "Docs"
+            },
+            {
+              "iconName": "material/compare_arrows",
+              "instancePosition": {},
+              "instanceStyle": {
+                "classes": ""
+              },
+              "labelText": "Error getting diagnotics \u0027deviceCheck\u0027",
+              "labelVisible": false
+            },
+            {
+              "iconName": "material/router",
+              "instancePosition": {},
+              "instanceStyle": {
+                "classes": ""
+              },
+              "labelVisible": true,
+              "rowColor": "diagnostics/good"
+            },
+            {
+              "iconName": "material/compare_arrows",
+              "instancePosition": {},
+              "instanceStyle": {
+                "classes": ""
+              },
+              "labelText": "gateway status",
+              "labelVisible": false
+            },
+            {
+              "iconName": "material/lock_open",
+              "instancePosition": {},
+              "instanceStyle": {
+                "classes": ""
+              },
+              "labelVisible": true
+            }
+          ],
+          "path": "Devices/Details/diagnostics/diagnotic-component",
+          "useDefaultViewHeight": false,
+          "useDefaultViewWidth": false
+        },
+        "type": "ia.display.flex-repeater"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

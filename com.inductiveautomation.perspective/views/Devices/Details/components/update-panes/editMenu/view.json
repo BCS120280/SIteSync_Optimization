@@ -1,0 +1,99 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 600,
+      "width": 80
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Change Device Type",
+          "tooltip": {
+            "enabled": true,
+            "text": "Change Device Type, could be firmware"
+          }
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "image": {
+            "icon": {
+              "path": "material/published_with_changes"
+            }
+          },
+          "style": {
+            "backgroundColor": "teal",
+            "classes": "pageFormat/grey-bubble"
+          },
+          "text": "Change"
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "meta": {
+          "name": "Re-sync tag",
+          "tooltip": {
+            "enabled": true,
+            "text": "Force tag to be repopulated from database"
+          }
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "image": {
+            "icon": {
+              "path": "material/cloud_download"
+            }
+          },
+          "style": {
+            "backgroundColor": "teal",
+            "classes": "pageFormat/grey-bubble"
+          },
+          "text": "Resync"
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "meta": {
+          "name": "Delete Device",
+          "tooltip": {
+            "text": "Remove device and tag"
+          }
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "image": {
+            "icon": {
+              "path": "material/delete_forever"
+            }
+          },
+          "style": {
+            "backgroundColor": "teal",
+            "classes": "pageFormat/grey-bubble"
+          },
+          "text": "Delete"
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "justify": "center"
+    },
+    "type": "ia.container.flex"
+  }
+}

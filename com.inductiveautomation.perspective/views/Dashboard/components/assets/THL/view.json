@@ -1,0 +1,333 @@
+{
+  "custom": {},
+  "params": {
+    "tagPath": "[default]THL-F286"
+  },
+  "propConfig": {
+    "params.tagPath": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 250,
+      "width": 250
+    },
+    "dropConfig": {
+      "udts": [
+        {
+          "action": "path",
+          "param": "tagPath",
+          "type": "SiteSync/THL"
+        }
+      ]
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "tempReading"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.tagPath"
+              },
+              "transforms": [
+                {
+                  "code": "\treturn value.split(\u0027]\u0027)[1].split(\u0027/\u0027)[-1]",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Dashboard/boldLabel"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "grow": 1,
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "classes": "Dashboard/boldLabel"
+              },
+              "text": "Temperature"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Labelcurrent_1"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "indirect",
+                            "references": {
+                              "tagPath": "{view.params.tagPath}"
+                            },
+                            "tagPath": "{tagPath}/temperature"
+                          },
+                          "transforms": [
+                            {
+                              "code": "\treturn str(round(value)) + \" C\"",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "tag"
+                        }
+                      }
+                    },
+                    "props": {
+                      "textStyle": {
+                        "classes": "Dashboard/label"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer"
+                },
+                "position": {
+                  "grow": 1,
+                  "shrink": 0
+                },
+                "props": {
+                  "direction": "column"
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer"
+            },
+            "position": {
+              "basis": "112.5px"
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "custom": {
+          "historical": [
+            {
+              "aggregation": "Average",
+              "alias": "Temperature"
+            }
+          ]
+        },
+        "meta": {
+          "name": "tempContainer"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "propConfig": {
+          "custom.historical[0].path": {
+            "binding": {
+              "config": {
+                "path": "view.params.tagPath"
+              },
+              "transforms": [
+                {
+                  "code": "\treturn value + \"/temperature\"",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "#FFFFFF",
+            "classes": "Dashboard/PVTile"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "grow": 1,
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "classes": "Dashboard/boldLabel"
+              },
+              "text": "Humdity"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Labelcurrent_1"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "props.text": {
+                        "binding": {
+                          "config": {
+                            "fallbackDelay": 2.5,
+                            "mode": "indirect",
+                            "references": {
+                              "tagPath": "{view.params.tagPath}"
+                            },
+                            "tagPath": "{tagPath}/humidity"
+                          },
+                          "transforms": [
+                            {
+                              "code": "\treturn str(round(value)) + \"%\"",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "tag"
+                        }
+                      }
+                    },
+                    "props": {
+                      "textStyle": {
+                        "classes": "Dashboard/label"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer"
+                },
+                "position": {
+                  "grow": 1,
+                  "shrink": 0
+                },
+                "props": {
+                  "direction": "column"
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer"
+            },
+            "position": {
+              "basis": "112.5px"
+            },
+            "props": {
+              "direction": "column"
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "custom": {
+          "historical": [
+            {
+              "aggregation": "Average",
+              "alias": "Humidity"
+            }
+          ]
+        },
+        "meta": {
+          "name": "tempContainer_0"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "propConfig": {
+          "custom.historical[0].path": {
+            "binding": {
+              "config": {
+                "path": "view.params.tagPath"
+              },
+              "transforms": [
+                {
+                  "code": "\treturn value + \"/humidity\"",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "#FFFFFF",
+            "classes": "Dashboard/PVTile"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "propConfig": {
+      "props.style.backgroundColor": {
+        "binding": {
+          "config": {
+            "fallbackDelay": 2.5,
+            "mode": "indirect",
+            "references": {
+              "tagPath": "{view.params.tagPath}"
+            },
+            "tagPath": "{tagPath}/lightAlert"
+          },
+          "transforms": [
+            {
+              "code": "\tif int(value) \u003d\u003d 0:\n\t\treturn \"#FFFFFF\"\n\telse:\n\t\treturn \"#ff0000\"",
+              "type": "script"
+            }
+          ],
+          "type": "tag"
+        }
+      }
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Dashboard/PVTile"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

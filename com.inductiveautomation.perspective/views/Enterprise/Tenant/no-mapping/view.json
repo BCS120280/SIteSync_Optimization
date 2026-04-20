@@ -1,0 +1,42 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "387px"
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "#DDDDDD94",
+            "borderBottomLeftRadius": 10,
+            "borderBottomRightRadius": 10,
+            "borderTopLeftRadius": 10,
+            "borderTopRightRadius": 10,
+            "fontSize": "large",
+            "fontWeight": "bold"
+          },
+          "text": "No matching Site associated with your account. Please contact your SiteSync administrator."
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "alignContent": "center",
+      "alignItems": "baseline",
+      "justify": "center",
+      "style": {
+        "marginTop": 50
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

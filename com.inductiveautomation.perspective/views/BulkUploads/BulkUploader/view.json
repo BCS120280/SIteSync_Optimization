@@ -1,0 +1,276 @@
+{
+  "custom": {
+    "devicesToUpload": 0,
+    "devicesUploaded": 0,
+    "excelDataSet": {},
+    "fileString": "",
+    "format": "",
+    "singleDeviceType": "",
+    "status": {},
+    "tagPath": "",
+    "tagProvider": "",
+    "toggleSingleDeviceType": false
+  },
+  "params": {},
+  "propConfig": {
+    "custom.devicesToUpload": {
+      "persistent": true
+    },
+    "custom.devicesUploaded": {
+      "persistent": true
+    },
+    "custom.excelDataSet": {
+      "persistent": true
+    },
+    "custom.fileString": {
+      "persistent": true
+    },
+    "custom.format": {
+      "persistent": true
+    },
+    "custom.singleDeviceType": {
+      "persistent": true
+    },
+    "custom.status": {
+      "persistent": true
+    },
+    "custom.tagPath": {
+      "persistent": true
+    },
+    "custom.tagProvider": {
+      "persistent": true
+    },
+    "custom.toggleSingleDeviceType": {
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 497,
+      "width": 619
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "props": {
+              "text": ".XLSX Upload",
+              "textStyle": {
+                "fontFamily": "inherit",
+                "fontWeight": "bold",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "events": {
+              "component": {
+                "onFileReceived": {
+                  "config": {
+                    "script": "\tself.view.custom.fileString \u003d event.file.getString()\n\ttry:\n\t\tds \u003d device.excelParser.excelToDataSet(event.file.getBytes())\n\t\tsystem.perspective.print(ds)\n\t\tself.view.custom.excelDataSet \u003d ds\n\texcept Exception as e:\n\t\tsystem.perspective.print(e)"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "FileUpload"
+            },
+            "position": {
+              "basis": "150px"
+            },
+            "props": {
+              "fileUploadIcon": {
+                "color": "#0D5C63",
+                "path": "material/cloud_download",
+                "style": {
+                  "color": "#5C9996"
+                }
+              },
+              "supportedFileTypes": [
+                "xlsx"
+              ]
+            },
+            "type": "ia.input.fileupload"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_0"
+        },
+        "position": {
+          "height": 0.3984,
+          "width": 0.769,
+          "x": 0.1158,
+          "y": 0.3199
+        },
+        "props": {
+          "direction": "column",
+          "justify": "space-evenly"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\timport json\n\n\t\t\t\n\n\toverallStatus \u003d []\n\ttry:\n\t\tsystem.perspective.print(\"starting upload\")\n\t\t\n\t\tif self.view.custom.excelDataSet !\u003d None:\n\t\t\tdf \u003d self.view.custom.excelDataSet\t\n\t\t\t\n\t\t\t\n\t\t\tsystem.perspective.print(df)\n\t\t\trowCount \u003d df.getRowCount()\n\t\t\tcolCount \u003d df.getColumnCount()\n\t\t\tif rowCount \u003e 1:\n\t\t\n\t\t\t\tsystem.perspective.print(\"rowcount\" + str(rowCount))\n\t\t\n\t\t\t\tself.session.custom.bulkUpload.totalUploaded \u003d 0\n\t\t\t\tsystem.perspective.closePopup(\"\")\n\t\t\t\tsystem.perspective.openPopup(\"BulkProgress\", \"BulkUploads/BulkProgress\", params \u003d {\u0027toUpload\u0027: rowCount -1, \u0027uploaded\u0027:self.session.custom.bulkUpload.totalUploaded})\n\t\t\t\tcolumnNames \u003d {}\n\t\t\t\tdeviceModels \u003d decoders.model.listDeviceProfiles(self.session.custom.tenantID)\n\t\t\t\tfor row in range(rowCount):\n\t\t\t\t\td \u003d {}\n\t\t\t\t\tfor col in range(colCount):\n\t\t\t\t\t\tif row \u003d\u003d 0:\n\t\t\t\t\t\t\tcolumnNames[col] \u003d df.getValueAt(row, col)\n\t\t\t\t\t\telse:\n\t\t\t\t\t\t\td[columnNames[col]] \u003d df.getValueAt(row, col)\n\t\t\t\t\t        \n\t\t\t\t\tif row \u003e 0:\n\t\t\t\t\t\tsystem.perspective.print(d)\n\t\t\t\t\t\t\n\t\t\t\t\t\tstatus \u003d device.bulkUpload.uploadLine(d, deviceModels, self.session.custom.tenantID, self.session.custom.defaultTagProvider)\t\n\t\t\t\t\t\t\n\t\t\t\t\t\toverallStatus.append(status)\n\t\t\t\t\t\t\n\t\t\t\t\t\t     \n\t\t\t\t\t\tself.session.custom.bulkUpload.totalUploaded +\u003d 1\n\t\t\t\t\t\t\n\t\t\t\t\t\tsystem.perspective.print(status)\n\t\t\t\tsorted_data \u003d sorted(overallStatus, key\u003dlambda x: x[\u0027status\u0027])\n\t\t\t\tself.session.custom.bulkStatus \u003d sorted_data\n\t\t\t\tsystem.perspective.print(overallStatus)\n\t\t\t\tsystem.perspective.closePopup(\"BulkProgress\")\n\t\t\t\tsystem.perspective.openPopup(\"BulkStatus\", \"BulkUploads/BulkStatus\", params \u003d {\n\t\t\t\t\t\t\u0027status\u0027 : overallStatus})\n\t\t\telse:\n\t\t\t\tutils.messages.errors.showErrorMessage(\"File empty, please upload file with at least 1 row containing a device\")\t\t\n\t\t\t\t\n\t\telse:\n\t\t\tutils.messages.errors.showErrorMessage(\"File empty, please upload file with at least 1 row containing a device\")\n\texcept Exception as e:\n\t\tsystem.perspective.print(e)\n\t\tutils.messages.errors.showErrorMessage(\"Error processing bulk upload: \" + str(e))\n\t"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "createDevices"
+        },
+        "position": {
+          "height": 0.1329,
+          "width": 0.4766,
+          "x": 0.2418,
+          "y": 0.7503
+        },
+        "props": {
+          "image": {
+            "style": {
+              "backgroundColor": "#5C9996",
+              "fill": "#5C9996",
+              "opacity": "1"
+            }
+          },
+          "style": {
+            "backgroundColor": "#FFFFFF",
+            "color": "#0D5C63"
+          },
+          "text": "Create Devices"
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "height": 0.1306,
+          "width": 0.4782,
+          "x": 0.2616,
+          "y": 0.0112
+        },
+        "props": {
+          "text": "Bulk Device Upload",
+          "textStyle": {
+            "color": "#0D5C63",
+            "fontSize": 25,
+            "fontWeight": "bolder",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "newTab": true,
+                "url": "https://docs.sitesync.cloud/doku.php?id\u003dwiki:bulkupload"
+              },
+              "scope": "C",
+              "type": "nav"
+            }
+          }
+        },
+        "meta": {
+          "name": "Icon"
+        },
+        "position": {
+          "height": 0.0503,
+          "width": 0.0404,
+          "x": 0.7179,
+          "y": 0.0513
+        },
+        "props": {
+          "color": "#0D5C63",
+          "path": "material/info",
+          "style": {
+            "cursor": "pointer"
+          }
+        },
+        "type": "ia.display.icon"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "269px"
+            },
+            "props": {
+              "text": "Click to Download XLSX File Format:"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "script": "\tfrom java.util import Base64\n\tdef toB64(bytes):\n\t\treturn Base64.getDecoder().decode(bytes)\n\ttry:\n\t\td \u003d system.sitesync.getUploadTemplate(self.session.custom.tenantID)\n\t\n\t\tarry \u003d toB64(d)\n\t\t\n\t\ttoday \u003d system.date.now()\n\t\tformattedDate \u003d system.date.format(today, \"yyyy-MM-dd_HHmmss\")\n\t\tfileName \u003d \"siteSyncBulkUpload_\" + formattedDate + \".xlsx\"\n\t\n\t\tsystem.perspective.download(fileName, arry)\n\texcept Exception as e:\n\t\tsystem.perspective.print(e)\n\t\tutils.messages.errors.showErrorMessage(str(e))\n\t\t"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Button_2"
+            },
+            "position": {
+              "basis": "175px"
+            },
+            "props": {
+              "style": {
+                "backgroundColor": "#0D5C63"
+              },
+              "text": "Bulk Upload Format"
+            },
+            "type": "ia.input.button"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_2"
+        },
+        "position": {
+          "height": 0.0986,
+          "width": 0.7254,
+          "x": 0.138,
+          "y": 0.1438
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "position": {
+      "x": -0.5816,
+      "y": -0.004
+    },
+    "props": {
+      "mode": "percent",
+      "style": {
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "type": "ia.container.coord"
+  }
+}

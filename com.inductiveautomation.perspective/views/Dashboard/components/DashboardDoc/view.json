@@ -1,0 +1,303 @@
+{
+  "custom": {
+    "currentView": "ALL",
+    "sensorTypes": [
+      "OTHER"
+    ],
+    "sensors": {
+      "OTHER": [
+        "[default]water/testUnit"
+      ]
+    }
+  },
+  "params": {},
+  "propConfig": {
+    "custom.currentView": {
+      "persistent": true
+    },
+    "custom.sensorTypes": {
+      "binding": {
+        "config": {
+          "path": "view.custom.sensors"
+        },
+        "transforms": [
+          {
+            "code": "\treturn value.keys()",
+            "type": "script"
+          }
+        ],
+        "type": "property"
+      },
+      "persistent": true
+    },
+    "custom.sensors": {
+      "persistent": true
+    }
+  },
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "dashboards"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 0,
+              "name": "sm",
+              "order": 2,
+              "rowIndex": 0,
+              "span": 12
+            },
+            {
+              "colIndex": 0,
+              "name": "md",
+              "order": 0,
+              "rowIndex": 1,
+              "span": 12
+            },
+            {
+              "colIndex": 0,
+              "name": "lg",
+              "order": 1,
+              "rowIndex": 1,
+              "span": 12
+            }
+          ],
+          "height": "auto"
+        },
+        "propConfig": {
+          "props.params.sensorType": {
+            "binding": {
+              "config": {
+                "path": "view.custom.currentView"
+              },
+              "type": "property"
+            }
+          },
+          "props.params.sensors": {
+            "binding": {
+              "config": {
+                "path": "view.custom.sensors"
+              },
+              "type": "property"
+            }
+          },
+          "props.path": {
+            "binding": {
+              "config": {
+                "path": "view.custom.currentView"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d \"ALL\":\n\t\treturn \"Dashboard/components/pages/dashboard - All\"\n\telif value \u003d\u003d \"ALARMS\":\n\t\treturn \"Dashboard/components/pages/Alarms\"\n\telif value \u003d\u003d \"NOTFOUND\":\n\t\treturn \"Dashboard/components/pages/NoSensorsFound\"\n\telse:\n\t\treturn \"Dashboard/components/pages/dashboard - Single Sensor\"\n",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "margin": "2%"
+          },
+          "useDefaultViewHeight": true
+        },
+        "type": "ia.display.view"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "187px"
+            },
+            "props": {
+              "text": "Viewing"
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 0,
+              "name": "sm",
+              "order": 0.5,
+              "rowIndex": 0,
+              "span": 10
+            },
+            {
+              "colIndex": 0,
+              "name": "md",
+              "order": 0.5,
+              "rowIndex": 0,
+              "span": 9
+            },
+            {
+              "colIndex": 0,
+              "name": "lg",
+              "order": 0.5,
+              "rowIndex": 0,
+              "span": 10
+            }
+          ],
+          "height": 60
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "id": "nav",
+                "type": "toggle",
+                "viewParams": {
+                  "sensorTypes": "{view.custom.sensorTypes}"
+                }
+              },
+              "scope": "C",
+              "type": "dock"
+            }
+          }
+        },
+        "meta": {
+          "name": "Icon"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 0,
+              "name": "sm",
+              "order": 0,
+              "rowIndex": 0,
+              "span": 1
+            },
+            {
+              "colIndex": 0,
+              "name": "md",
+              "order": 0,
+              "rowIndex": 0,
+              "span": 1
+            },
+            {
+              "colIndex": 0,
+              "name": "lg",
+              "order": 0,
+              "rowIndex": 0,
+              "span": 1
+            }
+          ],
+          "height": 60
+        },
+        "props": {
+          "path": "material/dehaze"
+        },
+        "type": "ia.display.icon"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tsystem.perspective.sendMessage(\"refresh\", {})"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Icon_0"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 11,
+              "name": "sm",
+              "order": 1,
+              "rowIndex": 0,
+              "span": 1
+            },
+            {
+              "colIndex": 11,
+              "name": "md",
+              "order": 1,
+              "rowIndex": 0,
+              "span": 1
+            },
+            {
+              "colIndex": 11,
+              "name": "lg",
+              "order": 1,
+              "rowIndex": 0,
+              "span": 1
+            }
+          ],
+          "height": 60
+        },
+        "props": {
+          "path": "material/refresh"
+        },
+        "type": "ia.display.icon"
+      }
+    ],
+    "events": {
+      "system": {
+        "onStartup": {
+          "config": {
+            "script": "\tsystem.perspective.sendMessage(\"startup\", {})"
+          },
+          "scope": "G",
+          "type": "script"
+        }
+      }
+    },
+    "meta": {
+      "name": "root"
+    },
+    "scripts": {
+      "customMethods": [],
+      "extensionFunctions": null,
+      "messageHandlers": [
+        {
+          "messageType": "refresh",
+          "pageScope": true,
+          "script": "\t# implement your handler here\n\tdef getSensorType(tagPath):\n\t\tsensorType \u003d system.tag.readBlocking([tagPath + \"/metaData/sensorType\"])[0].value\n\t\tif sensorType \u003d\u003d None:\n\t\t\treturn \"OTHER\"\n\t\telse:\n\t\t\treturn sensorType.upper()\n\t\t\t\t\n\t\t\n\tdevices \u003d system.sitesync.listDevices(self.session.custom.tenantID)\n\timport json \n\tdeviceList \u003d json.loads(devices)\n\tsensors \u003d {}\n\tfor d in deviceList:\n\t\tpath \u003d d[\u0027fullTagPath\u0027]\n\t\tsensorType \u003d getSensorType(path)\n\t\tif sensorType in sensors.keys():\n\t\t\tsensors[sensorType].append(path)\n\t\telse:\n\t\t\tsensors[sensorType] \u003d [path]\n\t\t\t\n\tself.view.custom.sensors \u003d sensors",
+          "sessionScope": false,
+          "viewScope": false
+        },
+        {
+          "messageType": "startup",
+          "pageScope": true,
+          "script": "\t# implement your handler here\n\ttry:\n\t\tdef getSensorType(tagPath):\n\t\t\tsensorType \u003d system.tag.readBlocking([tagPath + \"/metaData/sensorType\"])[0].value\n\t\t\tif sensorType \u003d\u003d None:\n\t\t\t\treturn \"OTHER\"\n\t\t\telse:\n\t\t\t\treturn sensorType.upper()\n\t\t\t\t\n\t\t\n\t\tdevices \u003d system.sitesync.listDevices(self.session.custom.tenantID)\n\t\timport json \n\t\tdeviceList \u003d json.loads(devices)\n\t\tsensors \u003d {}\n\t\tfor d in deviceList:\n\t\t\tpath \u003d d[\u0027fullTagPath\u0027]\n\t\t\tsensorType \u003d getSensorType(path)\n\t\t\tif sensorType in sensors.keys():\n\t\t\t\tsensors[sensorType].append(path)\n\t\t\telse:\n\t\t\t\tsensors[sensorType] \u003d [path]\n\t\t\t\t\n\t\tself.view.custom.sensors \u003d sensors\n\t\tif len(deviceList) \u003e 0:\n\t\t\tself.view.custom.currentView \u003d \"ALL\"\n\t\telse:\n\t\t\tself.view.custom.currentView \u003d \"NOTFOUND\"\n\texcept Exception as e:\n\t\tsystem.perspective.print(str(e))\n\t\t\t",
+          "sessionScope": false,
+          "viewScope": false
+        },
+        {
+          "messageType": "changeView",
+          "pageScope": true,
+          "script": "\t# implement your handler here\n\tself.view.custom.currentView \u003d payload[\u0027view\u0027]",
+          "sessionScope": false,
+          "viewScope": false
+        },
+        {
+          "messageType": "launchDock",
+          "pageScope": true,
+          "script": "\t# implement your handler here\n\ttagPath \u003d payload[\u0027tagPath\u0027]\n\t",
+          "sessionScope": false,
+          "viewScope": false
+        }
+      ]
+    },
+    "type": "ia.container.column"
+  }
+}

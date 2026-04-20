@@ -1,0 +1,60 @@
+{
+  "custom": {},
+  "params": {
+    "sensorTypes": [
+      "VIBRATION",
+      "TEMPERATURE"
+    ]
+  },
+  "propConfig": {
+    "params.sensorTypes": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "width": 210
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "FlexRepeater"
+        },
+        "position": {
+          "basis": "100%"
+        },
+        "propConfig": {
+          "props.instances": {
+            "binding": {
+              "config": {
+                "path": "view.params.sensorTypes"
+              },
+              "transforms": [
+                {
+                  "code": "\t\n\t\t\t\n\t\t\n\tdef getFirstOption():\n\t\tj \u003d {\n\t\t  \"instanceStyle\": {\n\t\t    \"classes\": \"\"\n\t\t  },\n\t\t  \"instancePosition\": {},\n\t\t  \"icon\": \"material/home\",\n\t\t  \"menuItem\": \"Home\",\n\t\t  \"message\": \"ALL\"\n\t\t}\n\t\treturn j\n\t\n\tdef getLastOption():\n\t\tj \u003d {\n\t\t\t  \"instanceStyle\": {\n\t\t\t    \"classes\": \"\"\n\t\t\t  },\n\t\t\t  \"instancePosition\": {},\n\t\t\t  \"icon\": \"material/alarm\",\n\t\t\t  \"menuItem\": \"ALARMS\",\n\t\t\t  \"message\": \"ALARMS\"\n\t\t\t}\n\t\treturn j\n\t\n\titems \u003d []\n\titems.append(getFirstOption())\n\t\n\t\n\tfor s in value:\n\t\tif s !\u003d \"OTHER\":\n\t\t\tj \u003d {\n\t\t\t  \"instanceStyle\": {\n\t\t\t    \"classes\": \"\"\n\t\t\t  },\n\t\t\t  \"instancePosition\": {},\n\t\t\t  \"icon\": dashboard.icons.getIcon(s),\n\t\t\t  \"menuItem\": s,\n\t\t\t  \"message\": s\n\t\t\t}\n\t\t\titems.append(j)\n\t\t\t\n\tif \"OTHER\" in value:\n\t\tj \u003d {\n\t\t\t  \"instanceStyle\": {\n\t\t\t    \"classes\": \"\"\n\t\t\t  },\n\t\t\t  \"instancePosition\": {},\n\t\t\t  \"icon\": dashboard.icons.getIcon(\"OTHER\"),\n\t\t\t  \"menuItem\": \"OTHER\",\n\t\t\t  \"message\": \"OTHER\"\n\t\t\t}\n\t\titems.append(j)\n\t\n\titems.append(getLastOption())\n\t\n\treturn items",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "direction": "column",
+          "path": "Dashboard/components/infrastructure/navigation/components/menuItem"
+        },
+        "type": "ia.display.flex-repeater"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "scope": "G",
+  "version": 1,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "thumbnail.png",
+    "view.json"
+  ],
+  "attributes": {
+    "lastModification": {
+      "actor": "Sarah Sonnier",
+      "timestamp": "2025-04-24T15:09:45Z"
+    },
+    "lastModificationSignature": "3b39da321f4267c86d692732aa0be5be25b379496b9b2c3936188fc694750ec2"
+  }
+}

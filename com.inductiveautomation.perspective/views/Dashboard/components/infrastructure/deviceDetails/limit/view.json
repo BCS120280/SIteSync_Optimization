@@ -1,0 +1,192 @@
+{
+  "custom": {},
+  "params": {
+    "tagPath": "[default]aloxyCoreTest/metaData/valueToDisplay.engUnit",
+    "valueLabel": "Unit",
+    "valueType": "TEXT"
+  },
+  "propConfig": {
+    "params.tagPath": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.valueLabel": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.valueType": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 100,
+      "width": 300
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 0,
+              "name": "sm",
+              "order": 0,
+              "rowIndex": 0,
+              "span": 5
+            },
+            {
+              "colIndex": 0,
+              "name": "md",
+              "order": 0,
+              "rowIndex": 0,
+              "span": 4
+            },
+            {
+              "colIndex": 3,
+              "name": "lg",
+              "order": 1,
+              "rowIndex": 0,
+              "span": 1
+            }
+          ],
+          "height": 60
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.valueLabel"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "TextField"
+            },
+            "position": {
+              "basis": "150px",
+              "grow": 1
+            },
+            "propConfig": {
+              "position.display": {
+                "binding": {
+                  "config": {
+                    "path": "view.params.valueType"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tif value \u003d\u003d \u0027TEXT\u0027:\n\t\treturn True\n\telse:\n\t\treturn False",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "property"
+                }
+              },
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "bidirectional": true,
+                    "fallbackDelay": 2.5,
+                    "mode": "indirect",
+                    "references": {
+                      "tagPath": "{view.params.tagPath}"
+                    },
+                    "tagPath": "{tagPath}"
+                  },
+                  "type": "tag"
+                }
+              }
+            },
+            "type": "ia.input.text-field"
+          },
+          {
+            "meta": {
+              "name": "NumericEntryField"
+            },
+            "position": {
+              "basis": "150px",
+              "grow": 1
+            },
+            "propConfig": {
+              "position.display": {
+                "binding": {
+                  "config": {
+                    "path": "view.params.valueType"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tif value !\u003d \u0027TEXT\u0027:\n\t\treturn True\n\telse:\n\t\treturn False",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "property"
+                }
+              },
+              "props.value": {
+                "binding": {
+                  "config": {
+                    "bidirectional": true,
+                    "fallbackDelay": 2.5,
+                    "mode": "indirect",
+                    "references": {
+                      "tagPath": "{view.params.tagPath}"
+                    },
+                    "tagPath": "{tagPath}"
+                  },
+                  "type": "tag"
+                }
+              }
+            },
+            "type": "ia.input.numeric-entry-field"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 5,
+              "name": "sm",
+              "order": 1,
+              "rowIndex": 0,
+              "span": 7
+            },
+            {
+              "colIndex": 4,
+              "name": "md",
+              "order": 1,
+              "rowIndex": 0,
+              "span": 8
+            },
+            {
+              "colIndex": 8,
+              "name": "lg",
+              "order": 1,
+              "rowIndex": 1,
+              "span": 1
+            }
+          ],
+          "height": 60
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "type": "ia.container.column"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "custom": {},
+  "params": {
+    "rowData": {
+      "description": "description1",
+      "devEUI": "70b3d56371d46c8b",
+      "deviceName": "tagName",
+      "deviceType": "HotDrop-Direct",
+      "fullTagPath": "[default]Aloxy-14CC",
+      "latitude": null,
+      "longitude": null,
+      "tagName": "testDeviceTag",
+      "tagPathBase": "subFolder",
+      "tagProvider": "default"
+    }
+  },
+  "propConfig": {
+    "params.rowData": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 39
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "value"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "fullTagPath": "{view.params.rowData.fullTagPath}"
+                },
+                "tagPath": "{fullTagPath}/metaData/valueToDisplay"
+              },
+              "transforms": [
+                {
+                  "code": "\tif quality.badOrError:\n\t\treturn \"\"\n\telse:\n\t\treturn value",
+                  "type": "script"
+                }
+              ],
+              "type": "tag"
+            }
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "engUnit"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "fullTagPath": "{view.params.rowData.fullTagPath}"
+                },
+                "tagPath": "{fullTagPath}/metaData/valueToDisplay.engUnit"
+              },
+              "transforms": [
+                {
+                  "code": "\tif quality.badOrError:\n\t\treturn \"\"\n\telse:\n\t\treturn value",
+                  "type": "script"
+                }
+              ],
+              "type": "tag"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "marginLeft": "1%"
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root",
+      "tooltip": {
+        "enabled": true
+      }
+    },
+    "propConfig": {
+      "meta.tooltip.text": {
+        "binding": {
+          "config": {
+            "fallbackDelay": 2.5,
+            "mode": "indirect",
+            "references": {
+              "fullTagPath": "{view.params.rowData.fullTagPath}"
+            },
+            "tagPath": "{fullTagPath}/metaData/valueToDisplay.SourceTagPath"
+          },
+          "transforms": [
+            {
+              "code": "\treturn \"Current reading for attribute \" + value.split(\u0027/\u0027)[-1]",
+              "type": "script"
+            }
+          ],
+          "type": "tag"
+        }
+      }
+    },
+    "props": {
+      "alignItems": "center",
+      "style": {
+        "overflow": "visible"
+      },
+      "wrap": "wrap"
+    },
+    "type": "ia.container.flex"
+  }
+}

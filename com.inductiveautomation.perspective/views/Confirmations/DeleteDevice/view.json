@@ -1,0 +1,253 @@
+{
+  "custom": {},
+  "params": {
+    "devEUI": "devEUI",
+    "deviceName": "{deviceName}",
+    "fullTagPath": "value"
+  },
+  "propConfig": {
+    "params.devEUI": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.deviceName": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.fullTagPath": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 243,
+      "width": 400
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "DeletePrompt"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 0,
+              "name": "sm",
+              "order": 0,
+              "rowIndex": 0,
+              "span": 12
+            },
+            {
+              "colIndex": 0,
+              "name": "md",
+              "order": 0,
+              "rowIndex": 0,
+              "span": 12
+            },
+            {
+              "colIndex": 0,
+              "name": "lg",
+              "order": 1,
+              "rowIndex": 0,
+              "span": 12
+            }
+          ],
+          "height": 60
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "\"Delete \" + {view.params.deviceName} + \"?\""
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "color": "#da6240",
+            "fontWeight": "bolder"
+          },
+          "textStyle": {
+            "fontSize": 18,
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "WarningMessage"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 1,
+              "name": "sm",
+              "order": 0,
+              "rowIndex": 1,
+              "span": 10
+            },
+            {
+              "colIndex": 1,
+              "name": "md",
+              "order": 1,
+              "rowIndex": 1,
+              "span": 10
+            },
+            {
+              "colIndex": 1,
+              "name": "lg",
+              "order": 1,
+              "rowIndex": 1,
+              "span": 10
+            }
+          ],
+          "height": 70
+        },
+        "props": {
+          "alignVertical": "top",
+          "style": {
+            "color": "#000000",
+            "fontWeight": "500"
+          },
+          "text": "Warning: Tags associated with this device will be deleted!",
+          "textStyle": {
+            "fontSize": 13,
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\ttry:\n\t\tsystem.perspective.print(\"Deleting database device...\" + self.view.params.devEUI)\n\t\timport json\n\t\tresults \u003d json.loads(system.sitesync.deleteDevice(self.view.params.devEUI))\n\t\tsystem.perspective.print(str(results))\n\t\tif utils.resultParser.isResultSuccess(results):\n\t\t\tsystem.tag.deleteTags([self.view.params.fullTagPath])\n\t\t\tsystem.perspective.closePopup(\"\")\n\t\t\tif self.session.custom.enableDataPage:\n\t\t\t\t\tsystem.perspective.navigate(page\u003d\"/device-management\")\n\t\t\telse:\n\t\t\t\tsystem.perspective.navigate(page\u003d\"/mobileDeviceList\")\n\t\telse:\n\t\t\tsystem.perspective.closePopup(\"\")\n\t\t\tutils.messages.errors.showErrorMessage(utils.resultParser.getResultMessage(results))\n\texcept Exception as e:\n\t\tsystem.perspective.closePopup(\"\")\n\t\tutils.messages.errors.showErrorMessage(str(e))"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Button_0"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 6,
+              "name": "sm",
+              "order": 0,
+              "rowIndex": 2,
+              "span": 5
+            },
+            {
+              "colIndex": 6,
+              "name": "md",
+              "order": 0,
+              "rowIndex": 2,
+              "span": 5
+            },
+            {
+              "colIndex": 6,
+              "name": "lg",
+              "order": 0,
+              "rowIndex": 2,
+              "span": 5
+            }
+          ],
+          "height": 50
+        },
+        "props": {
+          "image": {
+            "icon": {
+              "color": "#B23C3C"
+            }
+          },
+          "style": {
+            "backgroundColor": "#da6240",
+            "borderStyle": "outset",
+            "borderWidth": 2,
+            "classes": "hand-on-hover wait",
+            "color": "#000000",
+            "cursor": "pointer",
+            "fontSize": 16
+          },
+          "text": "Delete"
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tsystem.perspective.closePopup(\"\")"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Button_1"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 1,
+              "name": "sm",
+              "order": -0.5,
+              "rowIndex": 2,
+              "span": 5
+            },
+            {
+              "colIndex": 1,
+              "name": "md",
+              "order": -0.5,
+              "rowIndex": 2,
+              "span": 5
+            },
+            {
+              "colIndex": 1,
+              "name": "lg",
+              "order": -0.5,
+              "rowIndex": 2,
+              "span": 5
+            }
+          ],
+          "height": 50
+        },
+        "props": {
+          "image": {
+            "icon": {
+              "color": "#B23C3C"
+            }
+          },
+          "style": {
+            "backgroundColor": "#FFFFFF",
+            "color": "#000000",
+            "fontSize": 16
+          },
+          "text": "Go Back"
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "style": {
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "type": "ia.container.column"
+  }
+}

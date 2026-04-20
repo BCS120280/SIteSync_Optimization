@@ -1,0 +1,1367 @@
+{
+  "custom": {
+    "description": "value",
+    "devEUI": "4150e4bd07bc81b1",
+    "image": null,
+    "imageUploaded": false,
+    "latitude": 0,
+    "longitude": 0,
+    "metaData": {},
+    "mfgs": [
+      {
+        "label": "Honeywell",
+        "value": [
+          {
+            "label": "Honeywell-Versatillis",
+            "value": 61
+          }
+        ]
+      },
+      {
+        "label": "Dragino",
+        "value": [
+          {
+            "label": "Vutility-HotDrop-Direct",
+            "value": 6
+          },
+          {
+            "label": "DraginoDryContact",
+            "value": 9
+          },
+          {
+            "label": "Dragino-Temperature-Humidity-LHT65N",
+            "value": 31
+          },
+          {
+            "label": "Dragino-CurrentConverter-CS01LB",
+            "value": 32
+          },
+          {
+            "label": "Dragino-DryContact-CPL03-LB/LS",
+            "value": 33
+          },
+          {
+            "label": "dragino/LHT65N-Temperature-Humidity",
+            "value": 62
+          },
+          {
+            "label": "cs01-lb",
+            "value": 63
+          }
+        ]
+      },
+      {
+        "label": "RIOTWireless",
+        "value": [
+          {
+            "label": "RIOT-Ultrasonic-Level",
+            "value": 49
+          }
+        ]
+      },
+      {
+        "label": "VEGA",
+        "value": [
+          {
+            "label": "Vega-Air",
+            "value": 55
+          },
+          {
+            "label": "VEGA-PULSAIR41",
+            "value": 56
+          }
+        ]
+      },
+      {
+        "label": "Yokogawa",
+        "value": [
+          {
+            "label": "Yokogawa-Sushi-Vibration",
+            "value": 58
+          },
+          {
+            "label": "Yokogawa-Sushi-Pressure",
+            "value": 59
+          },
+          {
+            "label": "Yokogawa-Sushi-Temperature",
+            "value": 60
+          }
+        ]
+      },
+      {
+        "label": "Dragino1",
+        "value": [
+          {
+            "label": "newust",
+            "value": 8
+          }
+        ]
+      },
+      {
+        "label": "Trackonomy",
+        "value": [
+          {
+            "label": "Trackonomy-THL",
+            "value": 57
+          }
+        ]
+      },
+      {
+        "label": "Aloxy",
+        "value": [
+          {
+            "label": "Aloxy-ValvePosition",
+            "value": 48
+          }
+        ]
+      },
+      {
+        "label": "Sensor Networks",
+        "value": [
+          {
+            "label": "SensorNetworks-MicroPims",
+            "value": 52
+          }
+        ]
+      },
+      {
+        "label": "AbeewayTracker",
+        "value": [
+          {
+            "label": "AbeewayTracker",
+            "value": 25
+          },
+          {
+            "label": "Abeeway-Tracker",
+            "value": 47
+          }
+        ]
+      },
+      {
+        "label": "Sensia",
+        "value": [
+          {
+            "label": "Sensia-Temperature",
+            "value": 54
+          }
+        ]
+      },
+      {
+        "label": "DigitalMatter",
+        "value": [
+          {
+            "label": "OysterTracker",
+            "value": 24
+          },
+          {
+            "label": "DigitalMatter-OysterTracker",
+            "value": 46
+          }
+        ]
+      },
+      {
+        "label": "TESolutions",
+        "value": [
+          {
+            "label": "TEPressure",
+            "value": 1
+          },
+          {
+            "label": "TEVibration",
+            "value": 2
+          },
+          {
+            "label": "TE-Pressure",
+            "value": 26
+          },
+          {
+            "label": "TE-Vibration",
+            "value": 27
+          }
+        ]
+      },
+      {
+        "label": "TWTG",
+        "value": [
+          {
+            "label": "TWTGPressure ",
+            "value": 3
+          },
+          {
+            "label": "TWTGVibration",
+            "value": 4
+          },
+          {
+            "label": "TWTGTemperature",
+            "value": 5
+          },
+          {
+            "label": "TWTG-Pressure ",
+            "value": 28
+          },
+          {
+            "label": "TWTG-Vibration",
+            "value": 29
+          },
+          {
+            "label": "TWTG-Temperature-Transmitter",
+            "value": 30
+          },
+          {
+            "label": "TWTG-Temperature-Contact",
+            "value": 51
+          }
+        ]
+      },
+      {
+        "label": "Bourdon",
+        "value": [
+          {
+            "label": "Bourdon-PressureGauge",
+            "value": 50
+          }
+        ]
+      },
+      {
+        "label": "RadioBridge",
+        "value": [
+          {
+            "label": "RadioBridgeVoltage",
+            "value": 15
+          },
+          {
+            "label": "RadioBridgeMoisture",
+            "value": 16
+          },
+          {
+            "label": "RadioBridgeTemperature",
+            "value": 17
+          },
+          {
+            "label": "RadioBridge4-20ma",
+            "value": 18
+          },
+          {
+            "label": "RadioBridgeAccelerometer",
+            "value": 19
+          },
+          {
+            "label": "RadioBridgeLevel",
+            "value": 20
+          },
+          {
+            "label": "RadioBridgeContactSensor",
+            "value": 21
+          },
+          {
+            "label": "RadioBridgeVibration",
+            "value": 22
+          },
+          {
+            "label": "RadioBridgeHumidity",
+            "value": 23
+          },
+          {
+            "label": "RadioBridge-Voltage",
+            "value": 38
+          },
+          {
+            "label": "RadioBridge-Moisture",
+            "value": 39
+          },
+          {
+            "label": "RadioBridge-Temperature",
+            "value": 40
+          },
+          {
+            "label": "RadioBridge-420ma",
+            "value": 41
+          },
+          {
+            "label": "RadioBridge-Accelerometer",
+            "value": 42
+          },
+          {
+            "label": "RadioBridge-Level",
+            "value": 43
+          },
+          {
+            "label": "RadioBridge-Contact",
+            "value": 44
+          },
+          {
+            "label": "RadioBridge-Vibration",
+            "value": 45
+          }
+        ]
+      },
+      {
+        "label": "Orbiwise",
+        "value": [
+          {
+            "label": "Orbiwise-Sampols",
+            "value": 53
+          }
+        ]
+      },
+      {
+        "label": "Ellenex",
+        "value": [
+          {
+            "label": "PDS2-L - Differential Pressure",
+            "value": 13
+          },
+          {
+            "label": "Ellenex-Differential-Pressure-PDS2-L",
+            "value": 36
+          }
+        ]
+      },
+      {
+        "label": "Vutility",
+        "value": [
+          {
+            "label": "HotDrop-Direct",
+            "value": 7
+          },
+          {
+            "label": "HotDrop",
+            "value": 10
+          },
+          {
+            "label": "PulseDrop-Direct",
+            "value": 11
+          },
+          {
+            "label": "VoltDrop-Direct",
+            "value": 12
+          },
+          {
+            "label": "Vutility-PulseDrop-Direct",
+            "value": 34
+          },
+          {
+            "label": "Vutility-VoltDrop-Direct",
+            "value": 35
+          }
+        ]
+      },
+      {
+        "label": "Tekelek",
+        "value": [
+          {
+            "label": "TEK888 - Ultrasonic Level Sensor",
+            "value": 14
+          },
+          {
+            "label": "Tekelek-Ultrasonic-Level-TEK888",
+            "value": 37
+          }
+        ]
+      }
+    ],
+    "models": [
+      {
+        "label": "TEPressure",
+        "value": 1
+      },
+      {
+        "label": "TEVibration",
+        "value": 2
+      },
+      {
+        "label": "TWTGPressure ",
+        "value": 3
+      },
+      {
+        "label": "TWTGVibration",
+        "value": 4
+      },
+      {
+        "label": "TWTGTemperature",
+        "value": 5
+      },
+      {
+        "label": "Vutility-HotDrop-Direct",
+        "value": 6
+      },
+      {
+        "label": "HotDrop-Direct",
+        "value": 7
+      },
+      {
+        "label": "newust",
+        "value": 8
+      },
+      {
+        "label": "DraginoDryContact",
+        "value": 9
+      },
+      {
+        "label": "HotDrop",
+        "value": 10
+      },
+      {
+        "label": "PulseDrop-Direct",
+        "value": 11
+      },
+      {
+        "label": "VoltDrop-Direct",
+        "value": 12
+      },
+      {
+        "label": "PDS2-L - Differential Pressure",
+        "value": 13
+      },
+      {
+        "label": "TEK888 - Ultrasonic Level Sensor",
+        "value": 14
+      },
+      {
+        "label": "RadioBridgeVoltage",
+        "value": 15
+      },
+      {
+        "label": "RadioBridgeMoisture",
+        "value": 16
+      },
+      {
+        "label": "RadioBridgeTemperature",
+        "value": 17
+      },
+      {
+        "label": "RadioBridge4-20ma",
+        "value": 18
+      },
+      {
+        "label": "RadioBridgeAccelerometer",
+        "value": 19
+      },
+      {
+        "label": "RadioBridgeLevel",
+        "value": 20
+      },
+      {
+        "label": "RadioBridgeContactSensor",
+        "value": 21
+      },
+      {
+        "label": "RadioBridgeVibration",
+        "value": 22
+      },
+      {
+        "label": "RadioBridgeHumidity",
+        "value": 23
+      },
+      {
+        "label": "OysterTracker",
+        "value": 24
+      },
+      {
+        "label": "AbeewayTracker",
+        "value": 25
+      },
+      {
+        "label": "TE-Pressure",
+        "value": 26
+      },
+      {
+        "label": "TE-Vibration",
+        "value": 27
+      },
+      {
+        "label": "TWTG-Pressure ",
+        "value": 28
+      },
+      {
+        "label": "TWTG-Vibration",
+        "value": 29
+      },
+      {
+        "label": "TWTG-Temperature-Transmitter",
+        "value": 30
+      },
+      {
+        "label": "Dragino-Temperature-Humidity-LHT65N",
+        "value": 31
+      },
+      {
+        "label": "Dragino-CurrentConverter-CS01LB",
+        "value": 32
+      },
+      {
+        "label": "Dragino-DryContact-CPL03-LB/LS",
+        "value": 33
+      },
+      {
+        "label": "Vutility-PulseDrop-Direct",
+        "value": 34
+      },
+      {
+        "label": "Vutility-VoltDrop-Direct",
+        "value": 35
+      },
+      {
+        "label": "Ellenex-Differential-Pressure-PDS2-L",
+        "value": 36
+      },
+      {
+        "label": "Tekelek-Ultrasonic-Level-TEK888",
+        "value": 37
+      },
+      {
+        "label": "RadioBridge-Voltage",
+        "value": 38
+      },
+      {
+        "label": "RadioBridge-Moisture",
+        "value": 39
+      },
+      {
+        "label": "RadioBridge-Temperature",
+        "value": 40
+      },
+      {
+        "label": "RadioBridge-420ma",
+        "value": 41
+      },
+      {
+        "label": "RadioBridge-Accelerometer",
+        "value": 42
+      },
+      {
+        "label": "RadioBridge-Level",
+        "value": 43
+      },
+      {
+        "label": "RadioBridge-Contact",
+        "value": 44
+      },
+      {
+        "label": "RadioBridge-Vibration",
+        "value": 45
+      },
+      {
+        "label": "DigitalMatter-OysterTracker",
+        "value": 46
+      },
+      {
+        "label": "Abeeway-Tracker",
+        "value": 47
+      },
+      {
+        "label": "Aloxy-ValvePosition",
+        "value": 48
+      },
+      {
+        "label": "RIOT-Ultrasonic-Level",
+        "value": 49
+      },
+      {
+        "label": "Bourdon-PressureGauge",
+        "value": 50
+      },
+      {
+        "label": "TWTG-Temperature-Contact",
+        "value": 51
+      },
+      {
+        "label": "SensorNetworks-MicroPims",
+        "value": 52
+      },
+      {
+        "label": "Orbiwise-Sampols",
+        "value": 53
+      },
+      {
+        "label": "Sensia-Temperature",
+        "value": 54
+      },
+      {
+        "label": "Vega-Air",
+        "value": 55
+      },
+      {
+        "label": "VEGA-PULSAIR41",
+        "value": 56
+      },
+      {
+        "label": "Trackonomy-THL",
+        "value": 57
+      },
+      {
+        "label": "Yokogawa-Sushi-Vibration",
+        "value": 58
+      },
+      {
+        "label": "Yokogawa-Sushi-Pressure",
+        "value": 59
+      },
+      {
+        "label": "Yokogawa-Sushi-Temperature",
+        "value": 60
+      },
+      {
+        "label": "Honeywell-Versatillis",
+        "value": 61
+      },
+      {
+        "label": "dragino/LHT65N-Temperature-Humidity",
+        "value": 62
+      },
+      {
+        "label": "cs01-lb",
+        "value": 63
+      }
+    ],
+    "sensorType": "value",
+    "showMetaData": "false",
+    "tagProvider": ""
+  },
+  "params": {
+    "device": {
+      "description": "value",
+      "devEUI": "4150e4bd07bc81b1",
+      "deviceName": "testetsttes",
+      "deviceType": "value",
+      "fullTagPath": "[default]hotdropTest1",
+      "latitude": 0,
+      "longitude": 0,
+      "metaData": "value",
+      "tagName": "testetsttes",
+      "tagPathBase": "",
+      "tagProvider": "default"
+    }
+  },
+  "propConfig": {
+    "custom.description": {
+      "binding": {
+        "config": {
+          "path": "view.params.device.description"
+        },
+        "type": "property"
+      },
+      "persistent": true
+    },
+    "custom.devEUI": {
+      "binding": {
+        "config": {
+          "path": "view.params.device.devEUI"
+        },
+        "type": "property"
+      },
+      "persistent": true
+    },
+    "custom.deviceName": {
+      "binding": {
+        "config": {
+          "path": "view.params.device.deviceName"
+        },
+        "type": "property"
+      }
+    },
+    "custom.image": {
+      "persistent": true
+    },
+    "custom.imageUploaded": {
+      "persistent": true
+    },
+    "custom.latitude": {
+      "binding": {
+        "config": {
+          "path": "view.params.device.latitude"
+        },
+        "type": "property"
+      },
+      "persistent": true
+    },
+    "custom.longitude": {
+      "binding": {
+        "config": {
+          "path": "view.params.device.longitude"
+        },
+        "type": "property"
+      },
+      "persistent": true
+    },
+    "custom.metaData": {
+      "binding": {
+        "config": {
+          "path": "view.custom.devEUI"
+        },
+        "transforms": [
+          {
+            "code": "\treturn device.get.getMetaData(value)",
+            "type": "script"
+          }
+        ],
+        "type": "property"
+      },
+      "persistent": true
+    },
+    "custom.sensorType": {
+      "binding": {
+        "config": {
+          "path": "view.params.device.deviceType"
+        },
+        "type": "property"
+      },
+      "persistent": true
+    },
+    "custom.showMetaData": {
+      "persistent": true
+    },
+    "custom.tagPath": {
+      "binding": {
+        "config": {
+          "path": "view.params.device.tagPathBase"
+        },
+        "type": "property"
+      }
+    },
+    "custom.tagProvider": {
+      "persistent": true
+    },
+    "params.device": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 947,
+      "width": 735
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "props": {
+              "text": "Device Name"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_0"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.deviceName"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "CoordinateContainer_deviceName"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "marginBottom": 10,
+            "marginLeft": 10,
+            "marginRight": 10
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label_1"
+            },
+            "position": {
+              "basis": "25px"
+            },
+            "props": {
+              "text": "Dev EUI"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_0"
+            },
+            "position": {
+              "basis": "30px"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.devEUI"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "CoordinateContainer_devEUI"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "marginBottom": 10,
+            "marginLeft": 10,
+            "marginRight": 10
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label_3"
+            },
+            "position": {
+              "basis": "25px"
+            },
+            "props": {
+              "text": "Sensor Type"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_0"
+            },
+            "position": {
+              "basis": "30px"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.sensorType"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "CoordinateContainer_sensorType"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "marginBottom": 10,
+            "marginLeft": 10,
+            "marginRight": 10
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label_3"
+            },
+            "position": {
+              "basis": "25px"
+            },
+            "props": {
+              "text": "Description"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "TextArea"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "bidirectional": true,
+                    "path": "view.custom.description"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "type": "ia.input.text-area"
+          }
+        ],
+        "meta": {
+          "name": "Description"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "marginBottom": 10,
+            "marginLeft": 10,
+            "marginRight": 10
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "25px"
+            },
+            "props": {
+              "text": "Device Coordinates"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "lat"
+                },
+                "position": {
+                  "basis": "30px"
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "bidirectional": true,
+                        "path": "view.custom.latitude"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "placeholder": "Latitude",
+                  "style": {
+                    "marginBottom": 5
+                  }
+                },
+                "type": "ia.input.text-field"
+              },
+              {
+                "meta": {
+                  "name": "lon"
+                },
+                "position": {
+                  "basis": "30px"
+                },
+                "propConfig": {
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "bidirectional": true,
+                        "path": "view.custom.longitude"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "placeholder": "Longitude"
+                },
+                "type": "ia.input.text-field"
+              }
+            ],
+            "meta": {
+              "name": "FlexContainer"
+            },
+            "position": {
+              "basis": "66px"
+            },
+            "props": {
+              "direction": "column"
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "script": "\tself.view.custom.latitude \u003d self.session.props.geolocation.data.latitude\n\tself.view.custom.longitude \u003d self.session.props.geolocation.data.longitude\n\n\t\t"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Button"
+            },
+            "props": {
+              "image": {
+                "icon": {
+                  "path": "material/location_on"
+                }
+              },
+              "style": {
+                "backgroundColor": "#0D5C63"
+              },
+              "text": "Autofill Current Location"
+            },
+            "type": "ia.input.button"
+          }
+        ],
+        "meta": {
+          "name": "location"
+        },
+        "position": {
+          "basis": "128px",
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "justify": "space-between",
+          "style": {
+            "marginBottom": 10,
+            "marginLeft": 10,
+            "marginRight": 10
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "25px"
+            },
+            "props": {
+              "text": "Upload Picture of Install"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "events": {
+              "component": {
+                "onFileReceived": {
+                  "config": {
+                    "script": "\timport base64\n\tlogger \u003d system.util.getLogger(\u0027SiteSyncPictureUpload\u0027)\n\tlogger.info(\"starting fileupload\")\n\ttry:\n\t\t\n\t\tb \u003d base64.b64encode(event.file.getBytes())\n\t\n\t\t\n\t\tself.view.custom.image \u003d b\n\t\t\t\n\texcept Exception as e:\n\t\tsystem.perspective.print(str(e))\n\t\tlogger.error(str(e))"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "FileUpload"
+            },
+            "position": {
+              "basis": "50px"
+            },
+            "props": {
+              "fileUploadIcon": {
+                "color": "#0D5C63"
+              },
+              "maxUploads": 1,
+              "supportedFileTypes": [
+                "PNG",
+                "JPG",
+                "JPEG"
+              ]
+            },
+            "type": "ia.input.fileupload"
+          }
+        ],
+        "meta": {
+          "name": "CoordinateContainer_deviceName_1"
+        },
+        "position": {
+          "basis": "86px",
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "marginBottom": 10,
+            "marginLeft": 10,
+            "marginRight": 10
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "FlexRepeater"
+            },
+            "position": {
+              "grow": 1,
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.instances": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.metaData"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tinstances \u003d []  # variable can be called anything, as long as the return variable name matches; I just like to have my variable names match what I\u0027m expecting back\n\ttry:\n\t\tfor entry, val in value.items():\n\t\t    instance \u003d {\n\t\t      \"instanceStyle\": {\n\t\t        \"classes\": \"\"\n\t\t      },\n\t\t      \"instancePosition\": {},\n\t\t      \"componentValue\": val,\n\t\t      \"isEditing\": True,\n\t\t      \"labelText\": entry\n\t\t    }\n\t\t  \n\t\t    instances.append(instance)\n\t\treturn instances\n\texcept:\n\t\t\n\t\treturn instances",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "direction": "column",
+              "path": "Devices/Details/components/editableLabel",
+              "useDefaultViewHeight": false,
+              "useDefaultViewWidth": false
+            },
+            "type": "ia.display.flex-repeater"
+          }
+        ],
+        "meta": {
+          "name": "metaDAta"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "marginBottom": 10,
+            "marginLeft": 10,
+            "marginRight": 10
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "script": "\timport json\n\timport re\n\ttry:\n\t\tself.meta.visible \u003d False\n\t\tutils.messages.waiting.showLoading()\n\t\n\n\t\t#Load property data\n\t\t\n\t\tdevEUI \u003d str(self.view.custom.devEUI).replace(\u0027-\u0027, \u0027\u0027).lower().strip()\n\t\n\t\ttagPath \u003d str(self.view.custom.tagPath)\n\t\tdescription \u003d str(self.view.custom.description)\n\t\ttenantID \u003d self.session.custom.tenantID\n\t\tlatitude \u003dself.view.custom.latitude\n\t\tlongitude \u003d self.view.custom.longitude\t\t\n\t\tname \u003d self.view.custom.deviceName\n\t\t#Check for valid data\n\t\tdataValid \u003d True\n\t\tselectedTagProvider \u003d str(self.view.custom.tagProvider)\n\t\t\n\t\t#Add device\n\t\tself.props.style.classes \u003d \u0027wait\u0027\n\t\tutils.messages.waiting.hideLoading()\n\n\t\tdeviceJSON \u003d device.updateDevice.formatUpdateDeviceRequest(devEUI, name, description)\n\t\tupdateResult \u003d device.updateDevice.updateDevice(deviceJSON)\n\t\t\n\t\t\n\t\t\t\n\t\t##update metadata\n\t\tfullTagPath \u003d device.tagOperations.assembleFullPath(selectedTagProvider, tagPath, self.view.custom.deviceName)\n\t\t\n\t\tif self.view.custom.image !\u003d None:\n\t\t\tpictureUploadResult \u003d device.images.saveImage(self.view.custom.image, devEUI)\n\t\t\t\n\t\t\tdevice.tagOperations.updateImageTag(fullTagPath, self.view.custom.image)\n\t\t\t\t\n\t\tif len(self.view.custom.metaData.keys()) \u003e 0:\n\t\t\tsystem.sitesync.updateDeviceMetaData(json.dumps(self.view.custom.metaData), devEUI)\n\t\t\tdevice.tagOperations.updateMetaData(fullTagPath, self.view.custom.metaData)\n\t\t\t\n\t\tdevice.tagOperations.updateDescriptionTag(fullTagPath, description)\n\t\t\n\t\tdevice.tagOperations.updateInstallLocationTag(fullTagPath, latitude, longitude)\n\t\t\n\t\t\n\n\t\n\t\t\n\t\tutils.messages.success.showSuccess(\"Added!\")\n\t\tsyncErrorMessage \u003d \"\"\n\t\tself.view.custom.sensorType \u003d \u0027\u0027\n\t\tself.view.custom.deviceDescription \u003d \u0027\u0027\n\t\tself.view.custom.tagPath \u003d \u0027\u0027\n\n\t\t\n\t\tself.view.custom.devEUI\u003d \u0027\u0027\n\n\t\tself.view.custom.deviceName\u003d \u0027\u0027\n\t\tself.view.custom.imageUploaded \u003d False\n\t\tself.view.custom.image \u003d None\n\t\tself.meta.visible \u003d True\t\n\t\tsystem.perspective.navigate(page\u003d\"/mobileDeviceList\")\t\n\n\texcept Exception as e:\n\t\tsystem.perspective.print(e)\n\t\tsyncErrorMessage \u003d str(e)\n\t\tutils.messages.waiting.hideLoading()\n\t\tutils.messages.errors.showErrorMessage(syncErrorMessage)\n\t\tself.meta.visible \u003d True"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Button_save"
+            },
+            "props": {
+              "image": {
+                "style": {
+                  "classes": "auto"
+                }
+              },
+              "style": {
+                "backgroundColor": "#0D5C63",
+                "fontSize": 16
+              },
+              "text": "Save Device"
+            },
+            "type": "ia.input.button"
+          }
+        ],
+        "meta": {
+          "name": "CoordinateContainer_saveButton"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "marginLeft": 50,
+            "marginRight": 50
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "custom": {
+      "tagPaths": [
+        {
+          "id": 2,
+          "tagPathBase": "Test",
+          "tenantID": 1
+        },
+        {
+          "id": 3,
+          "tagPathBase": "Prod",
+          "tenantID": 1
+        },
+        {
+          "id": 4,
+          "tagPathBase": "GVL",
+          "tenantID": 1
+        },
+        {
+          "id": 5,
+          "tagPathBase": "SPP",
+          "tenantID": 1
+        },
+        {
+          "id": 6,
+          "tagPathBase": "GBR",
+          "tenantID": 1
+        },
+        {
+          "id": 7,
+          "tagPathBase": "KEN",
+          "tenantID": 1
+        },
+        {
+          "id": 8,
+          "tagPathBase": "CBG",
+          "tenantID": 1
+        },
+        {
+          "id": 9,
+          "tagPathBase": "CAN",
+          "tenantID": 1
+        },
+        {
+          "id": 10,
+          "tagPathBase": "DET",
+          "tenantID": 1
+        },
+        {
+          "id": 11,
+          "tagPathBase": "MAN",
+          "tenantID": 1
+        },
+        {
+          "id": 12,
+          "tagPathBase": "LAR",
+          "tenantID": 1
+        },
+        {
+          "id": 13,
+          "tagPathBase": "ANR",
+          "tenantID": 1
+        },
+        {
+          "id": 14,
+          "tagPathBase": "ROB",
+          "tenantID": 1
+        },
+        {
+          "id": 15,
+          "tagPathBase": "DIR",
+          "tenantID": 1
+        },
+        {
+          "id": 16,
+          "tagPathBase": "MTZ",
+          "tenantID": 1
+        },
+        {
+          "id": 17,
+          "tagPathBase": "ELP",
+          "tenantID": 1
+        },
+        {
+          "id": 18,
+          "tagPathBase": "SLC",
+          "tenantID": 1
+        },
+        {
+          "id": 19,
+          "tagPathBase": "TXC",
+          "tenantID": 1
+        }
+      ],
+      "tagProviders": [
+        {
+          "label": "default",
+          "value": "default"
+        },
+        {
+          "label": "PID Loops",
+          "value": "PID Loops"
+        },
+        {
+          "label": "Azure Injector",
+          "value": "Azure Injector"
+        },
+        {
+          "label": "MQTT Distributor",
+          "value": "MQTT Distributor"
+        },
+        {
+          "label": "Sample_Tags",
+          "value": "Sample_Tags"
+        },
+        {
+          "label": "monitoring",
+          "value": "monitoring"
+        }
+      ]
+    },
+    "events": {
+      "system": {
+        "onStartup": {
+          "config": {
+            "script": "\ttry:\n\t\t\t\n\t\ttagProviders \u003d utils.tagPathDropdown.getTagProviders()\n\t\ttagPaths \u003d utils.normalizedTagPaths.getAllTagPaths()\n\t\t\n\n\t\tself.custom.tagPaths \u003d tagPaths\n\t\tself.custom.tagProviders \u003d tagProviders\n\t\tself.view.custom.image \u003d None\n\t\t\n\texcept Exception as e:\n\t\tsystem.perspective.print(\"Error loading models: \" + str(e))"
+          },
+          "scope": "G",
+          "type": "script"
+        }
+      }
+    },
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "labels/bold-label pageFormat/rootPadding"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

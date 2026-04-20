@@ -1,0 +1,205 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "TextField"
+            },
+            "position": {
+              "grow": 1
+            },
+            "props": {
+              "placeholder": "Enter at least 4 characters to search",
+              "style": {
+                "padding": "5%"
+              }
+            },
+            "type": "ia.input.text-field"
+          },
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "script": "\ttry:\n\t\timport json \n\t\tsearchTerm \u003d self.getSibling(\"TextField\").props.text\n\t\tsystem.perspective.print(\"starting search..\" + searchTerm)\n\t\tutils.messages.waiting.showLoading()\n\t\tif len(searchTerm) \u003e 3:\n\t\t\tdeviceList \u003d system.sitesync.searchDevice(searchTerm, self.session.custom.tenantID)\n\t\t\tsystem.perspective.print(deviceList)\n\t\t\tresults \u003d []\n\t\t\tif deviceList !\u003d None or  deviceList !\u003d \"\":\n\t\t\t\tdList \u003d json.loads(deviceList)\n\t\t\t\tfor d in dList:\n\t\t\t\t\tsystem.perspective.print(d)\n\t\t\t\t\tj \u003d {\n\t\t\t\t\t  \"instanceStyle\": {\n\t\t\t\t\t    \"classes\": \"\"\n\t\t\t\t\t  },\n\t\t\t\t\t  \"instancePosition\": {},\n\t\t\t\t\t  \"device\": d\n\t\t\t\t\t}\n\t\t\t\t\tresults.append(j)\n\t\t\t\t\t\n\t\t\tself.parent.parent.getChild(\"searchQR\").props.instances \u003d results\n\t\t\tutils.messages.waiting.hideLoading()\n\t\telse:\n\t\t\tutils.messages.waiting.hideLoading()\n\t\t\tutils.messages.errors.showErrorMessage(\"Please enter at least 4 characters\")\n\texcept Exception as e:\n\t\tsystem.perspective.print(str(e))\n\t\tutils.messages.errors.showErrorMessage(\"Error searching: \" + str(e))"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "search"
+            },
+            "props": {
+              "image": {
+                "icon": {
+                  "path": "material/search"
+                }
+              },
+              "style": {
+                "padding": "5%"
+              },
+              "text": "Search"
+            },
+            "type": "ia.input.button"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer"
+        },
+        "props": {
+          "justify": "space-around"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "events": {
+          "system": {
+            "onStartup": {
+              "config": {
+                "script": "\tself.props.instances \u003d []"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "searchQR"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "path": "Devices/list/components/deviceSearchResult",
+          "useDefaultViewWidth": false
+        },
+        "type": "ia.display.flex-repeater"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "props": {
+                  "style": {
+                    "marginLeft": 1
+                  },
+                  "text": "Scan to Search"
+                },
+                "type": "ia.display.label"
+              },
+              {
+                "meta": {
+                  "name": "Icon_0"
+                },
+                "props": {
+                  "path": "material/qr_code_scanner"
+                },
+                "type": "ia.display.icon"
+              }
+            ],
+            "events": {
+              "dom": {
+                "onClick": [
+                  {
+                    "config": {
+                      "script": "\tself.session.custom.barcodeEvent \u003d \"DeviceLookup\""
+                    },
+                    "scope": "G",
+                    "type": "script"
+                  },
+                  {
+                    "config": {
+                      "config": {
+                        "backgroundColor": "AUTO",
+                        "cameraPreference": "BACK",
+                        "type": "QR_CODE",
+                        "uuid": "75fd9c28-e107-4e56-bf56-34c632d5a531"
+                      },
+                      "context": {}
+                    },
+                    "scope": "C",
+                    "type": "native/barcode"
+                  }
+                ]
+              }
+            },
+            "meta": {
+              "name": "FlexContainer"
+            },
+            "position": {
+              "shrink": 0
+            },
+            "props": {
+              "style": {
+                "backgroundColor": "#80808038",
+                "borderBottomLeftRadius": "12px",
+                "borderBottomRightRadius": "12px",
+                "borderStyle": "none",
+                "borderTopLeftRadius": "12px",
+                "borderTopRightRadius": "12px",
+                "borderWidth": "2px",
+                "fontWeight": "bold",
+                "margin": "1%",
+                "padding": "1%"
+              }
+            },
+            "scripts": {
+              "customMethods": [],
+              "extensionFunctions": null,
+              "messageHandlers": [
+                {
+                  "messageType": "DeviceLookup",
+                  "pageScope": false,
+                  "script": "\t# implement your handler here\n\timport json\n\timport time\n\t\t\n\tlogger \u003d system.util.getLogger(\u0027SiteSyncQRSearch\u0027)\n\n\ttry:\n\t\tlogger.info(str(payload))\n\t\tscannedData \u003d payload[\u0027scanValue\u0027]\n\t\tresults \u003d utils.QRCodeParser.parse(scannedData)\n\t\tlogger.info(str(results))\n\t\n\t\tif results[\u0027devEUI\u0027] !\u003d \"\":\n\t\t\n\t\t\tfoundDevice \u003d system.sitesync.lookupDevice(results[\u0027devEUI\u0027])\n\t\t\tlogger.info(foundDevice)\n\t\t\t\n\t\t\t\n\t\t\tutils.messages.waiting.hideLoading()\n\t\t\tif foundDevice !\u003d None:\n\t\t\t\tfoundDevice \u003d json.loads(foundDevice)\n\t\t\t\tsystem.perspective.navigate(page\u003d\"/devices/{0}\".format(results[\u0027devEUI\u0027]))\n\t\t\telse:\n\t\t\t\tutils.messages.errors.showErrorMessage(\"Device with EUI: \" + results[\u0027devEUI\u0027] + \" not found, try adding it first\")\n\t\t\t\t\n\t\telse:\n\t\t\tutils.messages.waiting.hideLoading()\n\t\t\tutils.messages.errors.showErrorMessage(\"DevEUI not found in scan: \" + scannedData)\n\t\t\ttime.sleep(2)\n\t\t\tutils.messages.errors.hideErrorMessage(\"\")\n\t\t\tlogger.info(\"No devEUI found: \" + scannedData)\n\texcept Exception as e:\n\t\tlogger.info(str(e))\n\t\tutils.messages.waiting.hideLoading()",
+                  "sessionScope": true,
+                  "viewScope": false
+                }
+              ]
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_0"
+        },
+        "position": {
+          "basis": "10%",
+          "shrink": 0
+        },
+        "props": {
+          "justify": "flex-end",
+          "style": {
+            "marginBottom": "15%"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "pageFormat/rootPadding"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "custom": {},
+  "params": {
+    "tagPath": "[default]"
+  },
+  "propConfig": {
+    "params.tagPath": {
+      "paramDirection": "inout",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 300
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "parent.custom.tagPath"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "FlexRepeater"
+        },
+        "position": {
+          "shrink": 0
+        },
+        "props": {
+          "instances": [
+            {
+              "instancePosition": {},
+              "instanceStyle": {
+                "classes": ""
+              },
+              "tagPath": "[default]"
+            }
+          ],
+          "path": "Dashboard/components/slicer/slicer",
+          "useDefaultViewHeight": false,
+          "useDefaultViewWidth": false,
+          "wrap": "wrap"
+        },
+        "type": "ia.display.flex-repeater"
+      }
+    ],
+    "events": {
+      "system": {
+        "onStartup": {
+          "config": {
+            "script": "\tsystem.perspective.sendMessage(\"UpdatePath\", payload\u003d{\"tagPath\": \"[{0}]\".format(self.session.custom.defaultTagProvider)})"
+          },
+          "scope": "G",
+          "type": "script"
+        }
+      }
+    },
+    "meta": {
+      "name": "root"
+    },
+    "propConfig": {
+      "custom.tagPath": {
+        "binding": {
+          "config": {
+            "bidirectional": true,
+            "path": "view.params.tagPath"
+          },
+          "type": "property"
+        }
+      }
+    },
+    "props": {
+      "direction": "column"
+    },
+    "scripts": {
+      "customMethods": [],
+      "extensionFunctions": null,
+      "messageHandlers": [
+        {
+          "messageType": "UpdatePath",
+          "pageScope": true,
+          "script": "\t# implement your handler here\n\tpath \u003d payload[\u0027tagPath\u0027]\n\to \u003d [{\n\t  \"instanceStyle\": {\n\t    \"classes\": \"\"\n\t  },\n\t  \"instancePosition\": {},\n\t  \"tagPath\": path\n\t}]\n\tself.custom.tagPath \u003d path\n\tself.getChild(\"FlexRepeater\").props.instances \u003d o",
+          "sessionScope": false,
+          "viewScope": false
+        },
+        {
+          "messageType": "removePath",
+          "pageScope": true,
+          "script": "\t# implement your handler here\n\tpath \u003d payload[\u0027tagPath\u0027]\n\to \u003d [{\n\t  \"instanceStyle\": {\n\t    \"classes\": \"\"\n\t  },\n\t  \"instancePosition\": {},\n\t  \"tagPath\": path\n\t}]\n\tself.custom.tagPath \u003d path\n\tself.getChild(\"FlexRepeater\").props.instances \u003d o",
+          "sessionScope": false,
+          "viewScope": false
+        }
+      ]
+    },
+    "type": "ia.container.flex"
+  }
+}

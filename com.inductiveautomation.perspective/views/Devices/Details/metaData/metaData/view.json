@@ -1,0 +1,258 @@
+{
+  "custom": {
+    "editChange": true,
+    "items": [
+      {
+        "componentValue": "",
+        "instancePosition": {},
+        "instanceStyle": {
+          "classes": ""
+        },
+        "isEditing": true,
+        "labelText": "heow"
+      },
+      {
+        "componentValue": "",
+        "instancePosition": {},
+        "instanceStyle": {
+          "classes": ""
+        },
+        "isEditing": true,
+        "labelText": "heow1"
+      },
+      {
+        "componentValue": "",
+        "instancePosition": {},
+        "instanceStyle": {
+          "classes": ""
+        },
+        "isEditing": true,
+        "labelText": "hn"
+      },
+      {
+        "componentValue": "",
+        "instancePosition": {},
+        "instanceStyle": {
+          "classes": ""
+        },
+        "isEditing": true,
+        "labelText": "hn1"
+      },
+      {
+        "componentValue": "",
+        "instancePosition": {},
+        "instanceStyle": {
+          "classes": ""
+        },
+        "isEditing": true,
+        "labelText": "tho"
+      }
+    ]
+  },
+  "params": {
+    "isEditing": true,
+    "metaData": {
+      "heow": "",
+      "heow1": "",
+      "hn": "",
+      "hn1": "",
+      "tho": ""
+    }
+  },
+  "propConfig": {
+    "custom.editChange": {
+      "persistent": true
+    },
+    "custom.items": {
+      "binding": {
+        "config": {
+          "path": "view.params.isEditing"
+        },
+        "transforms": [
+          {
+            "code": "\tinstances \u003d []  # variable can be called anything, as long as the return variable name matches; I just like to have my variable names match what I\u0027m expecting back\n\ttry:\n\t\tif self.params.metaData !\u003d None:\n\t\t\tfor entry, val in self.params.metaData.items():\n\t\t\t    instance \u003d {\n\t\t\t      \"instanceStyle\": {\n\t\t\t        \"classes\": \"\"\n\t\t\t      },\n\t\t\t      \"instancePosition\": {},\n\t\t\t      \"componentValue\": val,\n\t\t\t      \"isEditing\": value,\n\t\t\t      \"labelText\": entry\n\t\t\t    }\n\t\t\t  \n\t\t\t    instances.append(instance)\n\t\treturn instances\n\texcept:\n\t\t\n\t\treturn instances\n\treturn value",
+            "type": "script"
+          }
+        ],
+        "type": "property"
+      },
+      "persistent": true
+    },
+    "params.isEditing": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.metaData": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "propConfig": {
+          "position.display": {
+            "binding": {
+              "config": {
+                "path": "view.custom.items"
+              },
+              "transforms": [
+                {
+                  "code": "\treturn len(value) \u003e 1",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "labels/dark-green-header pageFormat/grey-bubble"
+          },
+          "text": "MetaData"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "FlexRepeater"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "propConfig": {
+          "position.display": {
+            "binding": {
+              "config": {
+                "path": "view.custom.items"
+              },
+              "transforms": [
+                {
+                  "code": "\tif len(value) \u003e 0:\n\t\treturn True\n\telse:\n\t\treturn False",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          },
+          "props.instances": {
+            "binding": {
+              "config": {
+                "bidirectional": true,
+                "path": "view.custom.items"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "direction": "column",
+          "elementPosition": {
+            "shrink": 0
+          },
+          "path": "Devices/Details/components/editableLabel",
+          "style": {
+            "marginLeft": "2%"
+          },
+          "useDefaultViewWidth": false
+        },
+        "type": "ia.display.flex-repeater"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "TextField"
+            },
+            "position": {
+              "grow": 1
+            },
+            "props": {
+              "placeholder": "Add metadata field"
+            },
+            "type": "ia.input.text-field"
+          },
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "script": "\tmetaName \u003d self.getSibling(\"TextField\").props.text\n\tif metaName !\u003d None and len(metaName) \u003e 1:\n\t\tj \u003d {\n\t\t      \"instanceStyle\": {\n\t\t        \"classes\": \"\"\n\t\t      },\n\t\t      \"instancePosition\": {},\n\t\t      \"componentValue\": \"\",\n\t\t      \"isEditing\": True,\n\t\t      \"labelText\": metaName\n\t\t    }\n\t\t \n\t\tself.view.custom.items.append(j)\n\t\tself.getSibling(\"TextField\").props.text \u003d \"\"\n\t"
+                  },
+                  "scope": "G",
+                  "type": "script"
+                }
+              }
+            },
+            "meta": {
+              "name": "Icon",
+              "tooltip": {
+                "enabled": true,
+                "text": "click to add metadata about your device"
+              }
+            },
+            "position": {
+              "basis": "30px"
+            },
+            "props": {
+              "path": "material/add",
+              "style": {
+                "backgroundColor": "#8080807A",
+                "borderBottomLeftRadius": "12px",
+                "borderBottomRightRadius": "12px",
+                "borderStyle": "none",
+                "borderTopLeftRadius": "12px",
+                "borderTopRightRadius": "12px",
+                "margin": "2%"
+              }
+            },
+            "type": "ia.display.icon"
+          }
+        ],
+        "meta": {
+          "name": "addMeta"
+        },
+        "propConfig": {
+          "position.display": {
+            "binding": {
+              "config": {
+                "path": "view.params.isEditing"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "scripts": {
+      "customMethods": [],
+      "extensionFunctions": null,
+      "messageHandlers": [
+        {
+          "messageType": "getMetaData",
+          "pageScope": true,
+          "script": "\t# implement your handler here\n\tsystem.perspective.print(\"starting meta load\")\n\ttry:\n\t\tdevEUI \u003d payload[\u0027devEUI\u0027]\n\t\ttagPath \u003d payload[\u0027fullTagPath\u0027]\n\t\tmeta \u003d {}\n\t\tfor i in self.getChild(\"FlexRepeater\").props.instances:\n\t\t\tsystem.perspective.print(i)\n\t\t\tmeta[i[\u0027labelText\u0027]] \u003d i[\u0027componentValue\u0027]\n\t\tsystem.perspective.print(meta)\t\t\n\t\tif len(meta.keys()) \u003e 0:\n\t\t\timport json\n\t\t\t\t\t\n\t\t\tj \u003d json.dumps(meta)\n\t\t\tupdateMetaData \u003d device.tagOperations.updateMetaData(tagPath, j)\n\t\t\tdevice.updateDevice.updateDeviceMetaData(meta, devEUI)\n\texcept Exception as e:\n\t\tsystem.perspective.print(\"getMeta: \" + str(e))",
+          "sessionScope": false,
+          "viewScope": false
+        }
+      ]
+    },
+    "type": "ia.container.flex"
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "custom": {},
+  "params": {
+    "formattedDevices": 0
+  },
+  "propConfig": {
+    "params.formattedDevices": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "props": {
+          "alignVertical": "top",
+          "style": {
+            "color": "#0D5C63",
+            "fontWeight": "bolder"
+          },
+          "text": "Uploading Devices...",
+          "textStyle": {
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_0"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "parent.custom.processed"
+              },
+              "transforms": [
+                {
+                  "code": "\treturn str(value) + \" of \" + str(self.parent.custom.total)",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "alignVertical": "top",
+          "style": {
+            "color": "#0D5C63",
+            "fontWeight": "bolder"
+          },
+          "textStyle": {
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Progress"
+        },
+        "position": {
+          "basis": "20px"
+        },
+        "propConfig": {
+          "props.max": {
+            "binding": {
+              "config": {
+                "path": "parent.custom.total"
+              },
+              "type": "property"
+            }
+          },
+          "props.value": {
+            "binding": {
+              "config": {
+                "path": "parent.custom.processed"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.display.progress"
+      }
+    ],
+    "custom": {
+      "processed": 0
+    },
+    "meta": {
+      "name": "root"
+    },
+    "propConfig": {
+      "custom.total": {
+        "binding": {
+          "config": {
+            "path": "view.params.formattedDevices"
+          },
+          "type": "property"
+        }
+      }
+    },
+    "props": {
+      "direction": "column",
+      "justify": "center",
+      "style": {
+        "margin": "3%"
+      }
+    },
+    "scripts": {
+      "customMethods": [],
+      "extensionFunctions": null,
+      "messageHandlers": [
+        {
+          "messageType": "updateCount",
+          "pageScope": true,
+          "script": "\t# implement your handler here\n\tself.custom.processed \u003d payload[\u0027processed\u0027]\n#\tif self.custom.processed \u003d\u003d self.custom.total:\n#\t\tsystem.perspective.sendMessage(\"navigate\", payload\u003d{\"page\":\"BulkUploads/components/preview\"})",
+          "sessionScope": false,
+          "viewScope": false
+        },
+        {
+          "messageType": "setTotal",
+          "pageScope": true,
+          "script": "\t# implement your handler here\n\tself.custom.total \u003d payload[\u0027total\u0027]",
+          "sessionScope": false,
+          "viewScope": false
+        }
+      ]
+    },
+    "type": "ia.container.flex"
+  }
+}

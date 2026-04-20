@@ -1,0 +1,86 @@
+{
+  "custom": {},
+  "params": {
+    "devEUI": "value",
+    "isEditing": true,
+    "name": null,
+    "tag": {
+      "fullTagPath": "[default]hotdropTest1",
+      "tagPathBase": "333ss"
+    }
+  },
+  "propConfig": {
+    "params.devEUI": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.isEditing": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.name": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.tag": {
+      "paramDirection": "inout",
+      "persistent": true
+    }
+  },
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "editableTag"
+        },
+        "propConfig": {
+          "props.params.tag.fullTagPath": {
+            "binding": {
+              "config": {
+                "path": "view.params.tag.fullTagPath"
+              },
+              "type": "property"
+            }
+          },
+          "props.params.tag.tagPathBase": {
+            "binding": {
+              "config": {
+                "bidirectional": true,
+                "path": "view.params.tag.tagPathBase"
+              },
+              "type": "property"
+            }
+          },
+          "props.path": {
+            "binding": {
+              "config": {
+                "path": "view.params.isEditing"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value !\u003d False:\n\t\treturn \"TagPaths/components/tagPathEdit\"\n\telse:\n\t\treturn \"Devices/Details/components/label\"\n",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "params": {
+            "tag": {}
+          }
+        },
+        "type": "ia.display.view"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

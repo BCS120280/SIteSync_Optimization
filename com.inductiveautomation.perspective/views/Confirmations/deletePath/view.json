@@ -1,0 +1,267 @@
+{
+  "custom": {},
+  "params": {
+    "currentPath": {
+      "id": 1,
+      "tagPathBase": "something"
+    }
+  },
+  "propConfig": {
+    "params.currentPath": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 242,
+      "width": 400
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "DeletePrompt"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 0,
+              "name": "sm",
+              "order": 0,
+              "rowIndex": 0,
+              "span": 12
+            },
+            {
+              "colIndex": 0,
+              "name": "md",
+              "order": 0,
+              "rowIndex": 0,
+              "span": 12
+            },
+            {
+              "colIndex": 0,
+              "name": "lg",
+              "order": 1,
+              "rowIndex": 0,
+              "span": 12
+            }
+          ],
+          "height": 60
+        },
+        "props": {
+          "style": {
+            "color": "#da6240",
+            "fontWeight": "bolder"
+          },
+          "text": "Delete Standardized Path",
+          "textStyle": {
+            "fontSize": 18,
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tresults \u003d utils.normalizedTagPaths.deleteTagPath(self.view.params.currentPath.id)\n\tif utils.resultParser.isResultSuccess(results):\n\t\t#close popup\n\t\tsystem.perspective.sendMessage(\"refreshData\", {})\n\t\tsystem.perspective.closePopup(\"9BXqjxYX\")\n\telse:\n\t\tutils.messages.errors.showErrorMessage(utils.resultParser.getResultMessage(results))"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "delete"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 6,
+              "name": "sm",
+              "order": 0,
+              "rowIndex": 2,
+              "span": 5
+            },
+            {
+              "colIndex": 6,
+              "name": "md",
+              "order": 0,
+              "rowIndex": 2,
+              "span": 5
+            },
+            {
+              "colIndex": 6,
+              "name": "lg",
+              "order": 0,
+              "rowIndex": 2,
+              "span": 5
+            }
+          ],
+          "height": 50
+        },
+        "props": {
+          "image": {
+            "icon": {
+              "color": "#FFFFFF",
+              "path": "material/delete_forever"
+            }
+          },
+          "style": {
+            "backgroundColor": "#da6240",
+            "borderStyle": "outset",
+            "borderWidth": 2,
+            "classes": "hand-on-hover wait",
+            "color": "#FFFFFF",
+            "cursor": "pointer",
+            "fontSize": 16
+          },
+          "text": "Delete"
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tsystem.perspective.closePopup(\"9BXqjxYX\")"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "cancel"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 1,
+              "name": "sm",
+              "order": -0.5,
+              "rowIndex": 2,
+              "span": 5
+            },
+            {
+              "colIndex": 1,
+              "name": "md",
+              "order": -0.5,
+              "rowIndex": 2,
+              "span": 5
+            },
+            {
+              "colIndex": 1,
+              "name": "lg",
+              "order": -0.5,
+              "rowIndex": 2,
+              "span": 5
+            }
+          ],
+          "height": 50
+        },
+        "props": {
+          "image": {
+            "icon": {
+              "color": "#B23C3C"
+            }
+          },
+          "style": {
+            "backgroundColor": "#FFFFFF",
+            "color": "#000000",
+            "fontSize": 16
+          },
+          "text": "Cancel"
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "meta": {
+          "name": "WarningMessage_0"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 0,
+              "name": "sm",
+              "order": 0,
+              "rowIndex": 1,
+              "span": 12
+            },
+            {
+              "colIndex": 0,
+              "name": "md",
+              "order": 1,
+              "rowIndex": 1,
+              "span": 12
+            },
+            {
+              "colIndex": 0,
+              "name": "lg",
+              "order": -0.5,
+              "rowIndex": 1,
+              "span": 12
+            }
+          ],
+          "height": 60
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.currentPath.tagPathBase"
+              },
+              "transforms": [
+                {
+                  "code": "\teuis \u003d \"Are you sure you want to delete standardized path: \" + value\n\treturn euis\n\n\n\n",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "alignVertical": "top",
+          "style": {
+            "color": "#000000",
+            "fontWeight": "500"
+          },
+          "textStyle": {
+            "fontSize": 13,
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "events": {
+      "system": {
+        "onStartup": {
+          "config": {
+            "script": "\tsystem.perspective.print(self.view.params.currentPath)"
+          },
+          "scope": "G",
+          "type": "script"
+        }
+      }
+    },
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "gutters": {
+        "horizontal": 3
+      },
+      "style": {
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "type": "ia.container.column"
+  }
+}

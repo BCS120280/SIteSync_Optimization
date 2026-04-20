@@ -1,0 +1,36 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "#\tresults \u003d system.piAdapter.doesTagExtistInPI(addDevices.PIAddress, \"MQTT1\", \"mpc/GVL/S017H8.$.SS\", \"adapter\")\n#\tsystem.perspective.print(results)\n\td \u003d  {\u0027serialNumber\u0027: \u0027\u0027, \u0027applicationKey\u0027: \u0027848bcdfffe616cf5848bcdfffe616cf5\u0027, \u0027description\u0027: \u0027\u0027, \u0027devEUI\u0027: \u0027848bcdfffe616cf1\u0027, \u0027joinEUI\u0027: \u0027848bcdfffe616cf5\u0027, \u0027appID\u0027: 3, \u0027name\u0027: \u0027testUnit\u0027, \u0027tenantID\u0027: 33, \u0027deviceModelID\u0027: 103}\n\t\n\tresults \u003d device.createDevice.createDevice(d)\n\tsystem.perspective.print(results)"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Button"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

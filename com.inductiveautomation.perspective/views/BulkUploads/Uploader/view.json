@@ -1,0 +1,67 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "EmbeddedView"
+        },
+        "propConfig": {
+          "props.path": {
+            "binding": {
+              "config": {
+                "path": "parent.custom.currentPage"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "params": {
+            "key": "value"
+          }
+        },
+        "type": "ia.display.view"
+      }
+    ],
+    "custom": {
+      "currentPage": "BulkUploads/components/uploadForm"
+    },
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "scripts": {
+      "customMethods": [],
+      "extensionFunctions": null,
+      "messageHandlers": [
+        {
+          "messageType": "navigate",
+          "pageScope": true,
+          "script": "\t# implement your handler here\n\tn \u003d payload[\u0027page\u0027]\n\tself.custom.currentPage \u003d n",
+          "sessionScope": false,
+          "viewScope": false
+        },
+        {
+          "messageType": "processFile",
+          "pageScope": true,
+          "script": "\t# implement your handler here\n\t##format into devices, make any notes\n\ttry:\n\t\trows \u003d payload[\u0027rows\u0027]\n\t\tselectedTenant \u003d payload[\u0027tenantName\u0027]\n\t\tselectedTenantID \u003d payload[\u0027tenantID\u0027]\n\t\tselectedDeviceProfileID \u003d payload[\u0027deviceProfileID\u0027]\n\t\tdeviceProfileList \u003d payload[\u0027deviceProfileList\u0027]\n\t\tselectedUseCase \u003d payload[\u0027selectedUseCase\u0027]\n\t\tselectedApp \u003d payload[\u0027selectedApp\u0027]\n\t\tselectedAppID \u003d payload[\u0027selectedAppID\u0027]\n\t\ttagProvider \u003d payload[\u0027tagProvider\u0027]\n\t\tformattedDevices \u003d device.bulkuploadV2.processFile(rows, deviceProfileList, selectedTenant, selectedApp, selectedUseCase, selectedTenantID, selectedDeviceProfileID, selectedAppID, tagProvider )\n\t\t#system.perspective.sendMessage(\"setFormattedDevices\", payload\u003d{\"formattedDevices\":formattedDevices})\n\t\n\t\t\n\t\tsystem.perspective.print(\"send payload\")\n\t\tsystem.perspective.sendMessage(\"navigate\", payload\u003d{\"page\":\"BulkUploads/components/preview\"})\n\t\tself.getChild(\"EmbeddedView\").props.params.formattedDevices \u003d formattedDevices\n\texcept Exception as e:\n\t\tsystem.perspective.print(\"process file error {0}\".format(str(e)))",
+          "sessionScope": false,
+          "viewScope": false
+        },
+        {
+          "messageType": "uploadDevices",
+          "pageScope": true,
+          "script": "\t# implement your handler here\n\ttry:\n\t\tdeviceList \u003d payload[\u0027formattedDevices\u0027]\n\t\tsystem.perspective.sendMessage(\"navigate\", payload\u003d{\"page\":\"BulkUploads/components/processing\"})\n\t\tself.getChild(\"EmbeddedView\").props.params.formattedDevices \u003d len(deviceList)\n\t\t\n\t\tresults \u003d []\n\t\timport time\n\t\tcounter \u003d 0\n\t\tfor d in deviceList:\n\t\t\n\t\t\tif d[\u0027uploadStatus\u0027] \u003d\u003d True:\n\t\t\t\ttry:\n\t\t\t\t\tstatus \u003d device.bulkuploadV2.doUpload(d)\n\t\t\t\t\tstatus[\u0027dev_eui\u0027] \u003d d[\u0027dev_eui\u0027]\n\t\t\t\t\tresults.append(status)\n\t\t\t\texcept Exception as e:\n\t\t\t\t\tstatus \u003d {\"message\":\"Error uploading device: \" + str(e), \"messageType\":\"ERROR\", \"dev_eui\":d[\u0027dev_eui\u0027]}\n\t\t\t\t\tresults.append(status)\n\t\t\t\t\tsystem.perspective.print(\"Error uploading device: \" + str(e))\n\t\t\n\t\t\telse:\n\t\t\t\ts \u003d {\u0027dev_eui\u0027:d[\u0027dev_eui\u0027], \u0027status\u0027:\"Not uploaded: \" + d[\u0027uploadMessage\u0027], \"messageType\":\"ERROR\"}\n\t\t\t\tresults.append(s)\n\t\t\tcounter +\u003d 1\n\t\t\tsystem.perspective.sendMessage(\"updateCount\", payload\u003d{\"processed\":counter})\n\t\t\n\t\tsystem.perspective.print(results)\n\t\tsystem.perspective.print(\"moveing to results\")\n\t\t\n\t\tself.getChild(\"EmbeddedView\").props.params.formattedDevices \u003d results\n\t\tself.custom.currentPage \u003d \"BulkUploads/components/results\"\n\texcept Exception as e:\n\t\tsystem.perspective.print(\"Error uploading devices: \" + str(e))\n\t\t",
+          "sessionScope": false,
+          "viewScope": false
+        }
+      ]
+    },
+    "type": "ia.container.flex"
+  }
+}

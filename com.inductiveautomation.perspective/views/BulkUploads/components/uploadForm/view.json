@@ -1,0 +1,1162 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "props": {
+              "text": "Bulk Device Upload",
+              "textStyle": {
+                "color": "#0D5C63",
+                "fontSize": 25,
+                "fontWeight": "bolder",
+                "textAlign": "center"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "newTab": true,
+                    "url": "https://sitesyncdevs.github.io/lorawan-module/bulk-upload/"
+                  },
+                  "scope": "C",
+                  "type": "nav"
+                }
+              }
+            },
+            "meta": {
+              "name": "Icon",
+              "tooltip": {
+                "enabled": true,
+                "text": "Click for more information about the template"
+              }
+            },
+            "props": {
+              "color": "#0D5C63",
+              "path": "material/info",
+              "style": {
+                "cursor": "pointer"
+              }
+            },
+            "type": "ia.display.icon"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_1"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "props": {
+          "justify": "center"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\ttry:\n\t\tcsv \u003d device.bulkuploadV2.createFileForDownload()\n\t\tsystem.perspective.download(\"SiteSyncUploadTemplate.csv\",csv)\n\texcept Exception as e:\n\t\tsystem.perspective.print(str(e))"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "props": {
+          "style": {
+            "classes": "pageFormat/grey-bubble",
+            "fontSize": "small",
+            "fontStyle": "italic"
+          },
+          "text": "Click to download template"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "50px"
+            },
+            "props": {
+              "text": "Device Type"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Dropdown_mfg"
+                    },
+                    "position": {
+                      "basis": "30px"
+                    },
+                    "propConfig": {
+                      "props.options": {
+                        "binding": {
+                          "config": {
+                            "path": "/root.custom.mfgs"
+                          },
+                          "type": "property"
+                        }
+                      },
+                      "props.value": {
+                        "onChange": {
+                          "enabled": null,
+                          "script": "\tif currentValue.value !\u003d None:\n\t\tself.parent.parent.getChild(\"Dropdown\").props.options \u003d currentValue.value\n\telse:\n\t\tself.parent.parent.getChild(\"Dropdown\").props.options \u003d self.view.getChild(\"root\").custom.models"
+                        }
+                      }
+                    },
+                    "props": {
+                      "placeholder": {
+                        "text": "--FILTER BY VENDOR--"
+                      },
+                      "showClearIcon": true,
+                      "style": {
+                        "backgroundColor": "#FFFFFF",
+                        "borderColor": "#AAAAAA"
+                      },
+                      "value": null
+                    },
+                    "type": "ia.input.dropdown"
+                  }
+                ],
+                "meta": {
+                  "name": "CoordinateContainer_manufacturer"
+                },
+                "props": {
+                  "direction": "column"
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "meta": {
+                  "name": "Dropdown"
+                },
+                "position": {
+                  "grow": 1
+                },
+                "propConfig": {
+                  "props.options": {
+                    "binding": {
+                      "config": {
+                        "path": "/root.custom.models"
+                      },
+                      "type": "property"
+                    }
+                  },
+                  "props.value": {
+                    "binding": {
+                      "config": {
+                        "bidirectional": true,
+                        "path": "/root.custom.selectedModelID"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "placeholder": {
+                    "text": "--SENSOR TYPE--"
+                  }
+                },
+                "type": "ia.input.dropdown"
+              }
+            ],
+            "meta": {
+              "name": "SensorType"
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer"
+        },
+        "props": {
+          "direction": "column"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "props": {
+              "text": "Tag Path"
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_2"
+        },
+        "position": {
+          "basis": "50px",
+          "display": false
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "tagProvider"
+            },
+            "position": {
+              "display": false,
+              "grow": 1,
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.options": {
+                "binding": {
+                  "config": {
+                    "path": "/root.custom.tagProviders"
+                  },
+                  "type": "property"
+                }
+              },
+              "props.value": {
+                "binding": {
+                  "config": {
+                    "bidirectional": true,
+                    "path": "/root.custom.tagProvider"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "placeholder": {
+                "text": "--TAG PROVIDER--"
+              }
+            },
+            "type": "ia.input.dropdown"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Dropdown"
+                },
+                "position": {
+                  "grow": 1
+                },
+                "propConfig": {
+                  "position.display": {
+                    "binding": {
+                      "config": {
+                        "path": "..../tagPath.custom.normalized"
+                      },
+                      "type": "property"
+                    }
+                  },
+                  "props.options": {
+                    "binding": {
+                      "config": {
+                        "path": "/root.custom.tagPaths"
+                      },
+                      "transforms": [
+                        {
+                          "code": "\toptions \u003d []\n\tfor t in value:\n\t\toptions.append({\"label\":t[\u0027tagPathBase\u0027], \"value\":t[\u0027tagPathBase\u0027]})\n\treturn options",
+                          "type": "script"
+                        }
+                      ],
+                      "type": "property"
+                    }
+                  },
+                  "props.value": {
+                    "binding": {
+                      "config": {
+                        "bidirectional": true,
+                        "path": "/root.custom.useCase"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "placeholder": {
+                    "text": "--TAG PATH--"
+                  },
+                  "showClearIcon": true
+                },
+                "type": "ia.input.dropdown"
+              },
+              {
+                "meta": {
+                  "name": "TextField"
+                },
+                "propConfig": {
+                  "position.display": {
+                    "binding": {
+                      "config": {
+                        "path": "..../tagPath.custom.normalized"
+                      },
+                      "transforms": [
+                        {
+                          "code": "\treturn not value",
+                          "type": "script"
+                        }
+                      ],
+                      "type": "property"
+                    }
+                  },
+                  "props.text": {
+                    "binding": {
+                      "config": {
+                        "bidirectional": true,
+                        "path": "/root.custom.useCase"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "type": "ia.input.text-field"
+              }
+            ],
+            "meta": {
+              "name": "tagPaths"
+            },
+            "position": {
+              "grow": 1,
+              "shrink": 0
+            },
+            "props": {
+              "direction": "column"
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "tagPath",
+          "visible": false
+        },
+        "propConfig": {
+          "custom.normalized": {
+            "binding": {
+              "config": {
+                "path": "parent.custom.tagPaths"
+              },
+              "transforms": [
+                {
+                  "code": "\tif len(value) \u003e 0:\n\t\treturn True\n\telse:\n\t\treturn False",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "events": {
+          "component": {
+            "onFileReceived": {
+              "config": {
+                "script": "\ttry:\n\t\timport csv\n\t\tfrom io import StringIO\n\t\tfrom org.python.core.util import StringUtil\n\t\tfileContents \u003d  event.file.getString(\"UTF-8\")\n\t\tdata \u003d event.file.getBytes()\n\t\treader \u003d csv.DictReader(StringIO(StringUtil.fromBytes(data)))\n\t\titems \u003d []\n\t\tfor row in reader:\n\t\t\tr \u003d {key: value.decode(\"utf-8\") for key, value in row.items()}\n\t\t\titems.append(r)\n\t\t\t\n\t\tself.parent.custom.parsedFile \u003d items\n\texcept Exception as e:\n\t\tsystem.perspective.print(str(e))"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "FileUpload"
+        },
+        "position": {
+          "basis": "145px"
+        },
+        "props": {
+          "fileUploadIcon": {
+            "style": {
+              "marginTop": "2%"
+            }
+          },
+          "maxUploads": 1,
+          "supportedFileTypes": [
+            "csv"
+          ]
+        },
+        "type": "ia.input.fileupload"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\t\t\n\tdef getValue(valueList, idToSearchFor):\n\t\tfor v in valueList:\n\t\t\tif v[\u0027value\u0027] \u003d\u003d idToSearchFor:\n\t\t\t\treturn v[\u0027label\u0027]\n\t\treturn \"Not found\"\n\ttry:\n\t\tsystem.perspective.print(\"Starting validation\")\n\t\tself.parent.getChild(\"FlexContainer_0\").getChild(\"errors\").position.display \u003d False\n\t\tself.position.display \u003d False\n\t\t## validate form, \n\t\tvalid \u003d False\n\t\ttenantSelected \u003d False\n\t\tappSelected \u003d False\n\t\tfileUploaded \u003d False\n\t\tuseCaseSelected \u003d False\n\t\tmodelSelected \u003d False\n\t\tappName \u003d \"\"\n\t\tmessage \u003d \"\"\n\t\tself.parent.getChild(\"FlexContainer_0\").getChild(\"errors\").props.text \u003d message\n\t\tselectedTenant \u003d self.parent.custom.tenant\n\t\t\n\t\t\t\n\t\tsystem.perspective.print(\"Starting validation model\")\n\t\tif self.parent.custom.selectedModelID !\u003d None and self.parent.custom.selectedModelID \u003e -1:\n\t\t\tmodelSelected \u003d True\n\t\telse:\n\t\t\tmessage \u003d \"Select a Device type\"\n\t\tsystem.perspective.print(\"Starting validation - use case\")\n\t\t\n\t\t\t\n\t\tif self.parent.custom.tenant !\u003d None and self.parent.custom.tenant !\u003d -1:\n\t\t\ttenantSelected \u003d True \n\t\telse:\n\t\t\tmessage \u003d \"Select a tenant to own these devices\"\n\t\t\t\n\t\tsystem.perspective.print(\"Starting validation app\")\n\t\t\n\t\t\t\n\t\tsystem.perspective.print(\"Starting validation - parsed file\")\n\t\tif self.parent.custom.parsedFile !\u003d None:\n\t\t\tif len(self.parent.custom.parsedFile) \u003e 0:\n\t\t\t\tfileUploaded \u003d True\n\t\t\t\t\n\t\t\telse:\n\t\t\t\tmessage \u003d \"Empty file uploaded, ensure at least 1 device is in file.\"\n\t\telse:\n\t\t\tmessage \u003d \"Please upload file\"\n\t\t\n\t\tsystem.perspective.print(\"completed validation\")\n\t\t\n\t\tif fileUploaded and modelSelected:\n\t\t\tsystem.perspective.print(\"valid\")\n\t\t\tvalid \u003d True\n\t\tsystem.perspective.print(message)\n\t\tself.parent.getChild(\"FlexContainer_0\").getChild(\"errors\").props.text \u003d message\n\t\tself.parent.getChild(\"FlexContainer_0\").getChild(\"errors\").position.display \u003d True\n\t\tif valid:\n\t\t\tp \u003d {\"rows\":self.parent.custom.parsedFile, \n\t\t\t\u0027tenantName\u0027:  self.session.custom.SiteName,\n\t\t\t\u0027tenantID\u0027:selectedTenant,\n\t\t\t\u0027deviceProfileID\u0027:self.parent.custom.selectedModelID,\n\t\t\t\u0027deviceProfileList\u0027: self.parent.custom.models,\n\t\t\t\u0027selectedUseCase\u0027:self.session.custom.SiteName,\n\t\t\t\u0027selectedAppID\u0027:self.parent.custom.appID, \n\t\t\t\"selectedApp\":\"\", \n\t\t\t\"tagProvider\":self.parent.custom.tagProvider\n\t\t\t\n\t\t\t}\n\t\t\tsystem.perspective.sendMessage(\"processFile\", payload\u003dp)\n\t\telse:\n\t\t\tsystem.perspective.print(\"not valid\")\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\n\t\tself.position.display \u003d True\n\texcept Exception as e:\n\t\tsystem.perspective.print(str(e))\n\t\tself.position.display \u003d True"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Button"
+        },
+        "props": {
+          "style": {
+            "margin": "2%",
+            "padding": "3%"
+          },
+          "text": "Upload"
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "errors"
+            },
+            "position": {
+              "display": false,
+              "grow": 1
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer_0"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "custom": {
+      "appID": -1,
+      "mfgs": [
+        {
+          "label": "AbeewayTracker",
+          "value": [
+            {
+              "label": "AbeewayTracker",
+              "value": 24
+            },
+            {
+              "label": "Abeeway-Tracker",
+              "value": 58
+            }
+          ]
+        },
+        {
+          "label": "Aloxy",
+          "value": [
+            {
+              "label": "Aloxy-ValvePosition",
+              "value": 59
+            }
+          ]
+        },
+        {
+          "label": "Bourdon",
+          "value": [
+            {
+              "label": "Bourdon-PressureGauge",
+              "value": 108
+            }
+          ]
+        },
+        {
+          "label": "DigitalMatter",
+          "value": [
+            {
+              "label": "DigitalMatter-OysterTracker",
+              "value": 107
+            }
+          ]
+        },
+        {
+          "label": "Dragino",
+          "value": [
+            {
+              "label": "Dragino-Temperature-Humidity-LHT65N",
+              "value": 90
+            },
+            {
+              "label": "Dragino-CurrentConverter-CS01LB",
+              "value": 92
+            },
+            {
+              "label": "Dragino-DryContact-CPL03-LB/LS",
+              "value": 93
+            },
+            {
+              "label": "Dragino S31B-LB",
+              "value": 118
+            }
+          ]
+        },
+        {
+          "label": "Ellenex",
+          "value": [
+            {
+              "label": "Ellenex-Differential-Pressure-PDS2-L",
+              "value": 96
+            }
+          ]
+        },
+        {
+          "label": "Glamos",
+          "value": [
+            {
+              "label": "Glamos-Walker",
+              "value": 77
+            }
+          ]
+        },
+        {
+          "label": "Honeywell",
+          "value": [
+            {
+              "label": "Honeywell-Versatillis",
+              "value": 114
+            }
+          ]
+        },
+        {
+          "label": "Orbiwise",
+          "value": [
+            {
+              "label": "Orbiwise-Sampols",
+              "value": 110
+            }
+          ]
+        },
+        {
+          "label": "RadioBridge",
+          "value": [
+            {
+              "label": "RadioBridge-Voltage",
+              "value": 98
+            },
+            {
+              "label": "RadioBridge-Moisture",
+              "value": 99
+            },
+            {
+              "label": "RadioBridge-Temperature",
+              "value": 100
+            },
+            {
+              "label": "RadioBridge-420ma",
+              "value": 101
+            },
+            {
+              "label": "RadioBridge-Accelerometer",
+              "value": 102
+            },
+            {
+              "label": "RadioBridge-Level",
+              "value": 103
+            },
+            {
+              "label": "RadioBridge-Contact",
+              "value": 104
+            },
+            {
+              "label": "RadioBridge-Vibration",
+              "value": 105
+            },
+            {
+              "label": "RadioBridgeHumidity",
+              "value": 106
+            }
+          ]
+        },
+        {
+          "label": "RIOTWireless",
+          "value": [
+            {
+              "label": "Riot-TLM",
+              "value": 60
+            }
+          ]
+        },
+        {
+          "label": "Sensia",
+          "value": [
+            {
+              "label": "Sensaio-ValvePos",
+              "value": 111
+            }
+          ]
+        },
+        {
+          "label": "Sensor Networks",
+          "value": [
+            {
+              "label": "MicroPims",
+              "value": 29
+            },
+            {
+              "label": "SensorNetworks-MicroPims",
+              "value": 63
+            },
+            {
+              "label": "SensorNetworks-MicroPims-Stateful",
+              "value": 76
+            },
+            {
+              "label": "MicroTemp",
+              "value": 115
+            }
+          ]
+        },
+        {
+          "label": "Signal Fire",
+          "value": [
+            {
+              "label": "SignalFire-PressureScout",
+              "value": 119
+            }
+          ]
+        },
+        {
+          "label": "Spirax",
+          "value": [
+            {
+              "label": "Gestra-SteamTrap",
+              "value": 26
+            }
+          ]
+        },
+        {
+          "label": "SteamIQ",
+          "value": [
+            {
+              "label": "SteamIQ-Steamtrap",
+              "value": 14
+            }
+          ]
+        },
+        {
+          "label": "Tekelek",
+          "value": [
+            {
+              "label": "Tekelek-Ultrasonic-Level-TEK888",
+              "value": 97
+            }
+          ]
+        },
+        {
+          "label": "TESolutions",
+          "value": [
+            {
+              "label": "TE-Pressure",
+              "value": 87
+            },
+            {
+              "label": "TE-Vibration",
+              "value": 88
+            }
+          ]
+        },
+        {
+          "label": "Trackonomy",
+          "value": [
+            {
+              "label": "Trackonomy-THL",
+              "value": 68
+            },
+            {
+              "label": "Trackonomy-ESeal",
+              "value": 116
+            },
+            {
+              "label": "fakeCarSeal",
+              "value": 117
+            }
+          ]
+        },
+        {
+          "label": "TWTG",
+          "value": [
+            {
+              "label": "TWTGVibration",
+              "value": 4
+            },
+            {
+              "label": "TWTG-Vibration-V4",
+              "value": 39
+            },
+            {
+              "label": "TWTG-Temperature-Transmitter",
+              "value": 40
+            },
+            {
+              "label": "TWTG-Pressure ",
+              "value": 89
+            },
+            {
+              "label": "TWTG-Temperature-Contact",
+              "value": 109
+            }
+          ]
+        },
+        {
+          "label": "VEGA",
+          "value": [
+            {
+              "label": "Vega-Air",
+              "value": 112
+            },
+            {
+              "label": "VEGA-PULSAIR41",
+              "value": 113
+            }
+          ]
+        },
+        {
+          "label": "VolleyBoast",
+          "value": [
+            {
+              "label": "VoBo",
+              "value": 17
+            }
+          ]
+        },
+        {
+          "label": "Vutility",
+          "value": [
+            {
+              "label": "Vutility-HotDrop-Direct",
+              "value": 91
+            },
+            {
+              "label": "Vutility-PulseDrop-Direct",
+              "value": 94
+            },
+            {
+              "label": "Vutility-VoltDrop-Direct",
+              "value": 95
+            }
+          ]
+        },
+        {
+          "label": "Yokogawa",
+          "value": [
+            {
+              "label": "Yokogawa-Sushi-Vibration",
+              "value": 69
+            },
+            {
+              "label": "Yokogawa-Sushi-Pressure",
+              "value": 70
+            },
+            {
+              "label": "Yokogawa-Sushi-Temperature",
+              "value": 71
+            },
+            {
+              "label": "Yokogawa-Sushi-Temperature-Dual",
+              "value": 85
+            },
+            {
+              "label": "Yokogawa-Sushi-Steamtrap",
+              "value": 86
+            }
+          ]
+        }
+      ],
+      "models": [
+        {
+          "label": "Abeeway-Tracker",
+          "value": 58
+        },
+        {
+          "label": "AbeewayTracker",
+          "value": 24
+        },
+        {
+          "label": "Aloxy-ValvePosition",
+          "value": 59
+        },
+        {
+          "label": "Bourdon-PressureGauge",
+          "value": 108
+        },
+        {
+          "label": "DigitalMatter-OysterTracker",
+          "value": 107
+        },
+        {
+          "label": "Dragino S31B-LB",
+          "value": 118
+        },
+        {
+          "label": "Dragino-CurrentConverter-CS01LB",
+          "value": 92
+        },
+        {
+          "label": "Dragino-DryContact-CPL03-LB/LS",
+          "value": 93
+        },
+        {
+          "label": "Dragino-Temperature-Humidity-LHT65N",
+          "value": 90
+        },
+        {
+          "label": "Ellenex-Differential-Pressure-PDS2-L",
+          "value": 96
+        },
+        {
+          "label": "fakeCarSeal",
+          "value": 117
+        },
+        {
+          "label": "Gestra-SteamTrap",
+          "value": 26
+        },
+        {
+          "label": "Glamos-Walker",
+          "value": 77
+        },
+        {
+          "label": "Honeywell-Versatillis",
+          "value": 114
+        },
+        {
+          "label": "MicroPims",
+          "value": 29
+        },
+        {
+          "label": "MicroTemp",
+          "value": 115
+        },
+        {
+          "label": "Orbiwise-Sampols",
+          "value": 110
+        },
+        {
+          "label": "RadioBridge-420ma",
+          "value": 101
+        },
+        {
+          "label": "RadioBridge-Accelerometer",
+          "value": 102
+        },
+        {
+          "label": "RadioBridge-Contact",
+          "value": 104
+        },
+        {
+          "label": "RadioBridge-Level",
+          "value": 103
+        },
+        {
+          "label": "RadioBridge-Moisture",
+          "value": 99
+        },
+        {
+          "label": "RadioBridge-Temperature",
+          "value": 100
+        },
+        {
+          "label": "RadioBridge-Vibration",
+          "value": 105
+        },
+        {
+          "label": "RadioBridge-Voltage",
+          "value": 98
+        },
+        {
+          "label": "RadioBridgeHumidity",
+          "value": 106
+        },
+        {
+          "label": "Riot-TLM",
+          "value": 60
+        },
+        {
+          "label": "Sensaio-ValvePos",
+          "value": 111
+        },
+        {
+          "label": "SensorNetworks-MicroPims",
+          "value": 63
+        },
+        {
+          "label": "SensorNetworks-MicroPims-Stateful",
+          "value": 76
+        },
+        {
+          "label": "SignalFire-PressureScout",
+          "value": 119
+        },
+        {
+          "label": "SteamIQ-Steamtrap",
+          "value": 14
+        },
+        {
+          "label": "TE-Pressure",
+          "value": 87
+        },
+        {
+          "label": "TE-Vibration",
+          "value": 88
+        },
+        {
+          "label": "Tekelek-Ultrasonic-Level-TEK888",
+          "value": 97
+        },
+        {
+          "label": "Trackonomy-ESeal",
+          "value": 116
+        },
+        {
+          "label": "Trackonomy-THL",
+          "value": 68
+        },
+        {
+          "label": "TWTG-Pressure ",
+          "value": 89
+        },
+        {
+          "label": "TWTG-Temperature-Contact",
+          "value": 109
+        },
+        {
+          "label": "TWTG-Temperature-Transmitter",
+          "value": 40
+        },
+        {
+          "label": "TWTG-Vibration-V4",
+          "value": 39
+        },
+        {
+          "label": "TWTGVibration",
+          "value": 4
+        },
+        {
+          "label": "Vega-Air",
+          "value": 112
+        },
+        {
+          "label": "VEGA-PULSAIR41",
+          "value": 113
+        },
+        {
+          "label": "VoBo",
+          "value": 17
+        },
+        {
+          "label": "Vutility-HotDrop-Direct",
+          "value": 91
+        },
+        {
+          "label": "Vutility-PulseDrop-Direct",
+          "value": 94
+        },
+        {
+          "label": "Vutility-VoltDrop-Direct",
+          "value": 95
+        },
+        {
+          "label": "Yokogawa-Sushi-Pressure",
+          "value": 70
+        },
+        {
+          "label": "Yokogawa-Sushi-Steamtrap",
+          "value": 86
+        },
+        {
+          "label": "Yokogawa-Sushi-Temperature",
+          "value": 71
+        },
+        {
+          "label": "Yokogawa-Sushi-Temperature-Dual",
+          "value": 85
+        },
+        {
+          "label": "Yokogawa-Sushi-Vibration",
+          "value": 69
+        }
+      ],
+      "parsedFile": null,
+      "selectedModelID": -1,
+      "tagPaths": [
+        {
+          "id": 2,
+          "tagPathBase": "Test",
+          "tenantID": 1
+        },
+        {
+          "id": 3,
+          "tagPathBase": "Prod",
+          "tenantID": 1
+        },
+        {
+          "id": 4,
+          "tagPathBase": "GVL",
+          "tenantID": 1
+        },
+        {
+          "id": 5,
+          "tagPathBase": "SPP",
+          "tenantID": 1
+        },
+        {
+          "id": 6,
+          "tagPathBase": "GBR",
+          "tenantID": 1
+        },
+        {
+          "id": 7,
+          "tagPathBase": "KEN",
+          "tenantID": 1
+        },
+        {
+          "id": 8,
+          "tagPathBase": "CBG",
+          "tenantID": 1
+        },
+        {
+          "id": 9,
+          "tagPathBase": "CAN",
+          "tenantID": 1
+        },
+        {
+          "id": 10,
+          "tagPathBase": "DET",
+          "tenantID": 1
+        },
+        {
+          "id": 11,
+          "tagPathBase": "MAN",
+          "tenantID": 1
+        },
+        {
+          "id": 12,
+          "tagPathBase": "LAR",
+          "tenantID": 1
+        },
+        {
+          "id": 13,
+          "tagPathBase": "ANR",
+          "tenantID": 1
+        },
+        {
+          "id": 14,
+          "tagPathBase": "ROB",
+          "tenantID": 1
+        },
+        {
+          "id": 15,
+          "tagPathBase": "DIR",
+          "tenantID": 1
+        },
+        {
+          "id": 16,
+          "tagPathBase": "MTZ",
+          "tenantID": 1
+        },
+        {
+          "id": 17,
+          "tagPathBase": "ELP",
+          "tenantID": 1
+        },
+        {
+          "id": 18,
+          "tagPathBase": "SLC",
+          "tenantID": 1
+        },
+        {
+          "id": 19,
+          "tagPathBase": "TXC",
+          "tenantID": 1
+        }
+      ],
+      "tagProvider": "default",
+      "tagProviders": [
+        {
+          "label": "default",
+          "value": "default"
+        },
+        {
+          "label": "PID Loops",
+          "value": "PID Loops"
+        },
+        {
+          "label": "Azure Injector",
+          "value": "Azure Injector"
+        },
+        {
+          "label": "MQTT Distributor",
+          "value": "MQTT Distributor"
+        },
+        {
+          "label": "Sample_Tags",
+          "value": "Sample_Tags"
+        },
+        {
+          "label": "monitoring",
+          "value": "monitoring"
+        }
+      ],
+      "useCase": -1
+    },
+    "events": {
+      "system": {
+        "onStartup": {
+          "config": {
+            "script": "\ttry:\n\t\tself.getChild(\"Button\").position.display \u003d True\n\t\tmodels, mfgList \u003d utils.deviceProfileDropDown.getDeviceProfiles(1)\n\t\t\n\t\t\n\t\ttagProviders \u003d utils.tagPathDropdown.getTagProviders()\n\t\ttagPaths \u003d utils.normalizedTagPaths.getAllTagPaths()\n\t\t\n\t\tself.custom.models \u003d models\n\t\tself.custom.mfgs \u003d mfgList\n\t\tself.custom.tagPaths \u003d tagPaths\n\t\tself.custom.tagProviders \u003d tagProviders\n\t\tself.custom.tagProvider \u003d self.session.custom.defaultTagProvider\n\t\tself.custom.selectedModelID \u003d -1\n\t\tself.custom.appID \u003d -1\n\t\tself.custom.parsedFile \u003d None\n\t\tself.getChild(\"FlexContainer\").getChild(\"SensorType\").getChild(\"CoordinateContainer_manufacturer\").getChild(\"Dropdown_mfg\").props.value \u003d None\n\t\t\n\t\n\t\t\n\texcept Exception as e:\n\t\tsystem.perspective.print(\"Error loading models: \" + str(e))"
+          },
+          "scope": "G",
+          "type": "script"
+        }
+      }
+    },
+    "meta": {
+      "name": "root"
+    },
+    "propConfig": {
+      "custom.tenant": {
+        "binding": {
+          "config": {
+            "path": "session.custom.tenantID"
+          },
+          "type": "property"
+        }
+      }
+    },
+    "props": {
+      "direction": "column",
+      "options": [],
+      "style": {
+        "margin": "3%"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

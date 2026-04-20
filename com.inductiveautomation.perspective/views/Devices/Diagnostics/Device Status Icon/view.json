@@ -1,0 +1,135 @@
+{
+  "custom": {},
+  "params": {
+    "rowData": {
+      "description": "description1",
+      "devEUI": "70b3d56371d46c8b",
+      "deviceName": "tagName",
+      "deviceType": "HotDrop-Direct",
+      "fullTagPath": "[default]848BCDFFFE6148DC",
+      "latitude": null,
+      "longitude": null,
+      "tagName": "testDeviceTag",
+      "tagPathBase": "subFolder",
+      "tagProvider": "default"
+    }
+  },
+  "propConfig": {
+    "params.rowData": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 39,
+      "width": 39
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "status"
+            },
+            "position": {
+              "height": 1,
+              "width": 1
+            },
+            "propConfig": {
+              "props.color": {
+                "binding": {
+                  "config": {
+                    "path": "parent.custom.status"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tif value \u003d\u003d -1:\n\t\treturn self.parent.custom.notActivated\n\telif value \u003d\u003d 0:\n\t\treturn self.parent.custom.good\n\telif value \u003d\u003d 3:\n\t\treturn self.parent.custom.error\n\telif value \u003d\u003d 4:\n\t\treturn self.parent.custom.decodeError\n\telse:\n\t\treturn self.parent.custom.error",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "property"
+                }
+              },
+              "props.path": {
+                "binding": {
+                  "config": {
+                    "path": "parent.custom.status"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tif value \u003d\u003d -1:\n\t\treturn \"material/signal_wifi_off\"\n\telif value \u003d\u003d 0:\n\t\treturn \"material/check_circle\"\n\telif value \u003d\u003d 3:\n\t\treturn \"material/error\"\n\telif value \u003d\u003d 4:\n\t\treturn \"material/lock_open\"\n\telse:\n\t\treturn \"material/error\"",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "property"
+                }
+              }
+            },
+            "type": "ia.display.icon"
+          }
+        ],
+        "custom": {
+          "decodeError": "#e69757",
+          "error": "#da6240",
+          "good": "#5c9996",
+          "notActivated": "#7f636e"
+        },
+        "meta": {
+          "name": "root",
+          "tooltip": {
+            "enabled": true
+          }
+        },
+        "position": {
+          "basis": "100%"
+        },
+        "propConfig": {
+          "custom.status": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "fullTagPath": "{view.params.rowData.fullTagPath}"
+                },
+                "tagPath": "{fullTagPath}/metaData/diagnostics/code"
+              },
+              "type": "tag"
+            }
+          },
+          "meta.tooltip.text": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "fullTagPath": "{view.params.rowData.fullTagPath}"
+                },
+                "tagPath": "{fullTagPath}/metaData/diagnostics/diagnosticMessage"
+              },
+              "type": "tag"
+            }
+          }
+        },
+        "props": {
+          "mode": "percent"
+        },
+        "type": "ia.container.coord"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "style": {
+        "margin": "12%",
+        "overflow": "hidden"
+      },
+      "wrap": "wrap"
+    },
+    "type": "ia.container.flex"
+  }
+}

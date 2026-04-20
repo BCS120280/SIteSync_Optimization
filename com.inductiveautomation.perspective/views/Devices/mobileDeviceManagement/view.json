@@ -1,0 +1,187 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "props": {
+          "style": {
+            "marginTop": 10
+          },
+          "text": "Devices",
+          "textStyle": {
+            "color": "#0d5c63",
+            "fontFamily": "Arial",
+            "fontSize": "XX-Large",
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Icon"
+                },
+                "position": {
+                  "basis": "70px"
+                },
+                "props": {
+                  "color": "#0D5C63",
+                  "path": "material/add_circle"
+                },
+                "type": "ia.display.icon"
+              },
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "basis": "200px"
+                },
+                "props": {
+                  "style": {
+                    "classes": "formLabel",
+                    "color": "#0D5C63",
+                    "fontSize": 16,
+                    "fontWeight": "bold",
+                    "marginLeft": 10
+                  },
+                  "text": "Add Device"
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "page": "/qrScan"
+                  },
+                  "scope": "C",
+                  "type": "nav"
+                }
+              }
+            },
+            "meta": {
+              "name": "addDevice"
+            },
+            "props": {
+              "alignItems": "center",
+              "justify": "center",
+              "style": {
+                "backgroundColor": "white",
+                "borderBottomLeftRadius": 12,
+                "borderBottomRightRadius": 12,
+                "borderColor": "#1F2E60",
+                "borderStyle": "solid",
+                "borderTopLeftRadius": 12,
+                "borderTopRightRadius": 12,
+                "margin": "8%"
+              }
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "Icon"
+                },
+                "position": {
+                  "basis": "70px"
+                },
+                "props": {
+                  "color": "#0D5C63",
+                  "path": "material/search"
+                },
+                "type": "ia.display.icon"
+              },
+              {
+                "meta": {
+                  "name": "Label"
+                },
+                "position": {
+                  "basis": "200px"
+                },
+                "props": {
+                  "style": {
+                    "classes": "formLabel",
+                    "color": "#0D5C63",
+                    "fontSize": 16,
+                    "fontWeight": "bold",
+                    "marginLeft": 10
+                  },
+                  "text": "Search for Device"
+                },
+                "type": "ia.display.label"
+              }
+            ],
+            "events": {
+              "dom": {
+                "onClick": {
+                  "config": {
+                    "page": "/mobile/deviceSearch"
+                  },
+                  "scope": "C",
+                  "type": "nav"
+                }
+              }
+            },
+            "meta": {
+              "name": "FlexContainer_0"
+            },
+            "props": {
+              "alignItems": "center",
+              "justify": "center",
+              "style": {
+                "backgroundColor": "white",
+                "borderBottomLeftRadius": 12,
+                "borderBottomRightRadius": 12,
+                "borderColor": "#1F2E60",
+                "borderStyle": "solid",
+                "borderTopLeftRadius": 12,
+                "borderTopRightRadius": 12,
+                "margin": "8%"
+              }
+            },
+            "type": "ia.container.flex"
+          }
+        ],
+        "meta": {
+          "name": "CoordinateContainer_QRScan"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "props": {
+          "direction": "column",
+          "style": {
+            "classes": "pageFormat/grey-bubble"
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "justify": "space-around",
+      "style": {
+        "classes": "pageFormat/rootPadding"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

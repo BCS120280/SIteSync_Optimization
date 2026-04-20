@@ -1,0 +1,273 @@
+{
+  "custom": {},
+  "params": {
+    "liquidColor": "#006D77",
+    "tagPath": "value"
+  },
+  "permissions": {
+    "securityLevels": [],
+    "type": "AllOf"
+  },
+  "propConfig": {
+    "params.liquidColor": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.tagPath": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 248,
+      "width": 244
+    },
+    "dropConfig": {
+      "udts": [
+        {
+          "action": "path",
+          "param": "tagPath",
+          "type": "SiteSync/VegaAir-V2"
+        }
+      ]
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Tag Name"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.tagPath"
+              },
+              "transforms": [
+                {
+                  "code": "\ttagName \u003d value.split(\u0027]\u0027)[1].split(\u0027/\u0027)[-1]\n\treturn tagName",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Dashboard/boldLabel"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "CylindricalTank",
+          "tooltip": {
+            "location": "center-left"
+          }
+        },
+        "position": {
+          "basis": "160px",
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.capacity": {
+            "binding": {
+              "config": {
+                "path": "view.params.deviceUDT.maxValue"
+              },
+              "type": "property"
+            }
+          },
+          "props.liquidColor": {
+            "binding": {
+              "config": {
+                "path": "view.params.liquidColor"
+              },
+              "type": "property"
+            }
+          },
+          "props.value": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.deviceUDT.PV}"
+              },
+              "type": "expr"
+            }
+          },
+          "props.warningThreshold": {
+            "binding": {
+              "config": {
+                "expression": "{view.params.deviceUDT.HiHi_Alarm_Status}||{view.params.deviceUDT.Hi_Alarm_Status}||{[tiarco_chemical]tiarco_chemical/BGAA Storage/LoLo_Alarm_Status}||{view.params.deviceUDT.Lo_Alarm_Status}||{view.params.deviceUDT.LoLo_Alarm_Status}"
+              },
+              "transforms": [
+                {
+                  "fallback": null,
+                  "inputType": "scalar",
+                  "mappings": [
+                    {
+                      "input": true,
+                      "output": 0
+                    },
+                    {
+                      "input": false,
+                      "output": 100
+                    }
+                  ],
+                  "outputType": "scalar",
+                  "type": "map"
+                }
+              ],
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "liquidWarningColor": "#E83434B0",
+          "style": {
+            "paddingBottom": "0px",
+            "paddingLeft": 46,
+            "paddingRight": 46
+          },
+          "tankWarningColor": 0,
+          "valueDisplay": {
+            "enabled": false
+          }
+        },
+        "type": "ia.display.cylindrical-tank"
+      },
+      {
+        "meta": {
+          "name": "FlexContainer"
+        },
+        "position": {
+          "basis": "12px"
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "deviceUDT": "Process Value",
+              "name": "PV Value Display"
+            },
+            "position": {
+              "basis": "55px",
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.params.deviceUDT.PV"
+                  },
+                  "transforms": [
+                    {
+                      "formatType": "numeric",
+                      "formatValue": "#0.0",
+                      "type": "format"
+                    }
+                  ],
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "classes": "Dashboard/boldLabel"
+              }
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "deviceUDT": "Process Value",
+              "name": "Engineering Units"
+            },
+            "position": {
+              "basis": "20px",
+              "shrink": 0
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "path": "view.params.deviceUDT.engineeringUnitsPV"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "style": {
+                "classes": "Dashboard/label"
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "deviceUDT": "Process Value Numeric",
+          "name": "PV Value Display Container"
+        },
+        "position": {
+          "basis": 25,
+          "shrink": 0
+        },
+        "props": {
+          "justify": "center",
+          "style": {
+            "marginBottom": 3,
+            "marginTop": 0
+          }
+        },
+        "type": "ia.container.flex"
+      }
+    ],
+    "events": {
+      "dom": {
+        "onDoubleClick": {
+          "config": {
+            "draggable": true,
+            "id": "gmSgxs6F",
+            "modal": true,
+            "overlayDismiss": true,
+            "position": {
+              "relativeLocation": "center"
+            },
+            "positionType": "relative",
+            "resizable": true,
+            "showCloseIcon": true,
+            "title": "Alarm Setpoints",
+            "type": "open",
+            "viewParams": {
+              "deviceUDT": "{view.params.deviceUDT}"
+            },
+            "viewPath": "Project_Views/Embedded/Popup Views/AI_4Setpoint_Popup",
+            "viewportBound": true
+          },
+          "scope": "C",
+          "type": "popup"
+        }
+      }
+    },
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "justify": "center",
+      "style": {
+        "classes": "Dashboard/PVTile"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

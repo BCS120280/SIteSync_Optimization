@@ -1,0 +1,485 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 250,
+      "width": 250
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "props": {
+          "style": {
+            "classes": "Dashboard/boldLabel"
+          },
+          "text": "Label"
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label"
+            },
+            "position": {
+              "basis": "32px",
+              "breakpoints": [
+                {
+                  "colIndex": 0,
+                  "name": "sm",
+                  "order": 0,
+                  "rowIndex": 0,
+                  "span": 5
+                },
+                {
+                  "colIndex": 0,
+                  "name": "md",
+                  "order": 1,
+                  "rowIndex": 0,
+                  "span": 3
+                },
+                {
+                  "colIndex": 0,
+                  "name": "lg",
+                  "order": 1,
+                  "rowIndex": 0,
+                  "span": 3
+                }
+              ],
+              "height": 60
+            },
+            "props": {
+              "style": {
+                "classes": "Dashboard/boldLabel"
+              },
+              "text": "Label"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_0"
+            },
+            "position": {
+              "basis": "32px",
+              "breakpoints": [
+                {
+                  "colIndex": 5,
+                  "name": "sm",
+                  "order": 1,
+                  "rowIndex": 1,
+                  "span": 4
+                },
+                {
+                  "colIndex": 0,
+                  "name": "md",
+                  "order": 0,
+                  "rowIndex": 1,
+                  "span": 3
+                },
+                {
+                  "colIndex": 0,
+                  "name": "lg",
+                  "order": 1,
+                  "rowIndex": 1,
+                  "span": 1
+                }
+              ],
+              "height": 60
+            },
+            "props": {
+              "style": {
+                "classes": "Dashboard/boldLabel"
+              },
+              "text": "Label"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_1"
+            },
+            "position": {
+              "basis": "32px",
+              "breakpoints": [
+                {
+                  "colIndex": 5,
+                  "name": "sm",
+                  "order": 1,
+                  "rowIndex": 0,
+                  "span": 4
+                },
+                {
+                  "colIndex": 3,
+                  "name": "md",
+                  "order": 1.5,
+                  "rowIndex": 0,
+                  "span": 5
+                },
+                {
+                  "colIndex": 3,
+                  "name": "lg",
+                  "order": 1.5,
+                  "rowIndex": 0,
+                  "span": 5
+                }
+              ],
+              "height": 60
+            },
+            "props": {
+              "style": {
+                "classes": "Dashboard/boldLabel"
+              },
+              "text": "Label"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_2"
+            },
+            "position": {
+              "basis": "32px",
+              "breakpoints": [
+                {
+                  "colIndex": 0,
+                  "name": "sm",
+                  "order": 0,
+                  "rowIndex": 1,
+                  "span": 5
+                },
+                {
+                  "colIndex": 0,
+                  "name": "md",
+                  "order": 0,
+                  "rowIndex": 2,
+                  "span": 3
+                },
+                {
+                  "colIndex": 0,
+                  "name": "lg",
+                  "order": 0,
+                  "rowIndex": 2,
+                  "span": 1
+                }
+              ],
+              "height": 60
+            },
+            "props": {
+              "style": {
+                "classes": "Dashboard/boldLabel"
+              },
+              "text": "Label"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_3"
+            },
+            "position": {
+              "basis": "32px",
+              "breakpoints": [
+                {
+                  "colIndex": 0,
+                  "name": "sm",
+                  "order": 0,
+                  "rowIndex": 2,
+                  "span": 5
+                },
+                {
+                  "colIndex": 3,
+                  "name": "md",
+                  "order": 0.5,
+                  "rowIndex": 2,
+                  "span": 5
+                },
+                {
+                  "colIndex": 0,
+                  "name": "lg",
+                  "order": 1,
+                  "rowIndex": 3,
+                  "span": 1
+                }
+              ],
+              "height": 60
+            },
+            "props": {
+              "style": {
+                "classes": "Dashboard/boldLabel"
+              },
+              "text": "Label"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_4"
+            },
+            "position": {
+              "basis": "32px",
+              "breakpoints": [
+                {
+                  "colIndex": 5,
+                  "name": "sm",
+                  "order": 0.5,
+                  "rowIndex": 2,
+                  "span": 4
+                },
+                {
+                  "colIndex": 3,
+                  "name": "md",
+                  "order": 1,
+                  "rowIndex": 1,
+                  "span": 5
+                },
+                {
+                  "colIndex": 0,
+                  "name": "lg",
+                  "order": 1,
+                  "rowIndex": 4,
+                  "span": 1
+                }
+              ],
+              "height": 60
+            },
+            "props": {
+              "style": {
+                "classes": "Dashboard/boldLabel"
+              },
+              "text": "Label"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "TimeSeriesChart"
+            },
+            "position": {
+              "breakpoints": [
+                {
+                  "colIndex": 0,
+                  "name": "sm",
+                  "order": 1,
+                  "rowIndex": 3,
+                  "span": 12
+                },
+                {
+                  "colIndex": 1,
+                  "name": "md",
+                  "order": 1,
+                  "rowIndex": 3,
+                  "span": 11
+                },
+                {
+                  "colIndex": 0,
+                  "name": "lg",
+                  "order": 1,
+                  "rowIndex": 5,
+                  "span": 12
+                }
+              ],
+              "height": 311
+            },
+            "props": {
+              "series": [
+                {
+                  "data": [
+                    {
+                      "Pressure": 12,
+                      "Temperature": 52,
+                      "time": 1560469431423
+                    },
+                    {
+                      "Pressure": 42,
+                      "Temperature": 18,
+                      "time": 1560469432423
+                    },
+                    {
+                      "Pressure": 81,
+                      "Temperature": 26,
+                      "time": 1560469433423
+                    },
+                    {
+                      "Pressure": 11,
+                      "Temperature": 63,
+                      "time": 1560469434423
+                    },
+                    {
+                      "Pressure": 23,
+                      "Temperature": 65,
+                      "time": 1560469435423
+                    },
+                    {
+                      "Pressure": 43,
+                      "Temperature": 12,
+                      "time": 1560469436423
+                    },
+                    {
+                      "Pressure": 71,
+                      "Temperature": 61,
+                      "time": 1560469437423
+                    },
+                    {
+                      "Pressure": 89,
+                      "Temperature": 60,
+                      "time": 1560469438423
+                    },
+                    {
+                      "Pressure": 66,
+                      "Temperature": 58,
+                      "time": 1560469439423
+                    },
+                    {
+                      "Pressure": 33,
+                      "Temperature": 1,
+                      "time": 1560469440423
+                    }
+                  ],
+                  "name": "Boiler"
+                }
+              ]
+            },
+            "type": "ia.chart.timeseries"
+          },
+          {
+            "meta": {
+              "name": "Label_5"
+            },
+            "position": {
+              "breakpoints": [
+                {
+                  "colIndex": 9,
+                  "name": "sm",
+                  "order": 2,
+                  "rowIndex": 1,
+                  "span": 3
+                },
+                {
+                  "colIndex": 8,
+                  "name": "md",
+                  "order": 2.5,
+                  "rowIndex": 0,
+                  "span": 4
+                },
+                {
+                  "colIndex": 6,
+                  "name": "lg",
+                  "order": 2.5,
+                  "rowIndex": 0,
+                  "span": 1
+                }
+              ],
+              "height": 60
+            },
+            "props": {
+              "style": {
+                "classes": "Dashboard/label"
+              },
+              "text": "Label"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_6"
+            },
+            "position": {
+              "basis": "32px",
+              "breakpoints": [
+                {
+                  "colIndex": 9,
+                  "name": "sm",
+                  "order": 2,
+                  "rowIndex": 0,
+                  "span": 3
+                },
+                {
+                  "colIndex": 8,
+                  "name": "md",
+                  "order": 2,
+                  "rowIndex": 1,
+                  "span": 4
+                },
+                {
+                  "colIndex": 0,
+                  "name": "lg",
+                  "order": 1,
+                  "rowIndex": 4,
+                  "span": 1
+                }
+              ],
+              "height": 60
+            },
+            "props": {
+              "style": {
+                "classes": "Dashboard/label"
+              },
+              "text": "Label"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "meta": {
+              "name": "Label_7"
+            },
+            "position": {
+              "basis": "32px",
+              "breakpoints": [
+                {
+                  "colIndex": 9,
+                  "name": "sm",
+                  "order": 1,
+                  "rowIndex": 2,
+                  "span": 3
+                },
+                {
+                  "colIndex": 8,
+                  "name": "md",
+                  "order": 1,
+                  "rowIndex": 2,
+                  "span": 4
+                },
+                {
+                  "colIndex": 0,
+                  "name": "lg",
+                  "order": 1,
+                  "rowIndex": 4,
+                  "span": 1
+                }
+              ],
+              "height": 60
+            },
+            "props": {
+              "style": {
+                "classes": "Dashboard/label"
+              },
+              "text": "Label"
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "ColumnContainer"
+        },
+        "type": "ia.container.column"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "style": {
+        "classes": "Dashboard/PVTile"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

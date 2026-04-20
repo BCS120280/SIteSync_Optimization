@@ -1,0 +1,2270 @@
+{
+  "custom": {
+    "device": {
+      "description": "",
+      "devEUI": "Not found",
+      "deviceName": "Not found",
+      "deviceType": "not found",
+      "deviceTypeID": -1,
+      "fullTagPath": "",
+      "latitude": 0,
+      "longitude": 0,
+      "tagName": "Not found",
+      "tagPathBase": "",
+      "tagProvider": "default"
+    },
+    "image": null,
+    "metaData": "value"
+  },
+  "params": {
+    "devEUI": "90ab96fffee1b9c9"
+  },
+  "propConfig": {
+    "custom.device": {
+      "binding": {
+        "config": {
+          "path": "view.params.devEUI"
+        },
+        "transforms": [
+          {
+            "code": "\timport json\n\tfoundDevice \u003d system.sitesync.lookupDevice(str(value))\n\tif foundDevice !\u003d None:\n\t\td \u003d json.loads(foundDevice)\n\telse:\n\t\td \u003d {}\n\tif \u0027devEUI\u0027 in d.keys():\n\t\treturn d\n\telse:\n\t\td \u003d {\n  \"deviceType\": \"not found\",\n  \"fullTagPath\": \"\",\n  \"tagProvider\": \"default\",\n  \"deviceTypeID\": -1,\n  \"tagPathBase\": \"\",\n  \"latitude\": 0,\n  \"description\": \"\",\n  \"tagName\": \"Not found\",\n  \"deviceName\": \"Not found\",\n  \"devEUI\": \"Not found\",\n  \"longitude\": 0\n}\n\treturn d",
+            "type": "script"
+          }
+        ],
+        "type": "property"
+      },
+      "persistent": true
+    },
+    "custom.metaData": {
+      "persistent": true
+    },
+    "params.devEUI": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 859,
+      "width": 1163
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "lbllon"
+                        },
+                        "position": {
+                          "basis": "155.7px"
+                        },
+                        "props": {
+                          "style": {
+                            "classes": "label"
+                          },
+                          "text": "Latitude"
+                        },
+                        "type": "ia.display.label"
+                      },
+                      {
+                        "meta": {
+                          "name": "Label"
+                        },
+                        "position": {
+                          "basis": "201px"
+                        },
+                        "propConfig": {
+                          "props.text": {
+                            "binding": {
+                              "config": {
+                                "fallbackDelay": 2.5,
+                                "mode": "indirect",
+                                "references": {
+                                  "fullTagPath": "{view.custom.device.fullTagPath}"
+                                },
+                                "tagPath": "{fullTagPath}/metaData/install_latitude"
+                              },
+                              "transforms": [
+                                {
+                                  "code": "\tif quality.badOrError:\n\t\treturn \"Error finding latitude\"\n\telse:\n\t\treturn value",
+                                  "type": "script"
+                                }
+                              ],
+                              "type": "tag"
+                            }
+                          }
+                        },
+                        "props": {
+                          "style": {
+                            "marginLeft": "2%"
+                          }
+                        },
+                        "type": "ia.display.label"
+                      }
+                    ],
+                    "meta": {
+                      "name": "lat"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "props": {
+                      "style": {
+                        "marginLeft": 10
+                      }
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "children": [
+                      {
+                        "meta": {
+                          "name": "Label_1"
+                        },
+                        "position": {
+                          "basis": "155.7px"
+                        },
+                        "props": {
+                          "style": {
+                            "classes": "label"
+                          },
+                          "text": "Longitude"
+                        },
+                        "type": "ia.display.label"
+                      },
+                      {
+                        "meta": {
+                          "name": "Label_2"
+                        },
+                        "position": {
+                          "basis": "263px"
+                        },
+                        "propConfig": {
+                          "props.text": {
+                            "binding": {
+                              "config": {
+                                "fallbackDelay": 2.5,
+                                "mode": "indirect",
+                                "references": {
+                                  "fullTagPath": "{view.custom.device.fullTagPath}"
+                                },
+                                "tagPath": "{fullTagPath}/metaData/install_longitude"
+                              },
+                              "transforms": [
+                                {
+                                  "code": "\tif quality.badOrError:\n\t\treturn \"Error finding longitude\"\n\telse:\n\t\treturn value",
+                                  "type": "script"
+                                }
+                              ],
+                              "type": "tag"
+                            }
+                          }
+                        },
+                        "props": {
+                          "style": {
+                            "marginLeft": "2%"
+                          }
+                        },
+                        "type": "ia.display.label"
+                      }
+                    ],
+                    "meta": {
+                      "name": "longitude"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "type": "ia.container.flex"
+                  },
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\tif self.session.props.geolocation.enabled:\n\t\tlatitude \u003d self.session.props.geolocation.data.latitude\n\t\tlongitude \u003d self.session.props.geolocation.data.longitude\n\t\tif latitude !\u003d None and longitude !\u003d None:\n\t\t\tself.view.params.device.latitude \u003d latitude\n\t\t\tself.view.params.device.longitude \u003d longitude\n\t\t\tupdateLocation \u003d device.updateDevice.updateLocation(self.view.params.device.devEUI, latitude, longitude)\n\t\t\tif utils.resultParser.isResultSuccess(updateLocation) \u003d\u003d True:\n\t\t\t\t##then update the actual tags\n\t\t\t\tdevice.tagOperations.updateInstallLocationTag(self.view.custom.device.tagPathBase, latitude, longitude)\n\t\t\telse:\n\t\t\t\tutils.messages.errors.showErrorMessage(\"Error saving location \" + utils.resultParser.getResultMessage(updateLocation))\n\t\telse:\n\t\t\tutils.messages.errors.showErrorMessage(\"Error getting location, please check your permissions\")\n\telse:\n\t\tutils.messages.errors.showErrorMessage(\"Geolocation not enabled on project, please enable in Perspective session settings.\")"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "setLocation"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "props": {
+                      "image": {
+                        "icon": {
+                          "path": "material/location_on"
+                        }
+                      },
+                      "text": "Set Location"
+                    },
+                    "type": "ia.input.button"
+                  }
+                ],
+                "meta": {
+                  "name": "locationscainer"
+                },
+                "position": {
+                  "basis": "40px"
+                },
+                "props": {
+                  "wrap": "wrap"
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "meta": {
+                  "name": "Map",
+                  "tooltip": {
+                    "enabled": true
+                  }
+                },
+                "position": {
+                  "grow": 1
+                },
+                "propConfig": {
+                  "custom.lat": {
+                    "binding": {
+                      "config": {
+                        "fallbackDelay": 2.5,
+                        "mode": "indirect",
+                        "references": {
+                          "fullTagPath": "{view.custom.device.fullTagPath}"
+                        },
+                        "tagPath": "{fullTagPath}/metaData/install_latitude"
+                      },
+                      "transforms": [
+                        {
+                          "code": "\tif quality.badOrError or value \u003d\u003d None:\n\t\treturn 0\n\telse:\n\t\treturn float(value)",
+                          "type": "script"
+                        }
+                      ],
+                      "type": "tag"
+                    }
+                  },
+                  "custom.lon": {
+                    "binding": {
+                      "config": {
+                        "fallbackDelay": 2.5,
+                        "mode": "indirect",
+                        "references": {
+                          "fullTagPath": "{view.custom.device.fullTagPath}"
+                        },
+                        "tagPath": "{fullTagPath}/metaData/install_longitude"
+                      },
+                      "transforms": [
+                        {
+                          "code": "\tif quality.badOrError or value \u003d\u003d None:\n\t\treturn 0\n\telse:\n\t\treturn float(value)",
+                          "type": "script"
+                        }
+                      ],
+                      "type": "tag"
+                    }
+                  },
+                  "props.init.center.lat": {
+                    "binding": {
+                      "config": {
+                        "path": "this.custom.lat"
+                      },
+                      "type": "property"
+                    },
+                    "persistent": true
+                  },
+                  "props.init.center.lng": {
+                    "binding": {
+                      "config": {
+                        "path": "this.custom.lon"
+                      },
+                      "type": "property"
+                    },
+                    "persistent": true
+                  },
+                  "props.layers.ui.marker[0].lat": {
+                    "binding": {
+                      "config": {
+                        "path": "this.custom.lat"
+                      },
+                      "type": "property"
+                    },
+                    "persistent": true
+                  },
+                  "props.layers.ui.marker[0].lng": {
+                    "binding": {
+                      "config": {
+                        "path": "this.custom.lon"
+                      },
+                      "type": "property"
+                    },
+                    "persistent": true
+                  },
+                  "props.layers.ui.marker[0].name": {
+                    "persistent": true
+                  }
+                },
+                "props": {
+                  "fadeAnimation": false,
+                  "hideViewMarkersOnZoom": false,
+                  "init": {
+                    "center": {
+                      "lat": 0,
+                      "lng": 0
+                    },
+                    "zoom": 8
+                  },
+                  "layers": {
+                    "raster": {
+                      "tile": [
+                        {
+                          "WMS": {
+                            "format": "image/jpeg",
+                            "layers": "",
+                            "styles": "",
+                            "transparent": false,
+                            "uppercase": false,
+                            "version": "1.1.1"
+                          },
+                          "options": {
+                            "attribution": "Map data \u0026copy; \u003ca href\u003d\u0027https://www.openstreetmap.org/\u0027\u003eOpenStreetMap\u003c/a\u003e contributors, \u003ca href\u003d\u0027https://creativecommons.org/licenses/by-sa/2.0/\u0027\u003eCC-BY-SA\u003c/a\u003e",
+                            "crossOrigin": false,
+                            "detectRetina": false,
+                            "errorTileUrl": "",
+                            "opacity": 1,
+                            "subdomains": [
+                              "a",
+                              "b",
+                              "c"
+                            ],
+                            "tileSize": {
+                              "height": 256,
+                              "width": 256
+                            },
+                            "tms": false,
+                            "update": {
+                              "interval": 200,
+                              "whenIdle": false,
+                              "whenZooming": true
+                            },
+                            "zIndex": 1,
+                            "zoom": {
+                              "max": 18,
+                              "min": 0,
+                              "native": {
+                                "max": null,
+                                "min": null
+                              },
+                              "offset": 0,
+                              "reverse": false
+                            }
+                          },
+                          "url": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                          "urlTemplateParams": {}
+                        }
+                      ]
+                    },
+                    "ui": {
+                      "marker": [
+                        {
+                          "enabled": true,
+                          "icon": {
+                            "color": "#4190F7",
+                            "path": "material/place",
+                            "size": {
+                              "height": 30,
+                              "width": 30
+                            },
+                            "style": {
+                              "classes": ""
+                            }
+                          },
+                          "lat": 0,
+                          "lng": 0,
+                          "name": "",
+                          "opacity": 0,
+                          "popup": {
+                            "autoclose": false,
+                            "closeButton": false,
+                            "closeOnClick": null,
+                            "closeOnEscapeKey": false,
+                            "content": {
+                              "text": "",
+                              "view": {
+                                "params": {},
+                                "path": ""
+                              }
+                            },
+                            "enabled": false,
+                            "height": {
+                              "max": null
+                            },
+                            "pan": {
+                              "auto": true
+                            },
+                            "width": {
+                              "max": 300,
+                              "min": 50
+                            }
+                          },
+                          "tooltip": {
+                            "content": {
+                              "text": "",
+                              "view": {
+                                "params": {},
+                                "path": ""
+                              }
+                            },
+                            "direction": "auto",
+                            "enabled": true,
+                            "opacity": 1,
+                            "permanent": false,
+                            "sticky": false
+                          }
+                        }
+                      ],
+                      "popup": [
+                        {
+                          "autoClose": true,
+                          "closeButton": true,
+                          "closeOnClick": null,
+                          "closeOnEscapeKey": true,
+                          "content": {
+                            "text": "DevEUI: ",
+                            "view": {
+                              "params": {},
+                              "path": ""
+                            }
+                          },
+                          "enabled": false,
+                          "height": {
+                            "max": null
+                          },
+                          "lat": null,
+                          "lng": null,
+                          "pan": {
+                            "auto": true
+                          },
+                          "width": {
+                            "max": 300,
+                            "min": 50
+                          }
+                        },
+                        {
+                          "autoClose": true,
+                          "closeButton": true,
+                          "closeOnClick": null,
+                          "closeOnEscapeKey": true,
+                          "content": {
+                            "text": "DevEUI:",
+                            "view": {
+                              "params": {},
+                              "path": ""
+                            }
+                          },
+                          "enabled": false,
+                          "height": {
+                            "max": null
+                          },
+                          "lat": null,
+                          "lng": null,
+                          "pan": {
+                            "auto": true
+                          },
+                          "width": {
+                            "max": 300,
+                            "min": 50
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "location": {
+                    "showHeadingIndicator": false
+                  }
+                },
+                "type": "ia.display.map"
+              }
+            ],
+            "meta": {
+              "name": "location"
+            },
+            "propConfig": {
+              "position.tabIndex": {
+                "binding": {
+                  "config": {
+                    "path": "session.custom.enableDataPage"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tif value:\n\t\treturn 2\n\telse:\n\t\treturn 7",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "direction": "column",
+              "wrap": "wrap"
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "diagnostics"
+                },
+                "position": {
+                  "grow": 1
+                },
+                "propConfig": {
+                  "props.params.deviceTypeID": {
+                    "binding": {
+                      "config": {
+                        "path": "view.custom.device.deviceTypeID"
+                      },
+                      "type": "property"
+                    }
+                  },
+                  "props.params.tagPathBase": {
+                    "binding": {
+                      "config": {
+                        "path": "view.custom.device.fullTagPath"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "path": "Devices/Details/diagnostics/diagnostic-form"
+                },
+                "type": "ia.display.view"
+              }
+            ],
+            "meta": {
+              "name": "diagnotics"
+            },
+            "position": {
+              "tabIndex": 1
+            },
+            "props": {
+              "direction": "column"
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "form"
+                },
+                "position": {
+                  "grow": 1,
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.params.device": {
+                    "binding": {
+                      "config": {
+                        "bidirectional": true,
+                        "path": "view.custom.device"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "path": "Devices/Details/information/deviceDetailsForm",
+                  "style": {
+                    "marginLeft": 10,
+                    "marginTop": 5
+                  }
+                },
+                "type": "ia.display.view"
+              },
+              {
+                "children": [
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\tself.parent.custom.isEditing \u003d not self.parent.custom.isEditing\n\tsystem.perspective.sendMessage(\"toggleEdit\", payload\u003d{\"isEditing\":self.parent.custom.isEditing})"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "edit",
+                      "tooltip": {
+                        "enabled": true,
+                        "text": "Edit Device"
+                      }
+                    },
+                    "position": {
+                      "basis": "48px",
+                      "shrink": 0
+                    },
+                    "props": {
+                      "color": "#0000004E",
+                      "path": "material/edit"
+                    },
+                    "type": "ia.display.icon"
+                  },
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\t#reset data source\n\tsystem.perspective.sendMessage(\"toggleEdit\", payload\u003d{\"isEditing\":False})\n"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "cancelEdits"
+                    },
+                    "propConfig": {
+                      "meta.visible": {
+                        "binding": {
+                          "config": {
+                            "path": "parent.custom.isEditing"
+                          },
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "props": {
+                      "image": {
+                        "icon": {
+                          "path": "material/cancel_presentation"
+                        }
+                      },
+                      "style": {
+                        "backgroundColor": "#C23232"
+                      },
+                      "text": "Cancel Edit"
+                    },
+                    "type": "ia.input.button"
+                  },
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\tsystem.perspective.sendMessage(\"saveForm\")\n\tself.parent.custom.isEditing \u003d False\n"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "editActions"
+                    },
+                    "propConfig": {
+                      "meta.visible": {
+                        "binding": {
+                          "config": {
+                            "path": "parent.custom.isEditing"
+                          },
+                          "type": "property"
+                        }
+                      },
+                      "props.image.icon.path": {
+                        "binding": {
+                          "config": {
+                            "path": "parent.custom.isEditing"
+                          },
+                          "transforms": [
+                            {
+                              "code": "\tif value:\n\t\treturn \"material/save\"\n\telse:\n\t\treturn \"material/edit\"",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "props": {
+                      "image": {
+                        "icon": {}
+                      },
+                      "text": "Save Edit"
+                    },
+                    "type": "ia.input.button"
+                  }
+                ],
+                "custom": {
+                  "isEditing": false
+                },
+                "meta": {
+                  "name": "editControls"
+                },
+                "props": {
+                  "direction": "column"
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "details"
+            },
+            "props": {
+              "justify": "space-between"
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Image"
+                    },
+                    "position": {
+                      "grow": 1
+                    },
+                    "propConfig": {
+                      "position.display": {
+                        "binding": {
+                          "config": {
+                            "path": "parent.custom.image"
+                          },
+                          "transforms": [
+                            {
+                              "code": "\treturn value !\u003d None",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "property"
+                        }
+                      },
+                      "props.source": {
+                        "binding": {
+                          "config": {
+                            "path": "parent.custom.image"
+                          },
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "props": {
+                      "fit": {
+                        "mode": "contain"
+                      },
+                      "tint": {
+                        "color": "#000000"
+                      }
+                    },
+                    "type": "ia.display.image"
+                  },
+                  {
+                    "meta": {
+                      "name": "noImage"
+                    },
+                    "propConfig": {
+                      "position.display": {
+                        "binding": {
+                          "config": {
+                            "path": "parent.custom.image"
+                          },
+                          "transforms": [
+                            {
+                              "code": "\tif value \u003d\u003d None:\n\t\treturn True\n\telse:\n\t\treturn False",
+                              "type": "script"
+                            }
+                          ],
+                          "type": "property"
+                        }
+                      }
+                    },
+                    "props": {
+                      "path": "Devices/Details/components/noImageFound"
+                    },
+                    "type": "ia.display.view"
+                  },
+                  {
+                    "events": {
+                      "component": {
+                        "onFileReceived": {
+                          "config": {
+                            "script": "\timport base64\n\ttry:\n\t\tsystem.perspective.print(\"Running upload script...\")\n\t\tself.view.custom.imageData \u003d []\n\t\tself.view.custom.image \u003d \"\"\n\t\tb \u003d base64.b64encode(event.file.getBytes())\n\t\tresults \u003d device.images.saveImage(b, self.view.custom.device.devEUI)\n\t\tif utils.resultParser.isResultSuccess(results):\n\t\t\timage \u003d device.images.getImageByDevEUI(self.view.custom.device.devEUI)\n\t\t\n\t\t\tif image !\u003d None:\n\t\t\t\ttagPaths \u003d [self.view.custom.device.fullTagPath + \"/metaData/image\"]\n\t\t\t\tdevice.tagOperations.updateTagValues(tagPaths, [image])\n\t\telse:\n\t\t\tutils.messages.errors.showErrorMessage(utils.resultParser.getResultMessage(results))\n\texcept Exception as e:\n\t\tsystem.perspective.print(str(e))"
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "FileUpload"
+                    },
+                    "props": {
+                      "fileSizeLimit": 5,
+                      "fileUploadIcon": {
+                        "color": "teal"
+                      },
+                      "maxUploads": 1,
+                      "supportedFileTypes": [
+                        "PNG",
+                        "JPG",
+                        "JPEG"
+                      ]
+                    },
+                    "type": "ia.input.fileupload"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer"
+                },
+                "position": {
+                  "grow": 1,
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "custom.image": {
+                    "binding": {
+                      "config": {
+                        "fallbackDelay": 2.5,
+                        "mode": "indirect",
+                        "references": {
+                          "fullTagPath": "{view.custom.device.fullTagPath}"
+                        },
+                        "tagPath": "{fullTagPath}/metaData/image"
+                      },
+                      "transforms": [
+                        {
+                          "code": "\tif quality.badOrError:\n\t\treturn None\n\telse:\n\t\treturn value",
+                          "type": "script"
+                        }
+                      ],
+                      "type": "tag"
+                    }
+                  }
+                },
+                "props": {
+                  "direction": "column",
+                  "justify": "space-between"
+                },
+                "type": "ia.container.flex"
+              }
+            ],
+            "meta": {
+              "name": "images"
+            },
+            "propConfig": {
+              "position.tabIndex": {
+                "binding": {
+                  "config": {
+                    "path": "session.custom.enableDataPage"
+                  },
+                  "transforms": [
+                    {
+                      "code": "\tif value:\n\t\treturn 3\n\telse:\n\t\treturn 6",
+                      "type": "script"
+                    }
+                  ],
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "direction": "column"
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "EmbeddedView_0"
+                },
+                "position": {
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.params.tagPath": {
+                    "binding": {
+                      "config": {
+                        "path": "view.custom.device.fullTagPath"
+                      },
+                      "transforms": [
+                        {
+                          "code": "\treturn value + \"/metaData/valueToDisplay\"",
+                          "type": "script"
+                        }
+                      ],
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "path": "Devices/Details/values/displayRow"
+                },
+                "type": "ia.display.view"
+              },
+              {
+                "meta": {
+                  "name": "EmbeddedView"
+                },
+                "position": {
+                  "grow": 1
+                },
+                "propConfig": {
+                  "props.params.tagPath": {
+                    "binding": {
+                      "config": {
+                        "path": "view.custom.device.fullTagPath"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "path": "Devices/Details/values/allValues"
+                },
+                "type": "ia.display.view"
+              }
+            ],
+            "meta": {
+              "name": "currentValues"
+            },
+            "propConfig": {
+              "position.tabIndex": {
+                "binding": {
+                  "config": {
+                    "path": "parent.custom.valuesTab"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "direction": "column",
+              "justify": "space-around"
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "props": {
+                      "style": {
+                        "padding": "3%"
+                      },
+                      "text": "Device Check-In Log",
+                      "textStyle": {
+                        "color": "#0D5C63",
+                        "fontSize": 20,
+                        "fontWeight": "bolder",
+                        "textAlign": "start"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\n\timport time\n\tself.props.style.cursor \u003d \"progress\";\n\tself.props.style.backgroundColor \u003d \"#00000060\"\n\tsystem.perspective.sendMessage(\"loadmqttlogs\")\n\ttime.sleep(1)\n\tself.props.style.cursor \u003d \"pointer\";\n\tself.props.style.backgroundColor \u003d \"#00000020\""
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "Icon"
+                    },
+                    "position": {
+                      "basis": "41px"
+                    },
+                    "props": {
+                      "color": "#0D5C63",
+                      "path": "material/refresh",
+                      "style": {
+                        "backgroundColor": "#00000020",
+                        "borderStyle": "ridge",
+                        "cursor": "pointer"
+                      }
+                    },
+                    "type": "ia.display.icon"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer"
+                },
+                "props": {
+                  "alignItems": "center",
+                  "justify": "space-between",
+                  "style": {
+                    "overflow": "hidden"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "custom": {
+                  "data": [],
+                  "image": null
+                },
+                "events": {
+                  "system": {
+                    "onStartup": {
+                      "config": {
+                        "script": "\tsystem.perspective.sendMessage(\"loadmqttlogs\")"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Table"
+                },
+                "position": {
+                  "grow": 1,
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.data": {
+                    "binding": {
+                      "config": {
+                        "path": "parent.custom.logData"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "cells": {
+                    "style": {
+                      "fontSize": "16px"
+                    }
+                  },
+                  "columns": [
+                    {
+                      "align": "center",
+                      "boolean": "checkbox",
+                      "dateFormat": "MM/DD/YYYY",
+                      "editable": false,
+                      "field": "event",
+                      "filter": {
+                        "boolean": {
+                          "condition": ""
+                        },
+                        "date": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "enabled": false,
+                        "number": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "string": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "visible": "on-hover"
+                      },
+                      "footer": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "header": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "justify": "auto",
+                      "nullFormat": {
+                        "includeNullStrings": false,
+                        "nullFormatValue": "",
+                        "strict": false
+                      },
+                      "number": "value",
+                      "numberFormat": "0,0.##",
+                      "progressBar": {
+                        "bar": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "max": 100,
+                        "min": 0,
+                        "track": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "value": {
+                          "enabled": true,
+                          "format": "0,0.##",
+                          "justify": "center",
+                          "style": {
+                            "classes": ""
+                          }
+                        }
+                      },
+                      "render": "auto",
+                      "resizable": true,
+                      "sort": "none",
+                      "sortable": false,
+                      "strictWidth": false,
+                      "style": {
+                        "classes": ""
+                      },
+                      "toggleSwitch": {
+                        "color": {
+                          "selected": "",
+                          "unselected": ""
+                        }
+                      },
+                      "viewParams": {},
+                      "viewPath": "",
+                      "visible": true,
+                      "width": ""
+                    },
+                    {
+                      "align": "center",
+                      "boolean": "checkbox",
+                      "dateFormat": "MM/DD/YYYY",
+                      "editable": false,
+                      "field": "timestamp",
+                      "filter": {
+                        "boolean": {
+                          "condition": ""
+                        },
+                        "date": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "enabled": false,
+                        "number": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "string": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "visible": "on-hover"
+                      },
+                      "footer": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "header": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "justify": "auto",
+                      "nullFormat": {
+                        "includeNullStrings": false,
+                        "nullFormatValue": "",
+                        "strict": false
+                      },
+                      "number": "value",
+                      "numberFormat": "0,0.##",
+                      "progressBar": {
+                        "bar": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "max": 100,
+                        "min": 0,
+                        "track": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "value": {
+                          "enabled": true,
+                          "format": "0,0.##",
+                          "justify": "center",
+                          "style": {
+                            "classes": ""
+                          }
+                        }
+                      },
+                      "render": "auto",
+                      "resizable": true,
+                      "sort": "none",
+                      "sortable": true,
+                      "strictWidth": false,
+                      "style": {
+                        "classes": ""
+                      },
+                      "toggleSwitch": {
+                        "color": {
+                          "selected": "",
+                          "unselected": ""
+                        }
+                      },
+                      "viewParams": {},
+                      "viewPath": "Devices/Diagnostics/lastActvitityTimestamp",
+                      "visible": true,
+                      "width": ""
+                    },
+                    {
+                      "align": "center",
+                      "boolean": "checkbox",
+                      "dateFormat": "MM/DD/YYYY",
+                      "editable": false,
+                      "field": "message",
+                      "filter": {
+                        "boolean": {
+                          "condition": ""
+                        },
+                        "date": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "enabled": false,
+                        "number": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "string": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "visible": "on-hover"
+                      },
+                      "footer": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "header": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "justify": "auto",
+                      "nullFormat": {
+                        "includeNullStrings": false,
+                        "nullFormatValue": "",
+                        "strict": false
+                      },
+                      "number": "value",
+                      "numberFormat": "0,0.##",
+                      "progressBar": {
+                        "bar": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "max": 100,
+                        "min": 0,
+                        "track": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "value": {
+                          "enabled": true,
+                          "format": "0,0.##",
+                          "justify": "center",
+                          "style": {
+                            "classes": ""
+                          }
+                        }
+                      },
+                      "render": "auto",
+                      "resizable": true,
+                      "sort": "none",
+                      "sortable": true,
+                      "strictWidth": false,
+                      "style": {
+                        "classes": ""
+                      },
+                      "toggleSwitch": {
+                        "color": {
+                          "selected": "",
+                          "unselected": ""
+                        }
+                      },
+                      "viewParams": {},
+                      "viewPath": "",
+                      "visible": false,
+                      "width": ""
+                    }
+                  ],
+                  "emptyMessage": {
+                    "noData": {
+                      "text": "No communications from device"
+                    }
+                  },
+                  "pager": {
+                    "initialOption": 10
+                  },
+                  "rows": {
+                    "subview": {
+                      "enabled": true,
+                      "viewPath": "Devices/Details/components/message"
+                    }
+                  },
+                  "selection": {
+                    "enableColumnSelection": true
+                  }
+                },
+                "type": "ia.display.table"
+              }
+            ],
+            "custom": {
+              "logData": []
+            },
+            "meta": {
+              "name": "checkinscontainer"
+            },
+            "position": {
+              "tabIndex": 6
+            },
+            "props": {
+              "direction": "column"
+            },
+            "scripts": {
+              "customMethods": [],
+              "extensionFunctions": null,
+              "messageHandlers": [
+                {
+                  "messageType": "loadmqttlogs",
+                  "pageScope": true,
+                  "script": "\t# implement your handler here\n\timport json\n\tj \u003d system.sitesync.getMQTTLogs(self.view.custom.device.devEUI)\n\tdata \u003d json.loads(j)\n\tself.custom.logData \u003d data",
+                  "sessionScope": false,
+                  "viewScope": false
+                }
+              ]
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "meta": {
+                      "name": "Label"
+                    },
+                    "props": {
+                      "style": {
+                        "padding": "3%"
+                      },
+                      "text": "Device Activity",
+                      "textStyle": {
+                        "color": "#0D5C63",
+                        "fontSize": 20,
+                        "fontWeight": "bolder",
+                        "textAlign": "start"
+                      }
+                    },
+                    "type": "ia.display.label"
+                  },
+                  {
+                    "events": {
+                      "dom": {
+                        "onClick": {
+                          "config": {
+                            "script": "\n\timport time\n\tself.props.style.cursor \u003d \"progress\";\n\tself.props.style.backgroundColor \u003d \"#00000060\"\n\tsystem.perspective.print(\"Refreshing device communications...\")\n\t\n\tsystem.perspective.sendMessage(\"loadactivitylogs\")\n\ttime.sleep(1)\n\tself.props.style.cursor \u003d \"pointer\";\n\tself.props.style.backgroundColor \u003d \"#00000020\""
+                          },
+                          "scope": "G",
+                          "type": "script"
+                        }
+                      }
+                    },
+                    "meta": {
+                      "name": "Icon"
+                    },
+                    "position": {
+                      "basis": "41px"
+                    },
+                    "props": {
+                      "color": "#0D5C63",
+                      "path": "material/refresh",
+                      "style": {
+                        "backgroundColor": "#00000020",
+                        "borderStyle": "ridge",
+                        "cursor": "pointer"
+                      }
+                    },
+                    "type": "ia.display.icon"
+                  }
+                ],
+                "meta": {
+                  "name": "FlexContainer"
+                },
+                "props": {
+                  "alignItems": "center",
+                  "justify": "space-between",
+                  "style": {
+                    "overflow": "hidden"
+                  }
+                },
+                "type": "ia.container.flex"
+              },
+              {
+                "custom": {
+                  "data": [],
+                  "image": null
+                },
+                "events": {
+                  "system": {
+                    "onStartup": {
+                      "config": {
+                        "script": "\tsystem.perspective.sendMessage(\"loadactivitylogs\")"
+                      },
+                      "scope": "G",
+                      "type": "script"
+                    }
+                  }
+                },
+                "meta": {
+                  "name": "Table"
+                },
+                "position": {
+                  "grow": 1,
+                  "shrink": 0
+                },
+                "propConfig": {
+                  "props.data": {
+                    "binding": {
+                      "config": {
+                        "path": "parent.custom.logData"
+                      },
+                      "type": "property"
+                    }
+                  }
+                },
+                "props": {
+                  "cells": {
+                    "style": {
+                      "fontSize": "16px"
+                    }
+                  },
+                  "columns": [
+                    {
+                      "align": "center",
+                      "boolean": "checkbox",
+                      "dateFormat": "MM/DD/YYYY",
+                      "editable": false,
+                      "field": "message",
+                      "filter": {
+                        "boolean": {
+                          "condition": ""
+                        },
+                        "date": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "enabled": false,
+                        "number": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "string": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "visible": "on-hover"
+                      },
+                      "footer": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "header": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "justify": "auto",
+                      "nullFormat": {
+                        "includeNullStrings": false,
+                        "nullFormatValue": "",
+                        "strict": false
+                      },
+                      "number": "value",
+                      "numberFormat": "0,0.##",
+                      "progressBar": {
+                        "bar": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "max": 100,
+                        "min": 0,
+                        "track": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "value": {
+                          "enabled": true,
+                          "format": "0,0.##",
+                          "justify": "center",
+                          "style": {
+                            "classes": ""
+                          }
+                        }
+                      },
+                      "render": "auto",
+                      "resizable": true,
+                      "sort": "none",
+                      "sortable": false,
+                      "strictWidth": false,
+                      "style": {
+                        "classes": ""
+                      },
+                      "toggleSwitch": {
+                        "color": {
+                          "selected": "",
+                          "unselected": ""
+                        }
+                      },
+                      "viewParams": {},
+                      "viewPath": "",
+                      "visible": true,
+                      "width": "auto"
+                    },
+                    {
+                      "align": "center",
+                      "boolean": "checkbox",
+                      "dateFormat": "MM/DD/YYYY",
+                      "editable": false,
+                      "field": "logLevel",
+                      "filter": {
+                        "boolean": {
+                          "condition": ""
+                        },
+                        "date": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "enabled": false,
+                        "number": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "string": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "visible": "on-hover"
+                      },
+                      "footer": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "header": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "justify": "auto",
+                      "nullFormat": {
+                        "includeNullStrings": false,
+                        "nullFormatValue": "",
+                        "strict": false
+                      },
+                      "number": "value",
+                      "numberFormat": "0,0.##",
+                      "progressBar": {
+                        "bar": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "max": 100,
+                        "min": 0,
+                        "track": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "value": {
+                          "enabled": true,
+                          "format": "0,0.##",
+                          "justify": "center",
+                          "style": {
+                            "classes": ""
+                          }
+                        }
+                      },
+                      "render": "auto",
+                      "resizable": true,
+                      "sort": "none",
+                      "sortable": true,
+                      "strictWidth": false,
+                      "style": {
+                        "classes": ""
+                      },
+                      "toggleSwitch": {
+                        "color": {
+                          "selected": "",
+                          "unselected": ""
+                        }
+                      },
+                      "viewParams": {},
+                      "viewPath": "",
+                      "visible": true,
+                      "width": "auto"
+                    },
+                    {
+                      "align": "center",
+                      "boolean": "checkbox",
+                      "dateFormat": "MM/DD/YYYY",
+                      "editable": false,
+                      "field": "logTime",
+                      "filter": {
+                        "boolean": {
+                          "condition": ""
+                        },
+                        "date": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "enabled": false,
+                        "number": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "string": {
+                          "condition": "",
+                          "value": ""
+                        },
+                        "visible": "on-hover"
+                      },
+                      "footer": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "header": {
+                        "align": "center",
+                        "justify": "left",
+                        "style": {
+                          "classes": ""
+                        },
+                        "title": ""
+                      },
+                      "justify": "auto",
+                      "nullFormat": {
+                        "includeNullStrings": false,
+                        "nullFormatValue": "",
+                        "strict": false
+                      },
+                      "number": "value",
+                      "numberFormat": "0,0.##",
+                      "progressBar": {
+                        "bar": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "max": 100,
+                        "min": 0,
+                        "track": {
+                          "color": "",
+                          "style": {
+                            "classes": ""
+                          }
+                        },
+                        "value": {
+                          "enabled": true,
+                          "format": "0,0.##",
+                          "justify": "center",
+                          "style": {
+                            "classes": ""
+                          }
+                        }
+                      },
+                      "render": "auto",
+                      "resizable": true,
+                      "sort": "none",
+                      "sortable": true,
+                      "strictWidth": false,
+                      "style": {
+                        "classes": ""
+                      },
+                      "toggleSwitch": {
+                        "color": {
+                          "selected": "",
+                          "unselected": ""
+                        }
+                      },
+                      "viewParams": {},
+                      "viewPath": "",
+                      "visible": true,
+                      "width": "auto"
+                    }
+                  ],
+                  "emptyMessage": {
+                    "noData": {
+                      "text": "No activity recorded yet"
+                    }
+                  },
+                  "pager": {
+                    "initialOption": 10
+                  },
+                  "rows": {
+                    "subview": {
+                      "enabled": true,
+                      "viewPath": "Devices/Details/components/message"
+                    }
+                  }
+                },
+                "type": "ia.display.table"
+              }
+            ],
+            "custom": {
+              "logData": []
+            },
+            "meta": {
+              "name": "activityContainer"
+            },
+            "position": {
+              "tabIndex": 7
+            },
+            "props": {
+              "direction": "column"
+            },
+            "scripts": {
+              "customMethods": [],
+              "extensionFunctions": null,
+              "messageHandlers": [
+                {
+                  "messageType": "loadactivitylogs",
+                  "pageScope": true,
+                  "script": "\t# implement your handler here\n\timport json\n\tj \u003d system.sitesync.getDeviceActivity(self.view.custom.device.devEUI)\t\n\tself.custom.logData \u003d json.loads(j)\n\t",
+                  "sessionScope": false,
+                  "viewScope": false
+                }
+              ]
+            },
+            "type": "ia.container.flex"
+          },
+          {
+            "meta": {
+              "name": "downlinks"
+            },
+            "propConfig": {
+              "position.tabIndex": {
+                "binding": {
+                  "config": {
+                    "path": "parent.custom.downlinksTab"
+                  },
+                  "type": "property"
+                }
+              },
+              "props.params.devEUI": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.device.devEUI"
+                  },
+                  "type": "property"
+                }
+              },
+              "props.params.deviceProfileID": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.device.deviceTypeID"
+                  },
+                  "type": "property"
+                }
+              },
+              "props.params.deviceProfileName": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.device.deviceType"
+                  },
+                  "type": "property"
+                }
+              },
+              "props.params.tagPath": {
+                "binding": {
+                  "config": {
+                    "path": "view.custom.device.fullTagPath"
+                  },
+                  "type": "property"
+                }
+              }
+            },
+            "props": {
+              "path": "Devices/Details/downlinks/deviceDownlinks"
+            },
+            "type": "ia.display.view"
+          }
+        ],
+        "custom": {
+          "diagnosticsTab": 1,
+          "infoTab": 0,
+          "primaryTab": 4,
+          "refreshDiagnostics": "False"
+        },
+        "meta": {
+          "name": "TabContainer"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 0,
+              "name": "sm",
+              "order": 0,
+              "rowIndex": 3,
+              "span": 12
+            },
+            {
+              "colIndex": 1,
+              "name": "md",
+              "order": 1,
+              "rowIndex": 4,
+              "span": 10
+            },
+            {
+              "colIndex": 1,
+              "name": "lg",
+              "order": 0,
+              "rowIndex": 4,
+              "span": 10
+            }
+          ],
+          "height": 615
+        },
+        "propConfig": {
+          "custom.downlinksTab": {
+            "binding": {
+              "config": {
+                "path": "session.custom.enableDataPage"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value:\n\t\treturn 5\n\telse:\n\t\treturn 3",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          },
+          "custom.valuesTab": {
+            "binding": {
+              "config": {
+                "path": "session.custom.enableDataPage"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value:\n\t\treturn 4\n\telse:\n\t\treturn 2",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          },
+          "props.currentTabIndex": {
+            "binding": {
+              "config": {
+                "path": "this.custom.primaryTab"
+              },
+              "type": "property"
+            }
+          },
+          "props.tabs": {
+            "binding": {
+              "config": {
+                "path": "session.custom.enableDataPage"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value:\n\t\n\t\treturn [\n\t  \"Details\",\n\t  \"Diagnostics\",\n\t  \"Map View\",\n\t  \"Image\",\n\t  \"Values\",\n\t  \"Downlinks\", \n\t  \"Messages\",\n\t  \"Logs\"\n\t]\n\telse:\n\t\n\t\treturn [\n\t\t\t  \"Details\",\n\t\t\t  \"Diagnostics\",\n\t\t\t  \"Values\",\n\t\t\t  \"Downlinks\"\n\t\t]",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "contentStyle": {
+            "backgroundColor": "#FFFFFF"
+          },
+          "menuStyle": {
+            "color": "#0D5C63"
+          },
+          "menuType": "modern",
+          "tabSize": {
+            "width": 100
+          }
+        },
+        "scripts": {
+          "customMethods": [],
+          "extensionFunctions": null,
+          "messageHandlers": [
+            {
+              "messageType": "tagPathChanged",
+              "pageScope": true,
+              "script": "\t# implement your handler here\n\tfullPath \u003d payload[\u0027fullTagPath\u0027]\n\tbasePath \u003d payload[\u0027tagPathBase\u0027]\n\tself.view.custom.device.tagPathBase \u003d basePath\n\tself.view.custom.device.fullTagPath \u003d fullPath",
+              "sessionScope": false,
+              "viewScope": false
+            }
+          ]
+        },
+        "type": "ia.container.tab"
+      },
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label_0"
+            },
+            "propConfig": {
+              "props.text": {
+                "binding": {
+                  "config": {
+                    "expression": "\"Device Name: \" +{view.custom.device.deviceName}"
+                  },
+                  "type": "expr"
+                }
+              }
+            },
+            "props": {
+              "textStyle": {
+                "color": "#000000",
+                "fontSize": "20px",
+                "fontWeight": "bold"
+              }
+            },
+            "type": "ia.display.label"
+          }
+        ],
+        "meta": {
+          "name": "FlexContainer"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 0,
+              "name": "sm",
+              "order": 2,
+              "rowIndex": 0,
+              "span": 12
+            },
+            {
+              "colIndex": 1,
+              "name": "md",
+              "order": 0,
+              "rowIndex": 1,
+              "span": 8
+            },
+            {
+              "colIndex": 1,
+              "name": "lg",
+              "order": 0,
+              "rowIndex": 1,
+              "span": 8
+            }
+          ],
+          "height": 28
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "#FFFFFF",
+            "overflow": "visible"
+          }
+        },
+        "type": "ia.container.flex"
+      },
+      {
+        "meta": {
+          "name": "Label_0"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 0,
+              "name": "sm",
+              "order": 0,
+              "rowIndex": 1,
+              "span": 12
+            },
+            {
+              "colIndex": 1,
+              "name": "md",
+              "order": 0,
+              "rowIndex": 2,
+              "span": 8
+            },
+            {
+              "colIndex": 1,
+              "name": "lg",
+              "order": 0,
+              "rowIndex": 2,
+              "span": 8
+            }
+          ],
+          "height": 34
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "\"Device EUI: \" + {view.params.devEUI}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "#FFFFFF",
+            "color": "#000000",
+            "fontSize": "16px",
+            "fontWeight": "bold"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_1"
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 0,
+              "name": "sm",
+              "order": 0,
+              "rowIndex": 2,
+              "span": 12
+            },
+            {
+              "colIndex": 1,
+              "name": "md",
+              "order": 1,
+              "rowIndex": 3,
+              "span": 8
+            },
+            {
+              "colIndex": 1,
+              "name": "lg",
+              "order": 0,
+              "rowIndex": 3,
+              "span": 8
+            }
+          ],
+          "height": 30
+        },
+        "propConfig": {
+          "props.style.classes": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "fullTagPath": "{view.custom.device.fullTagPath}"
+                },
+                "tagPath": "{fullTagPath}/LoRaMetrics/checkin_overdue"
+              },
+              "transforms": [
+                {
+                  "code": "\tif quality.badOrError or value:\n\t\treturn \"diagnostics/error\"\n\telse:\n\t\treturn \"diagnostics/good\"\n",
+                  "type": "script"
+                }
+              ],
+              "type": "tag"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "fullTagPath": "{view.params.device.fullTagPath}"
+                },
+                "tagPath": "{fullTagPath}/LoRaMetrics/checkin_overdue"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value:\n\t\treturn \"Device has not been seen in the expected check-in window\"\n\telse:\n\t\treturn \"Device has been seen in the expected check-in window\"\n",
+                  "type": "script"
+                }
+              ],
+              "type": "tag"
+            }
+          }
+        },
+        "props": {
+          "alignVertical": "top",
+          "style": {
+            "backgroundColor": "#FFFFFF",
+            "fontSize": "16px",
+            "fontWeight": "bold",
+            "textAlign": "start"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "draggable": true,
+                "id": "DAEVIJvy",
+                "modal": true,
+                "overlayDismiss": false,
+                "resizable": true,
+                "showCloseIcon": true,
+                "type": "open",
+                "viewParams": {
+                  "devEUI": "{view.custom.device.devEUI}",
+                  "deviceName": "{view.custom.device.deviceName}",
+                  "fullTagPath": "{view.custom.device.fullTagPath}"
+                },
+                "viewPath": "Confirmations/DeleteDevice",
+                "viewportBound": false
+              },
+              "scope": "C",
+              "type": "popup"
+            }
+          }
+        },
+        "meta": {
+          "name": "delete",
+          "tooltip": {
+            "enabled": true,
+            "text": "delete device"
+          }
+        },
+        "position": {
+          "breakpoints": [
+            {
+              "colIndex": 10,
+              "name": "sm",
+              "order": 1,
+              "rowIndex": 0,
+              "span": 1
+            },
+            {
+              "colIndex": 10,
+              "name": "md",
+              "order": 1,
+              "rowIndex": 0,
+              "span": 1
+            },
+            {
+              "colIndex": 10,
+              "name": "lg",
+              "order": 1,
+              "rowIndex": 0,
+              "span": 1
+            }
+          ],
+          "height": 63
+        },
+        "props": {
+          "color": "#0000004E",
+          "path": "material/delete_forever"
+        },
+        "type": "ia.display.icon"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "breakpoints": [
+        {
+          "minWidth": 499,
+          "name": "sm"
+        },
+        {
+          "minWidth": 500,
+          "name": "md"
+        },
+        {
+          "minWidth": 996,
+          "name": "lg"
+        }
+      ],
+      "style": {
+        "backgroundColor": "#FFFFFF",
+        "classes": "pageFormat/rootPadding"
+      }
+    },
+    "type": "ia.container.column"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "custom": {},
+  "params": {
+    "rowData": {
+      "description": "description1",
+      "devEUI": "70b3d56371d46c8b",
+      "deviceName": "tagName",
+      "deviceType": "HotDrop-Direct",
+      "fullTagPath": "[default]one/TagFolderIssueI",
+      "latitude": null,
+      "longitude": null,
+      "tagName": "testDeviceTag",
+      "tagPathBase": "subFolder",
+      "tagProvider": "default"
+    }
+  },
+  "propConfig": {
+    "params.rowData": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 39
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "fullTagPath": "{view.params.rowData.fullTagPath}"
+                },
+                "tagPath": "{fullTagPath}/LoRaMetrics/MesgTimeStamp"
+              },
+              "transforms": [
+                {
+                  "code": "\treturn utils.timeFormatter.time_elapsed_since_dateTag(value)",
+                  "type": "script"
+                }
+              ],
+              "type": "tag"
+            }
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "custom": {},
+  "params": {
+    "matches": []
+  },
+  "propConfig": {
+    "params.matches": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "FlexRepeater"
+        },
+        "position": {
+          "basis": "800px"
+        },
+        "propConfig": {
+          "props.instances": {
+            "binding": {
+              "config": {
+                "path": "view.params.matches"
+              },
+              "transforms": [
+                {
+                  "code": "\t\n\n\ttry:\n\t\tv \u003d []\n\t\tfor i in value:\n\t\t\tj \u003d {\n\t\t\t  \"instanceStyle\": {\n\t\t\t    \"classes\": \"\"\n\t\t\t  },\n\t\t\t  \"instancePosition\": {},\n\t\t\t  \"id\": i[\u0027id\u0027],\n\t\t\t  \"tenantName\": i[\u0027tenantName\u0027]\n\t\t\t}\n\t\t\tv.append(j)\n\t\t\n\t\treturn v\n\t\n\texcept Exception as e:\n\t\tsystem.perspective.print(e)\n\t\treturn []",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "direction": "column",
+          "path": "Enterprise/Components/tenant-select",
+          "useDefaultViewWidth": false
+        },
+        "type": "ia.display.flex-repeater"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "type": "ia.container.flex"
+  }
+}

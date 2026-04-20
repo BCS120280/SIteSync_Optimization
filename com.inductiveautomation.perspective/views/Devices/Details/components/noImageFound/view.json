@@ -1,0 +1,44 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Icon"
+        },
+        "position": {
+          "basis": "30px"
+        },
+        "props": {
+          "path": "material/photo_camera"
+        },
+        "type": "ia.display.icon"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "props": {
+          "style": {
+            "classes": "labels/dark-green-header",
+            "marginLeft": "3%",
+            "textAlign": "center"
+          },
+          "text": "No image found of device"
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "style": {
+        "classes": "pageFormat/grey-bubble"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

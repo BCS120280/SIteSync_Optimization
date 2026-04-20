@@ -1,0 +1,181 @@
+{
+  "custom": {},
+  "params": {
+    "iconName": "value",
+    "labelText": "value",
+    "labelVisible": true,
+    "navigateTo": null,
+    "rowColor": "diagnostics/good"
+  },
+  "propConfig": {
+    "params.iconName": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.labelText": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.labelVisible": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.navigateTo": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.rowColor": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 67
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Icon"
+        },
+        "position": {
+          "basis": "47px"
+        },
+        "propConfig": {
+          "props.color": {
+            "binding": {
+              "config": {
+                "path": "view.params.rowColor"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value \u003d\u003d \"grey\":\n\t\treturn \"#D5D5D5\"\n\telif value \u003d\u003d \"diagnostics/good\":\n\t\treturn \"#5c9996\"\n\telif value \u003d\u003d \"diagnostics/error\":\n\t\treturn \"#da6240\"\n\telse:\n\t\treturn value",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          },
+          "props.path": {
+            "binding": {
+              "config": {
+                "path": "view.params.iconName"
+              },
+              "type": "property"
+            }
+          },
+          "props.style.transform": {
+            "binding": {
+              "config": {
+                "path": "view.params.labelVisible"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value:\n\t\treturn \"scale(1, 1)\"\n\telse:\n\t\treturn \"rotate(90deg)\"\n",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "writingMode": "vertical-rl"
+          }
+        },
+        "type": "ia.display.icon"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "721px"
+        },
+        "propConfig": {
+          "meta.visible": {
+            "binding": {
+              "config": {
+                "path": "view.params.labelVisible"
+              },
+              "type": "property"
+            }
+          },
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.labelText"
+              },
+              "type": "property"
+            }
+          },
+          "props.textStyle.classes": {
+            "binding": {
+              "config": {
+                "path": "view.params.rowColor"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "diagnostics/good",
+            "marginLeft": 5
+          },
+          "textStyle": {}
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "events": {
+      "dom": {
+        "onDoubleClick": {
+          "config": {
+            "script": "\tdestination \u003d self.view.params.navigateTo\n\tif destination \u003d\u003d None:\n\t\treturn \"\"\n\telif destination \u003d\u003d \"Connection\":\n\t\tsystem.perspective.navigate(page\u003d\"/connectionConfiguration\", newTab\u003dTrue)\n\telif destination \u003d\u003d \"Docs\":\n\t\tsystem.perspective.print(\"Navigate to sitesync docs\")\n\t\tsystem.perspective.navigate(url\u003d\"https://sitesyncdevs.github.io/lorawan-module/network-server/\", newTab\u003dTrue)\n\telif \"/device-profile/decoder/\" in destination:\n\t\t##in the future, navigate to the model page of the device to decode troubleshooting\n\t\tsystem.perspective.navigate(page\u003ddestination, newTab\u003dTrue)"
+          },
+          "scope": "G",
+          "type": "script"
+        }
+      }
+    },
+    "meta": {
+      "name": "root",
+      "tooltip": {}
+    },
+    "propConfig": {
+      "meta.tooltip.enabled": {
+        "binding": {
+          "config": {
+            "path": "view.params.navigateTo"
+          },
+          "transforms": [
+            {
+              "code": "\tif value \u003d\u003d None:\n\t\treturn False\n\telse:\n\t\treturn True",
+              "type": "script"
+            }
+          ],
+          "type": "property"
+        }
+      },
+      "meta.tooltip.text": {
+        "binding": {
+          "config": {
+            "path": "view.params.navigateTo"
+          },
+          "transforms": [
+            {
+              "code": "\tdestination  \u003d value\n\tif destination \u003d\u003d \"Connection\":\n\t\treturn \"Double click to investigate MQTT connection\"\n\telif destination \u003d\u003d \"Docs\":\n\t\treturn \"Double click to view sensor docs (coming soon)\"\n\telif \"/device-profile/decoder/\" in destination:\n\t\t##in the future, navigate to the model page of the device to decode troubleshooting\n\t\treturn \"Double click to investigate decoder\"",
+              "type": "script"
+            }
+          ],
+          "type": "property"
+        }
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

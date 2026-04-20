@@ -1,0 +1,137 @@
+{
+  "custom": {},
+  "params": {
+    "matches": []
+  },
+  "propConfig": {
+    "params.matches": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "FlexRepeater"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.instances": {
+            "binding": {
+              "config": {
+                "path": "parent.custom.sites"
+              },
+              "transforms": [
+                {
+                  "code": "\t\n\n\ttry:\n\t\tv \u003d []\n\t\tfor i in value:\n\t\t\tif i[\u0027id\u0027] \u003e 1: \n\t\t\t\tj \u003d {\n\t\t\t\t  \"instanceStyle\": {\n\t\t\t\t    \"classes\": \"\"\n\t\t\t\t  },\n\t\t\t\t  \"instancePosition\": {},\n\t\t\t\t  \"id\": i[\u0027id\u0027],\n\t\t\t\t  \"tenantName\": i[\u0027tenantName\u0027]\n\t\t\t\t}\n\t\t\t\tv.append(j)\n\t\t\n\t\treturn v\n\t\n\texcept Exception as e:\n\t\tsystem.perspective.print(e)\n\t\treturn []",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "direction": "column",
+          "path": "Enterprise/Components/tenant-select",
+          "useDefaultViewWidth": false
+        },
+        "type": "ia.display.flex-repeater"
+      }
+    ],
+    "custom": {
+      "sites": [
+        {
+          "authGroups": "",
+          "id": 1,
+          "isApplication": 0,
+          "isVisible": 0,
+          "notes": "",
+          "ownerTenantID": 0,
+          "primaryRegion": "US915",
+          "tenantName": "SiteSync"
+        },
+        {
+          "authGroups": "",
+          "id": 2,
+          "isApplication": 0,
+          "isVisible": 1,
+          "notes": "",
+          "ownerTenantID": 0,
+          "primaryRegion": "US915",
+          "tenantName": "GVL"
+        },
+        {
+          "authGroups": "",
+          "id": 5,
+          "isApplication": 0,
+          "isVisible": 1,
+          "notes": "",
+          "ownerTenantID": 0,
+          "primaryRegion": "US915",
+          "tenantName": "SPP"
+        },
+        {
+          "authGroups": "",
+          "id": 6,
+          "isApplication": 0,
+          "isVisible": 1,
+          "notes": "",
+          "ownerTenantID": 0,
+          "primaryRegion": "US915",
+          "tenantName": "LAR"
+        },
+        {
+          "authGroups": "",
+          "id": 7,
+          "isApplication": 0,
+          "isVisible": 1,
+          "notes": "",
+          "ownerTenantID": 0,
+          "primaryRegion": "US915",
+          "tenantName": "SLC"
+        },
+        {
+          "authGroups": "",
+          "id": 10,
+          "isApplication": 0,
+          "isVisible": 1,
+          "notes": "",
+          "ownerTenantID": 0,
+          "primaryRegion": "US915",
+          "tenantName": "CAN"
+        },
+        {
+          "authGroups": "",
+          "id": 16,
+          "isApplication": 0,
+          "isVisible": 1,
+          "notes": "",
+          "ownerTenantID": 0,
+          "primaryRegion": "US915",
+          "tenantName": "CBG"
+        }
+      ]
+    },
+    "events": {
+      "system": {
+        "onStartup": {
+          "config": {
+            "script": "\timport json\n\t\n\tsites \u003d json.loads(system.sitesync.listTenants())\n\tself.custom.sites \u003d sites"
+          },
+          "scope": "G",
+          "type": "script"
+        }
+      }
+    },
+    "meta": {
+      "name": "root"
+    },
+    "type": "ia.container.flex"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "custom": {},
+  "params": {
+    "sensorType": "value",
+    "tagPath": "value"
+  },
+  "propConfig": {
+    "params.sensorType": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.tagPath": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 250,
+      "width": 250
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "EmbeddedView"
+        },
+        "position": {
+          "basis": "100%"
+        },
+        "propConfig": {
+          "props.params.tagPath": {
+            "binding": {
+              "config": {
+                "path": "view.params.tagPath"
+              },
+              "type": "property"
+            }
+          },
+          "props.path": {
+            "binding": {
+              "config": {
+                "path": "view.params.sensorType"
+              },
+              "transforms": [
+                {
+                  "code": "\tif value in (\"TEMPERATURE\", \"PRESSURE\", \"420ma\", \"FLOWMETER\"):\n\t\treturn \"Dashboard/components/assets/Pressure\"\n\telif value \u003d\u003d \"VALVEPOSITION\":\n\t\treturn \"Dashboard/components/assets/ValvePosition\"\n\t\t\n\telif value \u003d\u003d \"LEVEL\":\n\t\treturn \"Dashboard/components/assets/Level\"\n\telif value \u003d\u003d \"THL\":\n\t\treturn \"Dashboard/components/assets/THL\"\n\t\t\n\telif value \u003d\u003d \"HOTDROP\":\n\t\treturn \"Dashboard/components/assets/Current\"\n\t\t\n\telif value \u003d\u003d \"VIBRATION\":\n\t\treturn \"Dashboard/components/assets/Vibration\"\n\t\t\n\telif value \u003d\u003d \"LOCKOUT\":\n\t\treturn \"Dashboard/components/assets/Lockout\"\n\t\n\telse:\n\t\n\t\treturn \"Dashboard/components/assets/OtherPV\"",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.display.view"
+      }
+    ],
+    "events": {
+      "dom": {
+        "onDoubleClick": {
+          "config": {
+            "id": "moreDetails",
+            "type": "toggle",
+            "viewParams": {
+              "tagPath": "{view.params.tagPath}"
+            }
+          },
+          "scope": "C",
+          "type": "dock"
+        }
+      }
+    },
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

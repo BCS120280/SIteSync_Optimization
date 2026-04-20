@@ -1,0 +1,129 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "events": {
+          "system": {
+            "onStartup": {
+              "config": {
+                "script": "\tself.props.instances \u003d []"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "searchQR"
+        },
+        "position": {
+          "basis": "80%",
+          "grow": 1,
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.instances": {
+            "binding": {
+              "config": {
+                "path": "parent.custom.filteredDevices"
+              },
+              "transforms": [
+                {
+                  "code": "\titems \u003d []\n\tfor d in value:\n\t\tj \u003d {\n  \"instanceStyle\": {\n    \"classes\": \"\"\n  },\n  \"instancePosition\": {},\n  \"device\": d\n}\n\t\titems.append(j)\n\t\t\n\treturn items",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "direction": "column",
+          "path": "Devices/list/components/deviceSearchResult",
+          "useDefaultViewWidth": false
+        },
+        "type": "ia.display.flex-repeater"
+      },
+      {
+        "meta": {
+          "name": "filters"
+        },
+        "position": {
+          "basis": "10%",
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.params.tagPath": {
+            "binding": {
+              "config": {
+                "bidirectional": true,
+                "path": "parent.custom.tagPath"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "path": "Dashboard/components/slicer/slicers",
+          "style": {
+            "borderBottomColor": "#8080803D",
+            "borderBottomStyle": "solid",
+            "borderLeftStyle": "none",
+            "borderRightStyle": "none",
+            "borderTopStyle": "none"
+          }
+        },
+        "type": "ia.display.view"
+      }
+    ],
+    "custom": {
+      "devices": [],
+      "tagPath": "[default]"
+    },
+    "events": {
+      "system": {
+        "onStartup": {
+          "config": {
+            "script": "\tself.custom.devices \u003d device.get.listDevices(self.session.custom.tenantID)"
+          },
+          "scope": "G",
+          "type": "script"
+        }
+      }
+    },
+    "meta": {
+      "name": "root"
+    },
+    "propConfig": {
+      "custom.filteredDevices": {
+        "binding": {
+          "config": {
+            "struct": {
+              "devices": "{this.custom.devices}",
+              "tagPath": "{this.custom.tagPath}"
+            },
+            "waitOnAll": true
+          },
+          "transforms": [
+            {
+              "code": "\tdev \u003d []\n\tfor d in self.custom.devices:\n\t\tif value[\u0027tagPath\u0027] in d[\u0027fullTagPath\u0027]:\n\t\t\tdev.append(d)\n\treturn dev",
+              "type": "script"
+            }
+          ],
+          "type": "expr-struct"
+        }
+      }
+    },
+    "props": {
+      "direction": "column-reverse",
+      "justify": "flex-end",
+      "style": {
+        "classes": "pageFormat/rootPadding"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

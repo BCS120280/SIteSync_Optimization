@@ -1,0 +1,139 @@
+{
+  "custom": {},
+  "params": {
+    "tagPath": "[default]AloxyValvePosition"
+  },
+  "propConfig": {
+    "params.tagPath": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 250,
+      "width": 250
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "view.params.tagPath"
+              },
+              "transforms": [
+                {
+                  "code": "\ttagName \u003d value.split(\u0027]\u0027)[1].split(\u0027/\u0027)[-1]\n\treturn tagName",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "classes": "Dashboard/boldLabel"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Valve"
+        },
+        "position": {
+          "grow": 1,
+          "shrink": 0
+        },
+        "propConfig": {
+          "props.label.text": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "tagPath": "{view.params.tagPath}"
+                },
+                "tagPath": "{tagPath}/otherValues/valveType"
+              },
+              "transforms": [
+                {
+                  "code": "\t##else, look up twtg valve type\n\treturn value",
+                  "type": "script"
+                }
+              ],
+              "type": "tag"
+            }
+          },
+          "props.state": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "tagPath": "{view.params.tagPath}"
+                },
+                "tagPath": "{tagPath}/metaData/valueToDisplay"
+              },
+              "transforms": [
+                {
+                  "code": "\ttry:\n\t\tif int(value) \u003d\u003d 0:\n\t\t\treturn \"closed\"\n\t\telif int(value) \u003d\u003d 100:\n\t\t\treturn \"open\"\n\t\telse:\n\t\t\treturn \"partiallyClosed\"\n\texcept:\n\t\treturn \"failedToClose\"\n\t",
+                  "type": "script"
+                }
+              ],
+              "type": "tag"
+            }
+          },
+          "props.value.text": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "tagPath": "{view.params.tagPath}"
+                },
+                "tagPath": "{tagPath}/metaData/valueToDisplay"
+              },
+              "transforms": [
+                {
+                  "code": "\treturn str(value) + \"%\"",
+                  "type": "script"
+                }
+              ],
+              "type": "tag"
+            }
+          }
+        },
+        "props": {
+          "appearance": "p\u0026id",
+          "label": {},
+          "value": {
+            "style": {
+              "classes": "Dashboard/boldLabel"
+            }
+          },
+          "valve": "bottom"
+        },
+        "type": "ia.symbol.valve"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column",
+      "justify": "space-around",
+      "style": {
+        "classes": "Dashboard/PVTile"
+      }
+    },
+    "type": "ia.container.flex"
+  }
+}

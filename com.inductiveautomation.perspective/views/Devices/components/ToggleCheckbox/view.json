@@ -1,0 +1,151 @@
+{
+  "custom": {
+    "iconColor": "#A0A3A9",
+    "iconPath": "material/remove_circle",
+    "selected": false,
+    "toolMsg": "Select"
+  },
+  "events": {
+    "system": {
+      "onStartup": {
+        "config": {
+          "script": "\tself.custom.selected \u003d self.params.rowData.selected"
+        },
+        "scope": "G",
+        "type": "script"
+      }
+    }
+  },
+  "params": {
+    "rowData": {
+      "devEUI": "",
+      "selected": false,
+      "tagPathBase": "value"
+    }
+  },
+  "propConfig": {
+    "custom.iconColor": {
+      "binding": {
+        "config": {
+          "path": "view.custom.selected"
+        },
+        "transforms": [
+          {
+            "code": "\t\n\tsystem.perspective.print(self.params.rowData)\n\tif value is True:\n\t\t\n\t\tself.custom.iconPath \u003d \"material/remove_circle\"\n\t\tself.custom.iconColor \u003d \"#da6240\"\n\t\tself.custom.toolMsg \u003d \"Unselect\"\n\t\t\n\telse: \n\t\tself.custom.iconPath \u003d \"material/remove_circle\"\n\t\tself.custom.iconColor \u003d \"#A0A3A9\"\n\t\tself.custom.toolMsg \u003d \"Select\"\n\t\t\n\treturn self.custom.iconColor",
+            "type": "script"
+          }
+        ],
+        "type": "property"
+      },
+      "persistent": true
+    },
+    "custom.iconPath": {
+      "persistent": true
+    },
+    "custom.selected": {
+      "persistent": true
+    },
+    "custom.toolMsg": {
+      "persistent": true
+    },
+    "params.rowData": {
+      "paramDirection": "inout",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 35,
+      "width": 30
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "events": {
+          "component": {
+            "onActionPerformed": {
+              "config": {
+                "script": "\n\tsystem.perspective.print(\"BUTTON\")\n\t\n\t\n\t\n\tif self.view.custom.selected is True:\n\t\tself.view.custom.iconPath \u003d \"material/check_box\"\n\t\tself.view.custom.iconColor \u003d \"#6DBA73\"\n\t\tself.view.custom.toolMsg \u003d \"Unselect\"\n\t\tself.view.custom.selected \u003d False\n\t\tself.view.params.rowData.selected \u003d False\n\t\t\n\t\tsystem.perspective.print(\"this is true\")\n\t\t\n\telse:\n\t\tself.view.custom.iconPath \u003d \"material/indeterminate_check_box\"\n\t\tself.view.custom.iconColor \u003d \"#A0A3A9\"\n\t\tself.view.custom.toolMsg \u003d \"Select\"\n\t\tself.view.custom.selected \u003d True\n\t\tself.view.params.rowData.selected \u003d True\n\t\t\n\t\tsystem.perspective.print(\"this is false\")\n\t\t\n\tpayload \u003d { \n\t\t\"devEUI\": self.view.params.rowData.devEUI, \n\t\t\"selected\": self.view.custom.selected,\n\t\t\"tagPathBase\":self.view.params.rowData.tagPathBase\n\t}\n\t\n\tsystem.perspective.print(payload)\n\tsystem.perspective.sendMessage(\"checkUnCheck\", payload, scope\u003d\"page\")\n\t\n\tsystem.perspective.print(\"END\")"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Button",
+          "tooltip": {
+            "enabled": true
+          }
+        },
+        "position": {
+          "basis": "100%",
+          "shrink": 0
+        },
+        "propConfig": {
+          "meta.tooltip.text": {
+            "binding": {
+              "config": {
+                "bidirectional": true,
+                "path": "view.custom.toolMsg"
+              },
+              "type": "property"
+            }
+          },
+          "props.image.icon.color": {
+            "binding": {
+              "config": {
+                "bidirectional": true,
+                "path": "view.custom.iconColor"
+              },
+              "type": "property"
+            }
+          },
+          "props.image.icon.path": {
+            "binding": {
+              "config": {
+                "bidirectional": true,
+                "path": "view.custom.iconPath"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "image": {
+            "height": 30,
+            "icon": {},
+            "style": {
+              "backgroundColor": "#000000"
+            },
+            "width": 30
+          },
+          "primary": false,
+          "style": {
+            "backgroundColor": "#FFFFFF",
+            "borderStyle": "none",
+            "color": "#FFFFFF",
+            "fontFamily": "Roboto",
+            "fontWeight": "lighter",
+            "margin": 0,
+            "padding": 0
+          },
+          "text": ""
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "alignItems": "center",
+      "style": {
+        "padding": 2
+      },
+      "wrap": "wrap"
+    },
+    "type": "ia.container.flex"
+  }
+}

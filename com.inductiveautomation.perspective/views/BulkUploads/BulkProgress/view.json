@@ -1,0 +1,89 @@
+{
+  "custom": {},
+  "params": {
+    "toUpload": "value",
+    "uploaded": "value"
+  },
+  "propConfig": {
+    "params.toUpload": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.uploaded": {
+      "paramDirection": "inout",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": {
+      "height": 83,
+      "width": 357
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "props": {
+          "alignVertical": "top",
+          "style": {
+            "color": "#0D5C63",
+            "fontWeight": "bolder"
+          },
+          "text": "Uploading Devices...",
+          "textStyle": {
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Label_0"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "path": "session.custom.bulkUpload.totalUploaded"
+              },
+              "transforms": [
+                {
+                  "code": "\treturn str(value) + \" of \" + str(self.view.params.toUpload)",
+                  "type": "script"
+                }
+              ],
+              "type": "property"
+            }
+          }
+        },
+        "props": {
+          "alignVertical": "top",
+          "style": {
+            "color": "#0D5C63",
+            "fontWeight": "bolder"
+          },
+          "textStyle": {
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}
