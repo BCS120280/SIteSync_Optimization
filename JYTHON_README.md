@@ -9,8 +9,8 @@ This workspace is configured for developing and debugging Jython 2.7 scripts for
 - Bash shell
 
 ### Files Created
-- `jython-standalone-2.7.3.jar` - Jython runtime
-- `jython.sh` - Launcher script for Jython
+- `jython2.7.4/` - Jython 2.7.4 runtime install tree (`jython.jar`, `Lib/`, `bin/`, `registry`) produced by the Maven `jython-installer` artifact
+- `jython.sh` - Launcher script for Jython (sets `python.home=jython2.7.4`)
 - `test_jython_setup.py` - Environment verification script
 - `.vscode/launch.json` - VS Code debug configurations
 - `.idea/runConfigurations/Jython_2_7.xml` - PyCharm run configuration
@@ -130,7 +130,7 @@ def publish(module, server, topic, payload, qos, retain):
 ### Import Errors
 - Ensure `jython.sh` is executable: `chmod +x jython.sh`
 - Check Java version: `java -version`
-- Verify JAR file integrity
+- Verify the `jython2.7.4/` install tree is intact (must contain `jython.jar` and `Lib/`)
 
 ### Debugging Issues
 - Use print statements liberally (Jython 2.7 style)
