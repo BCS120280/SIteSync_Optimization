@@ -16,11 +16,11 @@
       ],
       "env": {
         "CONTEXT7_API_KEY": "${input:CONTEXT7_API_KEY}"
-      },
-      "gallery": "https://api.mcp.github.com",
-      "version": "1.0.31"
+      }
     },
+    // "ignition-mcp" uses a "url" field for HTTP-based servers, while others use "type", "command", and "args" for stdio-based servers.
     "ignition-mcp": {
+      "type": "http",
       "url": "http://localhost:3537/mcp"
     }
   }
