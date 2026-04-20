@@ -6,20 +6,24 @@ import os
 import sys
 
 
+def log(msg):
+	system.perspective.print(msg)
+
+
 def main():
 	repo_root = os.path.dirname(os.path.abspath(__file__))
 	sys.path.insert(0, os.path.join(repo_root, "ignition", "script-python", "utils", "debug"))
 
 	import code as dbg
 
-	print("=== utils.debug smoke test ===")
-	print("Python version:", sys.version)
-	print("stdin tty?:", sys.stdin.isatty() if hasattr(sys.stdin, "isatty") else "unknown")
-	print("Calling dbg.brk() - expect (Pdb) prompt if tty, warning otherwise.")
+	log("=== utils.debug smoke test ===")
+	log("Python version: {}".format(sys.version))
+	log("stdin tty?: {}".format(sys.stdin.isatty() if hasattr(sys.stdin, "isatty") else "unknown"))
+	log("Calling dbg.brk() - expect (Pdb) prompt if tty, warning otherwise.")
 	x = 42
 	y = "hello from jython"
 	dbg.brk()
-	print("Resumed. x =", x, "y =", y)
+	log("Resumed. x = {} y = {}".format(x, y))
 	return 0
 
 

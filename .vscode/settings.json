@@ -3,6 +3,16 @@
         "editor.insertSpaces": false,
         "editor.tabSize": 4
     },
+    "files.watcherExclude": {
+        "**/.ignition-stubs/**": true
+    },
+    "python.analysis.exclude": [
+        "**/.ignition-stubs/**"
+    ],
+    "python.analysis.ignore": [
+        "**/.ignition-stubs/**"
+    ],
+    "ignition.diagnostics.enabled": false,
     "chat.mcp.serverSampling": {
         "SIteSync_Optimization/.vscode/mcp.json: io.github.upstash/context7": {
             "allowedModels": [
