@@ -1,95 +1,99 @@
 {
-    "[python]": {
-        "editor.insertSpaces": false,
-        "editor.tabSize": 4
+  "[python]": {
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4
+  },
+  "files.watcherExclude": {
+    "**/.ignition-stubs/**": true
+  },
+  "python.analysis.typeCheckingMode": "off",
+  "python.analysis.diagnosticMode": "openFilesOnly",
+  "python.analysis.exclude": [
+    "**/.ignition-stubs/**",
+    "**/script-python/**",
+    "SiteSYnc EnterpriseManagementScripts/**",
+    "ignition/**",
+    "PISync_2026-04-11_1427/**",
+    "PI_Integration_Manager_2026-04-17_1632/**",
+    "SiteSync-FieldApp_Improvements_2026-04-11_1548/**",
+    "SiteSyncCore_2026-04-17_1622/**",
+    "FileTranslator_20260322203920/**",
+    "com.inductiveautomation.perspective/**",
+    "com.inductiveautomation.vision/**",
+    "com.inductiveautomation.webdev/**",
+    "ignition-sdk_examples-main/**"
+  ],
+  "python.analysis.ignore": [
+    "**/.ignition-stubs/**",
+    "**/script-python/**",
+    "SiteSYnc EnterpriseManagementScripts/**",
+    "ignition/**",
+    "PISync_2026-04-11_1427/**",
+    "PI_Integration_Manager_2026-04-17_1632/**",
+    "SiteSync-FieldApp_Improvements_2026-04-11_1548/**",
+    "SiteSyncCore_2026-04-17_1622/**",
+    "FileTranslator_20260322203920/**",
+    "com.inductiveautomation.perspective/**",
+    "com.inductiveautomation.vision/**",
+    "com.inductiveautomation.webdev/**"
+  ],
+  "python.linting.enabled": false,
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": false,
+  "ignition.diagnostics.enabled": false,
+  "files.associations": {
+    "**/script-python/**/*.py": "jython",
+    "**/event-scripts/**/*.py": "jython"
+  },
+  "chat.mcp.serverSampling": {
+    "SIteSync_Optimization/.vscode/mcp.json: io.github.upstash/context7": {
+      "allowedModels": [
+        "copilot/auto",
+        "copilotcli/claude-haiku-4.5",
+        "claude-code/claude-haiku-4.5",
+        "copilot/claude-haiku-4.5",
+        "copilotcli/gpt-4.1",
+        "copilot/gpt-4.1",
+        "copilot/gpt-4o",
+        "copilotcli/gpt-5-mini",
+        "copilot/gpt-5-mini",
+        "copilot/oswe-vscode-prime"
+      ]
     },
-    "files.watcherExclude": {
-        "**/.ignition-stubs/**": true
-    },
-    "python.analysis.typeCheckingMode": "off",
-    "python.analysis.diagnosticMode": "openFilesOnly",
-    "python.analysis.exclude": [
-        "**/.ignition-stubs/**",
-        "**/script-python/**",
-        "SiteSYnc EnterpriseManagementScripts/**",
-        "ignition/**",
-        "PISync_2026-04-11_1427/**",
-        "PI_Integration_Manager_2026-04-17_1632/**",
-        "SiteSync-FieldApp_Improvements_2026-04-11_1548/**",
-        "SiteSyncCore_2026-04-17_1622/**",
-        "FileTranslator_20260322203920/**",
-        "com.inductiveautomation.perspective/**",
-        "com.inductiveautomation.vision/**",
-        "com.inductiveautomation.webdev/**",
-        "ignition-sdk_examples-main/**"
-    ],
-    "python.analysis.ignore": [
-        "**/.ignition-stubs/**",
-        "**/script-python/**",
-        "SiteSYnc EnterpriseManagementScripts/**",
-        "ignition/**",
-        "PISync_2026-04-11_1427/**",
-        "PI_Integration_Manager_2026-04-17_1632/**",
-        "SiteSync-FieldApp_Improvements_2026-04-11_1548/**",
-        "SiteSyncCore_2026-04-17_1622/**",
-        "FileTranslator_20260322203920/**",
-        "com.inductiveautomation.perspective/**",
-        "com.inductiveautomation.vision/**",
-        "com.inductiveautomation.webdev/**"
-    ],
-    "python.linting.enabled": false,
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": false,
-    "ignition.diagnostics.enabled": false,
-    "files.associations": {
-        "**/script-python/**/*.py": "jython",
-        "**/event-scripts/**/*.py": "jython"
-    },
-    "chat.mcp.serverSampling": {
-        "SIteSync_Optimization/.vscode/mcp.json: io.github.upstash/context7": {
-            "allowedModels": [
-                "copilot/auto",
-                "copilotcli/claude-haiku-4.5",
-                "claude-code/claude-haiku-4.5",
-                "copilot/claude-haiku-4.5",
-                "copilotcli/gpt-4.1",
-                "copilot/gpt-4.1",
-                "copilot/gpt-4o",
-                "copilotcli/gpt-5-mini",
-                "copilot/gpt-5-mini",
-                "copilot/oswe-vscode-prime"
-            ]
-        },
-        "SIteSync_Optimization/.vscode/mcp.json: ignition-mcp": {
-            "allowedModels": [
-                "copilot/auto",
-                "copilotcli/claude-haiku-4.5",
-                "claude-code/claude-haiku-4.5",
-                "copilot/claude-haiku-4.5",
-                "copilotcli/gpt-4.1",
-                "copilot/gpt-4.1",
-                "copilot/gpt-4o",
-                "copilotcli/gpt-5-mini",
-                "copilot/gpt-5-mini",
-                "copilot/oswe-vscode-prime"
-            ]
-        }
-    },
-    "claudeCode.initialPermissionMode": "plan",
-    "cSpell.ignorePaths": [
-        "**/*.md"
-    ],
-    "cSpell.words": [
-        "Jython",
-        "Ignition",
-        "Cirrus",
-        "CirrusLink",
-        "UDT",
-        "toMillis",
-        "toInstant",
-        "jsonEncode",
-        "DropReason",
-        "ConfigError",
-        "PublishError"
-    ]
+    "SIteSync_Optimization/.vscode/mcp.json: ignition-mcp": {
+      "allowedModels": [
+        "copilot/auto",
+        "copilotcli/claude-haiku-4.5",
+        "claude-code/claude-haiku-4.5",
+        "copilot/claude-haiku-4.5",
+        "copilotcli/gpt-4.1",
+        "copilot/gpt-4.1",
+        "copilot/gpt-4o",
+        "copilotcli/gpt-5-mini",
+        "copilot/gpt-5-mini",
+        "copilot/oswe-vscode-prime"
+      ]
+    }
+  },
+  "claudeCode.initialPermissionMode": "plan",
+  "cSpell.ignorePaths": [
+    "**/*.md"
+  ],
+  "cSpell.words": [
+    "Jython",
+    "Ignition",
+    "Cirrus",
+    "CirrusLink",
+    "UDT",
+    "toMillis",
+    "toInstant",
+    "jsonEncode",
+    "DropReason",
+    "ConfigError",
+    "PublishError"
+  ],
+  "python.analysis.extraPaths": [
+    "/home/codespace/.vscode-remote/extensions/hydrologicengineeringcenter.hec-jython-0.0.2/stubs",
+    "/home/codespace/.vscode-remote/extensions/hydrologicengineeringcenter.hec-jython-0.0.2/jython_files"
+  ]
 }
