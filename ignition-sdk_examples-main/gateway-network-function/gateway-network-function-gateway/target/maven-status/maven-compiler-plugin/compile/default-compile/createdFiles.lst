@@ -1,0 +1,17 @@
+com/inductiveautomation/ignition/examples/task/GetWrapperLogTaskType$1.class
+com/inductiveautomation/ignition/examples/GetLogsRPCImpl.class
+com/inductiveautomation/ignition/examples/task/GetWrapperLogTaskType.class
+com/inductiveautomation/ignition/examples/GetLogsGatewayFunctions.class
+com/inductiveautomation/ignition/examples/task/GetWrapperLogTask.class
+com/inductiveautomation/ignition/examples/service/GLSecurityConfigValues.class
+com/inductiveautomation/ignition/examples/service/GLSecurityConfigValues$Mode.class
+com/inductiveautomation/ignition/examples/service/GLSecurityDescriptorFactory.class
+com/inductiveautomation/ignition/examples/task/RemoteServerSelectionStep$1.class
+com/inductiveautomation/ignition/examples/task/RemoteServerSelectionStep.class
+com/inductiveautomation/ignition/examples/task/GetWrapperLogTaskSettingsRecord.class
+com/inductiveautomation/ignition/examples/task/RemoteGatewaySelection.class
+com/inductiveautomation/ignition/examples/service/GetLogsServiceImpl.class
+com/inductiveautomation/ignition/examples/GatewayHook.class
+com/inductiveautomation/ignition/examples/service/GLSecurityConfigFactory.class
+com/inductiveautomation/ignition/examples/service/GetLogsService.class
+com/inductiveautomation/ignition/examples/task/SimpleRemoteGateway.class

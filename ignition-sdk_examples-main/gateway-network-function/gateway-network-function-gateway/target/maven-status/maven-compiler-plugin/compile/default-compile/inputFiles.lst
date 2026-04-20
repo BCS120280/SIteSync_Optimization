@@ -1,0 +1,14 @@
+/workspaces/SIteSync_Optimization/ignition-sdk_examples-main/gateway-network-function/gateway-network-function-gateway/src/main/java/com/inductiveautomation/ignition/examples/task/RemoteGatewaySelection.java
+/workspaces/SIteSync_Optimization/ignition-sdk_examples-main/gateway-network-function/gateway-network-function-gateway/src/main/java/com/inductiveautomation/ignition/examples/service/GLSecurityConfigFactory.java
+/workspaces/SIteSync_Optimization/ignition-sdk_examples-main/gateway-network-function/gateway-network-function-gateway/src/main/java/com/inductiveautomation/ignition/examples/task/RemoteServerSelectionStep.java
+/workspaces/SIteSync_Optimization/ignition-sdk_examples-main/gateway-network-function/gateway-network-function-gateway/src/main/java/com/inductiveautomation/ignition/examples/task/GetWrapperLogTask.java
+/workspaces/SIteSync_Optimization/ignition-sdk_examples-main/gateway-network-function/gateway-network-function-gateway/src/main/java/com/inductiveautomation/ignition/examples/task/GetWrapperLogTaskType.java
+/workspaces/SIteSync_Optimization/ignition-sdk_examples-main/gateway-network-function/gateway-network-function-gateway/src/main/java/com/inductiveautomation/ignition/examples/service/GLSecurityDescriptorFactory.java
+/workspaces/SIteSync_Optimization/ignition-sdk_examples-main/gateway-network-function/gateway-network-function-gateway/src/main/java/com/inductiveautomation/ignition/examples/service/GLSecurityConfigValues.java
+/workspaces/SIteSync_Optimization/ignition-sdk_examples-main/gateway-network-function/gateway-network-function-gateway/src/main/java/com/inductiveautomation/ignition/examples/task/SimpleRemoteGateway.java
+/workspaces/SIteSync_Optimization/ignition-sdk_examples-main/gateway-network-function/gateway-network-function-gateway/src/main/java/com/inductiveautomation/ignition/examples/service/GetLogsService.java
+/workspaces/SIteSync_Optimization/ignition-sdk_examples-main/gateway-network-function/gateway-network-function-gateway/src/main/java/com/inductiveautomation/ignition/examples/GetLogsRPCImpl.java
+/workspaces/SIteSync_Optimization/ignition-sdk_examples-main/gateway-network-function/gateway-network-function-gateway/src/main/java/com/inductiveautomation/ignition/examples/GetLogsGatewayFunctions.java
+/workspaces/SIteSync_Optimization/ignition-sdk_examples-main/gateway-network-function/gateway-network-function-gateway/src/main/java/com/inductiveautomation/ignition/examples/service/GetLogsServiceImpl.java
+/workspaces/SIteSync_Optimization/ignition-sdk_examples-main/gateway-network-function/gateway-network-function-gateway/src/main/java/com/inductiveautomation/ignition/examples/task/GetWrapperLogTaskSettingsRecord.java
+/workspaces/SIteSync_Optimization/ignition-sdk_examples-main/gateway-network-function/gateway-network-function-gateway/src/main/java/com/inductiveautomation/ignition/examples/GatewayHook.java
