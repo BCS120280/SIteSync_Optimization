@@ -10,6 +10,7 @@
         "whiskeyhouse.ignition-dev-tools",
         "upstash.context7-mcp",
         "ms-python.vscode-python-envs",
-        "sixth.sixth-ai"
+        "sixth.sixth-ai",
+        "vscjava.vscode-maven"
     ]
 }

@@ -43,7 +43,8 @@
 			"sixth.sixth-ai",
 			"donjayamanne.python-environment-manager",
 			"ms-toolsai.vscode-jupyter-powertoys",
-			"hydrologicengineeringcenter.hec-jython"
+			"hydrologicengineeringcenter.hec-jython",
+			"vscjava.vscode-maven"
 		]
 	}
 }

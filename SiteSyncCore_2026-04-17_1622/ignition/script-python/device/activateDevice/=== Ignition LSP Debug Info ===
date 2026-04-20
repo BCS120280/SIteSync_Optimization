@@ -1,0 +1,20 @@
+=== Ignition LSP Debug Info ===
+
+LSP Client: Active
+  State: 2
+  Server: Ignition Language Server
+
+Active Document:
+  URI: file:///workspaces/SIteSync_Optimization/SiteSyncCore_2026-04-17_1622/ignition/script-python/device/activateDevice/code.py
+  Language: python
+  Scheme: file
+  File: /workspaces/SIteSync_Optimization/SiteSyncCore_2026-04-17_1622/ignition/script-python/device/activateDevice/code.py
+  Lines: 26
+
+Workspace Folders:
+  SIteSync_Optimization: /workspaces/SIteSync_Optimization
+
+Ignition Projects Found: 3
+  project.json
+  PISync_2026-04-11_1427/project.json
+  FileTranslator_20260322203920/project.json
