@@ -1,35 +1,11 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python Debugger: Current File",
-            "type": "node",
+            "name": "Jython 2.7 Debug (Current File)",
+            "type": "node-terminal",
             "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal"
-        },
-        {
-            "name": "Jython 2.7 Debug",
-            "type": "node",
-            "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal",
-            "cwd": "${workspaceFolder}",
-            "env": {
-                "JYTHONPATH": "${workspaceFolder}",
-                "PYTHONPATH": "${workspaceFolder}"
-            },
-            "args": [ ]
-        },
-        {
-            "name": "Jython 2.7 Interactive",
-            "type": "node",
-            "request": "launch",
-            "program": "",
-            "console": "integratedTerminal",
+            "command": "./jython.sh \"${file}\"",
             "cwd": "${workspaceFolder}",
             "env": {
                 "JYTHONPATH": "${workspaceFolder}",
@@ -37,11 +13,15 @@
             }
         },
         {
-            "name": "CPython 3 (do NOT use for Ignition scripts)",
-            "type": "node",
+            "name": "Jython 2.7 Interactive",
+            "type": "node-terminal",
             "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal"
+            "command": "./jython.sh",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "JYTHONPATH": "${workspaceFolder}",
+                "PYTHONPATH": "${workspaceFolder}"
+            }
         }
     ]
 }
