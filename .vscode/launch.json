@@ -1,0 +1,44 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+        { "name": "Python Debugger: Current File", "type": "debugpy", "request": "launch", "program": "${file}", "console": "integratedTerminal" },
+        {
+            "name": "Jython 2.7 Debug",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "python": "./jython.sh",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "JYTHONPATH": "${workspaceFolder}",
+                "PYTHONPATH": "${workspaceFolder}"
+            },
+            "args": [ ]
+        },
+        {
+            "name": "Jython 2.7 Interactive",
+            "type": "python",
+            "request": "launch",
+            "program": "",
+            "python": "./jython.sh",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "JYTHONPATH": "${workspaceFolder}",
+                "PYTHONPATH": "${workspaceFolder}"
+            }
+        },
+        {
+            "name": "CPython 3 (do NOT use for Ignition scripts)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        }
+    ]
+}

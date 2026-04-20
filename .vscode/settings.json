@@ -6,9 +6,33 @@
     "chat.mcp.serverSampling": {
         "SIteSync_Optimization/.vscode/mcp.json: io.github.upstash/context7": {
             "allowedModels": [
-                "anthropic/Anthropic/claude-opus-4-7"
+                "copilot/auto"
+            ]
+        },
+        "SIteSync_Optimization/.vscode/mcp.json: ignition-mcp": {
+            "allowedModels": [
+                "copilot/auto",
+                "copilotcli/claude-haiku-4.5",
+                "claude-code/claude-haiku-4.5",
+                "copilot/claude-haiku-4.5"
             ]
         }
     },
-    "claudeCode.initialPermissionMode": "plan"
+    "claudeCode.initialPermissionMode": "plan",
+    "cSpell.ignorePaths": [
+        "**/*.md"
+    ],
+    "cSpell.words": [
+        "Jython",
+        "Ignition",
+        "Cirrus",
+        "CirrusLink",
+        "UDT",
+        "toMillis",
+        "toInstant",
+        "jsonEncode",
+        "DropReason",
+        "ConfigError",
+        "PublishError"
+    ]
 }
