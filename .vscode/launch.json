@@ -4,14 +4,18 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
-        { "name": "Python Debugger: Current File", "type": "debugpy", "request": "launch", "program": "${file}", "console": "integratedTerminal" },
         {
-            "name": "Jython 2.7 Debug",
-            "type": "python",
+            "name": "Python Debugger: Current File",
+            "type": "node",
             "request": "launch",
             "program": "${file}",
-            "python": "./jython.sh",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Jython 2.7 Debug",
+            "type": "node",
+            "request": "launch",
+            "program": "${file}",
             "console": "integratedTerminal",
             "cwd": "${workspaceFolder}",
             "env": {
@@ -22,10 +26,9 @@
         },
         {
             "name": "Jython 2.7 Interactive",
-            "type": "python",
+            "type": "node",
             "request": "launch",
             "program": "",
-            "python": "./jython.sh",
             "console": "integratedTerminal",
             "cwd": "${workspaceFolder}",
             "env": {
@@ -35,7 +38,7 @@
         },
         {
             "name": "CPython 3 (do NOT use for Ignition scripts)",
-            "type": "debugpy",
+            "type": "node",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal"
