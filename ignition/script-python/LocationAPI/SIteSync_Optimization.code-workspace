@@ -27,7 +27,22 @@
 			"JAVA_HOME": "/usr/local/sdkman/candidates/java/25.0.2-ms",
 			"PATH": "/usr/local/sdkman/candidates/java/25.0.2-ms/bin:${env:PATH}"
 		},
-		"ignitionSift.pythonPath": "python2"
+		"ignitionSift.pythonPath": "python2",
+		"workbench.editor.autoLockGroups": {
+			"workbench.editor.chatDebug": true,
+			"default": true,
+			"workbench.editor.chatSession": true,
+			"workbench.editorinputs.searchEditorInput": true,
+			"agentSessionsWelcomePage": true,
+			"jupyter-notebook": true,
+			"decompiled.javaClass": true,
+			"chatgpt.conversationEditor": true,
+			"ai-mlstudio.dataEditor": true,
+			"gitlens.rebase": true,
+			"workbench.input.interactive": true
+		},
+		"workbench.editor.alwaysShowEditorActions": true,
+		"workbench.editor.defaultBinaryEditor": "ai-mlstudio.dataEditor"
 	},
 	"extensions": {
 		"recommendations": [
