@@ -6,13 +6,45 @@
     "files.watcherExclude": {
         "**/.ignition-stubs/**": true
     },
+    "python.analysis.typeCheckingMode": "off",
+    "python.analysis.diagnosticMode": "openFilesOnly",
     "python.analysis.exclude": [
-        "**/.ignition-stubs/**"
+        "**/.ignition-stubs/**",
+        "**/script-python/**",
+        "SiteSYnc EnterpriseManagementScripts/**",
+        "ignition/**",
+        "PISync_2026-04-11_1427/**",
+        "PI_Integration_Manager_2026-04-17_1632/**",
+        "SiteSync-FieldApp_Improvements_2026-04-11_1548/**",
+        "SiteSyncCore_2026-04-17_1622/**",
+        "FileTranslator_20260322203920/**",
+        "com.inductiveautomation.perspective/**",
+        "com.inductiveautomation.vision/**",
+        "com.inductiveautomation.webdev/**",
+        "ignition-sdk_examples-main/**"
     ],
     "python.analysis.ignore": [
-        "**/.ignition-stubs/**"
+        "**/.ignition-stubs/**",
+        "**/script-python/**",
+        "SiteSYnc EnterpriseManagementScripts/**",
+        "ignition/**",
+        "PISync_2026-04-11_1427/**",
+        "PI_Integration_Manager_2026-04-17_1632/**",
+        "SiteSync-FieldApp_Improvements_2026-04-11_1548/**",
+        "SiteSyncCore_2026-04-17_1622/**",
+        "FileTranslator_20260322203920/**",
+        "com.inductiveautomation.perspective/**",
+        "com.inductiveautomation.vision/**",
+        "com.inductiveautomation.webdev/**"
     ],
+    "python.linting.enabled": false,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": false,
     "ignition.diagnostics.enabled": false,
+    "files.associations": {
+        "**/script-python/**/*.py": "jython",
+        "**/event-scripts/**/*.py": "jython"
+    },
     "chat.mcp.serverSampling": {
         "SIteSync_Optimization/.vscode/mcp.json: io.github.upstash/context7": {
             "allowedModels": [

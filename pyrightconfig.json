@@ -3,7 +3,43 @@
     ".ignition-stubs",
     "/home/codespace/.vscode-remote/data/User/globalStorage/whiskeyhouse.ignition-dev-tools/venv/lib/python3.12/site-packages/ignition_lsp/stubs"
   ],
-  "reportMissingImports": "warning",
+  "exclude": [
+    "**/script-python/**",
+    "**/event-scripts/**",
+    "**/named-query/**",
+    "**/designer-properties/**",
+    "**/global-props/**",
+    "SiteSYnc EnterpriseManagementScripts/**",
+    "ignition/**",
+    "PISync_2026-04-11_1427/**",
+    "PI_Integration_Manager_2026-04-17_1632/**",
+    "SiteSync-FieldApp_Improvements_2026-04-11_1548/**",
+    "SiteSyncCore_2026-04-17_1622/**",
+    "FileTranslator_20260322203920/**",
+    "com.inductiveautomation.perspective/**",
+    "com.inductiveautomation.vision/**",
+    "com.inductiveautomation.webdev/**",
+    ".ignition-stubs/**",
+    ".stubs/**",
+    "ignition-sdk_examples-main/**"
+  ],
+  "ignore": [
+    "**/script-python/**",
+    "SiteSYnc EnterpriseManagementScripts/**",
+    "ignition/**",
+    "PISync_2026-04-11_1427/**",
+    "PI_Integration_Manager_2026-04-17_1632/**",
+    "SiteSync-FieldApp_Improvements_2026-04-11_1548/**",
+    "SiteSyncCore_2026-04-17_1622/**",
+    "FileTranslator_20260322203920/**",
+    "com.inductiveautomation.perspective/**",
+    "com.inductiveautomation.vision/**",
+    "com.inductiveautomation.webdev/**"
+  ],
+  "reportMissingImports": "none",
   "reportMissingModuleSource": "none",
-  "reportUndefinedVariable": "none"
+  "reportUndefinedVariable": "none",
+  "reportOptionalMemberAccess": "none",
+  "reportOptionalSubscript": "none",
+  "reportGeneralTypeIssues": "none"
 }
