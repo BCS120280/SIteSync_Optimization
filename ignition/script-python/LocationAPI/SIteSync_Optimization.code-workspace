@@ -36,7 +36,8 @@
 			"keith-gamble.ignition-flint",
 			"nburnet1.ignition-sift",
 			"rbledsaw3.ignition-json-edit",
-			"whiskeyhouse.ignition-dev-tools"
+			"whiskeyhouse.ignition-dev-tools",
+			"upstash.context7-mcp"
 		]
 	}
 }
