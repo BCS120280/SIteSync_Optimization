@@ -1,6 +1,7 @@
 {
     "version": "0.2.0",
     "configurations": [
+        
         {
             "name": "Jython 2.7 Debug (Current File)",
             "type": "node-terminal",

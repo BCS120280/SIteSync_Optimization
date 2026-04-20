@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "0.2",
+  "project-paths": [
+    "/workspaces"
+  ],
+  "gateways": {
+    "pywgen002953": {
+      "host": "https://pywgen002953.mextranet.com",
+      "port": 8043,
+      "ssl": true,
+      "ignoreSSLErrors": true,
+      "projects": [
+        "SIteSync_Optimization"
+      ],
+      "enabled": true,
+      "id": "pywgen002953"
+    }
+  },
+  "settings": {
+    "showInheritedResources": true,
+    "groupResourcesByType": true,
+    "autoRefreshProjects": true,
+    "searchHistoryLimit": 50
+  }
+}
