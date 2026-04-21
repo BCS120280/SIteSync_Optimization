@@ -1,5 +1,8 @@
 {
     "recommendations": [
-        "vscjava.vscode-gradle"
+        "vscjava.vscode-gradle",
+        "jostrand.ignition-mcp",
+        "eamodio.gitlens",
+        "upstash.context7-mcp"
     ]
 }

@@ -47,5 +47,14 @@
         "DropReason",
         "ConfigError",
         "PublishError"
+    ],
+    "netbeans.jdkhome": "/usr/local/sdkman/candidates/java/21.0.10-ms",
+    "netbeans.project.jdkhome": "/usr/local/sdkman/candidates/java/21.0.10-ms",
+    "terminal.integrated.env.linux": {
+        "JAVA_HOME": "/usr/local/sdkman/candidates/java/21.0.10-ms",
+        "PATH": "/usr/local/sdkman/candidates/java/21.0.10-ms/bin:${env:PATH}"
+    },
+    "python.analysis.extraPaths": [
+        "/home/codespace/.vscode-remote/data/User/globalStorage/whiskeyhouse.ignition-dev-tools/venv/lib/python3.12/site-packages/ignition_lsp/stubs"
     ]
 }
