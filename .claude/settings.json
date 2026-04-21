@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(./gradlew --stop)",
-      "Bash(chmod +x gradlew)"
+      "Bash(chmod +x gradlew)",
+      "Bash(kill 20830)",
+      "Bash(gradle --version)"
     ]
   }
 }
