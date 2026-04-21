@@ -1,60 +1,62 @@
 {
-    "[python]": {
-        "editor.insertSpaces": false,
-        "editor.tabSize": 4
+  "[python]": {
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4
+  },
+  "files.watcherExclude": {
+    "**/.ignition-stubs/**": true
+  },
+  "python.analysis.exclude": [
+    "**/.ignition-stubs/**"
+  ],
+  "python.analysis.ignore": [
+    "**/.ignition-stubs/**"
+  ],
+  "ignition.diagnostics.enabled": false,
+  "chat.mcp.serverSampling": {
+    "SIteSync_Optimization/.vscode/mcp.json: io.github.upstash/context7": {
+      "allowedModels": [
+        "copilot/auto",
+        "claude-code/claude-haiku-4.5",
+        "copilotcli/claude-haiku-4.5",
+        "copilot/claude-haiku-4.5"
+      ]
     },
-    "files.watcherExclude": {
-        "**/.ignition-stubs/**": true
-    },
-    "python.analysis.exclude": [
-        "**/.ignition-stubs/**"
-    ],
-    "python.analysis.ignore": [
-        "**/.ignition-stubs/**"
-    ],
-    "ignition.diagnostics.enabled": false,
-    "chat.mcp.serverSampling": {
-        "SIteSync_Optimization/.vscode/mcp.json: io.github.upstash/context7": {
-            "allowedModels": [
-                "copilot/auto",
-                "claude-code/claude-haiku-4.5",
-                "copilotcli/claude-haiku-4.5",
-                "copilot/claude-haiku-4.5"
-            ]
-        },
-        "SIteSync_Optimization/.vscode/mcp.json: ignition-mcp": {
-            "allowedModels": [
-                "copilot/auto",
-                "claude-code/claude-haiku-4.5",
-                "copilotcli/claude-haiku-4.5",
-                "copilot/claude-haiku-4.5"
-            ]
-        }
-    },
-    "claudeCode.initialPermissionMode": "plan",
-    "cSpell.ignorePaths": [
-        "**/*.md"
-    ],
-    "cSpell.words": [
-        "Jython",
-        "Ignition",
-        "Cirrus",
-        "CirrusLink",
-        "UDT",
-        "toMillis",
-        "toInstant",
-        "jsonEncode",
-        "DropReason",
-        "ConfigError",
-        "PublishError"
-    ],
-    "netbeans.jdkhome": "/usr/local/sdkman/candidates/java/21.0.10-ms",
-    "netbeans.project.jdkhome": "/usr/local/sdkman/candidates/java/21.0.10-ms",
-    "terminal.integrated.env.linux": {
-        "JAVA_HOME": "/usr/local/sdkman/candidates/java/21.0.10-ms",
-        "PATH": "/usr/local/sdkman/candidates/java/21.0.10-ms/bin:${env:PATH}"
-    },
-    "python.analysis.extraPaths": [
-        "/home/codespace/.vscode-remote/data/User/globalStorage/whiskeyhouse.ignition-dev-tools/venv/lib/python3.12/site-packages/ignition_lsp/stubs"
-    ]
+    "SIteSync_Optimization/.vscode/mcp.json: ignition-mcp": {
+      "allowedModels": [
+        "copilot/auto",
+        "claude-code/claude-haiku-4.5",
+        "copilotcli/claude-haiku-4.5",
+        "copilot/claude-haiku-4.5"
+      ]
+    }
+  },
+  "claudeCode.initialPermissionMode": "plan",
+  "cSpell.ignorePaths": [
+    "**/*.md"
+  ],
+  "cSpell.words": [
+    "Jython",
+    "Ignition",
+    "Cirrus",
+    "CirrusLink",
+    "UDT",
+    "toMillis",
+    "toInstant",
+    "jsonEncode",
+    "DropReason",
+    "ConfigError",
+    "PublishError"
+  ],
+  "netbeans.jdkhome": "/usr/local/sdkman/candidates/java/21.0.10-ms",
+  "netbeans.project.jdkhome": "/usr/local/sdkman/candidates/java/21.0.10-ms",
+  "terminal.integrated.env.linux": {
+    "JAVA_HOME": "/usr/local/sdkman/candidates/java/21.0.10-ms",
+    "PATH": "/usr/local/sdkman/candidates/java/21.0.10-ms/bin:${env:PATH}"
+  },
+  "python.analysis.extraPaths": [
+    "/home/codespace/.vscode-remote/data/User/globalStorage/whiskeyhouse.ignition-dev-tools/venv/lib/python3.12/site-packages/ignition_lsp/stubs",
+    "/home/codespace/.vscode-remote/extensions/hydrologicengineeringcenter.hec-jython-0.0.2/stubs",
+    "/home/codespace/.vscode-remote/extensions/hydrologicengineeringcenter.hec-jython-0.0.2/jython_files"
+  ]
 }
