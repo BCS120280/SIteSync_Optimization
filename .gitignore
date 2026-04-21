@@ -1,1 +1,5 @@
 /.ignition-stubs/
+
+# Jython runtime caches (regenerated on each run)
+/jython2.7.4/cachedir/
+/.jython_cache/
